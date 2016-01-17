@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rel_fornecedores" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="209a4b7a-399a-49fe-8531-1fefbcb17136">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="zebra">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($V{REPORT_COUNT}.intValue() % 2 == 0 )]]></conditionExpression>
+			<style forecolor="#F1F1F1" backcolor="#F1F1F1"/>
+		</conditionalStyle>
+	</style>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cargo" class="br.com.sgpo.administrativo.modelo.Cargo">
+		<fieldDescription><![CDATA[cargo]]></fieldDescription>
+	</field>
+	<field name="ativo" class="java.lang.Boolean">
+		<fieldDescription><![CDATA[ativo]]></fieldDescription>
+	</field>
+	<field name="cpf" class="java.lang.String">
+		<fieldDescription><![CDATA[cpf]]></fieldDescription>
+	</field>
+	<field name="nome" class="java.lang.String">
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
+	</field>
+	<title>
+		<band height="56" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="36" width="217" height="20" uuid="379176fa-d9c7-4abe-8e58-9e0c30d63c47"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="6" width="555" height="30" uuid="77999dcc-3504-4ae0-9928-37123a511852"/>
+				<textElement verticalAlignment="Middle">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Colaboradores Registrados]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="22" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="2" width="555" height="20" forecolor="#9DA4AC" backcolor="#9DA4AC" uuid="87c06f7c-5d78-4a87-a43e-f7c2d5b13f91"/>
+				<staticText>
+					<reportElement x="0" y="0" width="224" height="20" uuid="cd956189-4ac5-4aa5-98ae-61d753d3ed31"/>
+					<text><![CDATA[nome]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="224" y="0" width="131" height="20" uuid="32990bba-6cd1-4da2-b460-6352c7652cb0"/>
+					<text><![CDATA[cpf]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="355" y="0" width="100" height="20" uuid="b1c0ebd9-f512-4144-aefc-d782924d17ef"/>
+					<text><![CDATA[cargo]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="455" y="0" width="100" height="20" uuid="169b1608-27d1-4b46-a259-83dd9abbcf92"/>
+					<text><![CDATA[ativo]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="20" splitType="Stretch">
+			<rectangle>
+				<reportElement style="zebra" x="0" y="0" width="555" height="20" uuid="09d7de0f-60cc-4a62-8269-8aea96634f77"/>
+				<graphicElement>
+					<pen lineWidth="0.0"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="0" y="0" width="224" height="20" uuid="3f7c6f2b-5fff-47f6-ad0a-fb68fc2ad6db"/>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="224" y="0" width="131" height="20" uuid="3322202b-95f9-4ffc-8702-521d45eaf994"/>
+				<textFieldExpression><![CDATA[$F{cpf}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="355" y="0" width="100" height="20" uuid="e146136e-dbbc-43ea-ae57-a400e26b69bc"/>
+				<textFieldExpression><![CDATA[$F{cargo}.getNome()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="455" y="0" width="100" height="20" uuid="9208ef1e-d4ed-47ae-82fd-03ff484dedaa"/>
+				<textFieldExpression><![CDATA[$F{ativo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

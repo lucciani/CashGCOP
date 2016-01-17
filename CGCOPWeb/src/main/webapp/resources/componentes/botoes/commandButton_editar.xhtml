@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <composite:interface>
+        <composite:attribute name="acao_butao" required="true"  method-signature="java.lang.Void action()"/>
+        <composite:attribute name="componente_to_update"  required="true"  shortDescription="componete atualizado apos selecionar a linha" />
+        <composite:attribute name="renderizar_btn"  required="true"  type="java.lang.Boolean" />
+        <composite:attribute name="onclick"  default="" />
+        <composite:attribute name="process"  default="@this" />
+
+    </composite:interface>
+    <composite:implementation id="compConsulta">
+        <p:commandButton icon="fa fa-edit Fs14"  id="btnEdit" onclick="#{cc.attrs.onclick}"   title="#{label['editar']}" rendered="#{cc.attrs.renderizar_btn}" 
+                         update="#{cc.attrs.componente_to_update}" actionListener="#{cc.attrs.acao_butao}" class="btnEditar" process="#{cc.attrs.process}"/>
+    </composite:implementation>
+</ui:composition>
+
+

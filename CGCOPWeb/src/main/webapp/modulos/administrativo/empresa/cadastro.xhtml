@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:empresa="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/empresa"
+
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="corpo">
+        <h:form id="frm_cad"  prependId="false" >
+            <componentes:panelPadrao id="pnlPadrao" class="Responsive" acao_cancelar="#{empresaMB.init()}" 
+                                     acao_excluir="#{empresaMB.desativarEmpresa()}" btn_excluir="#{empresaMB.empresa.ativo}"   acao_salvar="#{empresaMB.salvar()}" 
+
+                                     btn_limpar="true" cabecalho="#{label.cadastro} #{label.de} #{label.empresa}" btn_imprimir="false" btn_ativar="false"
+                                     btn_dialog_rel="false" btn_cancelar="false" acao_ativar="#{empresaMB.init()}" >
+                <empresa:cadastroEmpresa id="compCadastro"/>
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    <ui:define name="dialog" id="dialogs">
+
+        <p:dialog showEffect="fade" position="center center"   header="#{label.logo}" id="dialogoAssinat" modal="true" hideEffect="fade" widgetVar="dialogoAssinat">
+            <h:form enctype="multipart/form-data">
+                <h:panelGrid width="100%">
+                    <p:fileUpload id="carArq" style="margin: 10px" mode="advanced" fileLimit="1" fileUploadListener="#{empresaMB.fileUploud}" 
+                                  value="#{empresaMB.arquivoUpload}" sizeLimit="10485760" invalidSizeMessage="#{msg.limite_excediro}"
+                                  cancelLabel="#{label.cancelar}" label="#{label.carregar_arquivo}" uploadLabel="#{label.enviar_arquivo}" 
+                                  allowTypes="/(\.|\/)(gif|jpe?g|png)$/"  skinSimple="true"  previewWidth="100"  />
+
+                </h:panelGrid>
+
+
+            </h:form>
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>
+
+

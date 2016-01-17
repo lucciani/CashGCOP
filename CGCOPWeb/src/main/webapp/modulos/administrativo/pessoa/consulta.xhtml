@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pessoa="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/pessoa"
+                xmlns:dialogs="http://xmlns.jcp.org/jsf/composite/componentes/dialogs"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
+
+
+
+    <ui:define name="corpo">
+        <h:form id="frm_cons" prependId="false" >
+            <componentes:panelPadrao id="pnlPadrao" cabecalho="#{label.consulta} #{label.pessoa}" acao_limpar="#{pessoaMB.init()}" render_sep_1="false" btn_excluir="false" 
+                                     btn_cancelar="false" btn_salvar="false" btn_ativar="false" acao_imprimir="#{pessoaMB.init()}" render_sep_2="false" render_sep_3="false"
+                                     dialog_cadastro="dialogCadastro" btn_imprimir="false" btn_dialog_rel="false" btn_salvar_update="false">
+                <pessoa:consultaPessoa id="compConsulta" componente_to_update="@form:pnlPadrao:compConsulta:tabela" renderizar_btn_selecionar="false" />
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    <ui:define name="dialog">
+     
+    </ui:define>
+
+</ui:composition>
+
+

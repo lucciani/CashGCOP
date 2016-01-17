@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:un="http://xmlns.jcp.org/jsf/composite/componentes/paginas/cadastro_basico/unidade_medida"
+                xmlns:util="http://xmlns.jcp.org/jsf/composite/componentes/util"
+                xmlns:comp="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:btn="http://xmlns.jcp.org/jsf/composite/componentes/botoes"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+                xmlns:input="http://xmlns.jcp.org/jsf/composite/componentes/inputs">
+
+    <ui:define name="corpo">
+        <div class="Container100">
+            <p:tabView class="ContainerIndent Responsive tabView-inicio" id="tabView">
+                <p:tab rendered="#{utilitarioNavegacaoMB.permissaoIncluir(administrativo.inicio)}" id="tabDash" title="#{label.dados}" class=" Responsive">
+                    <h:form id="frm_dash"  prependId="false" >
+                        <util:dadosInicial id="compDadosPro"/>
+                    </h:form>
+
+                    <div class="Container100   Responsive" style="float: left">
+                        <h:form id="frm_graf" class="ContainerIndent " prependId="false" >
+                            <p:panel>
+
+                                <i class="icon-chart Fleft Fs30   red "></i>
+                                <div class="Fs30 Fleft  Wid70 hardblue fontItalic">#{label.concluidos}</div>                                       
+                            </p:panel>
+                            <p:fieldset widgetVar="fielGraf" >
+                                <p:selectOneRadio value="#{dadosInicialMB.ano}"  class="Wid10  "  >
+                                    <f:selectItems value="#{dadosInicialMB.listaDeAnos}" var="an" itemValue="#{an}" itemLabel="#{an}"/>
+                                </p:selectOneRadio>
+                                <p:chart type="line" model="#{dadosInicialMB.lineModel}"   widgetVar="graf" style="height: 100%"/>
+                            </p:fieldset>
+                        </h:form>
+                    </div>
+                </p:tab>
+                <p:tab id="tabAgenda" title="#{label.agenda}" class="Container100 Responsive">
+                    <h:form id="frm_c" prependId="false" >
+                        <div class="ContainerIndent">
+
+                            <util:agendaEventos id="compAgenda"/>
+                        </div>
+                    </h:form>
+                </p:tab>
+            </p:tabView>
+        </div>
+
+    <h:outputStylesheet name="dadosInicial.css" library="css" />
+
+
+    </ui:define>
+    <ui:define name="dialog">
+        <h:form prependId="false" id="frmDialog" >
+            <p:dialog widgetVar="caixaDialogo" id="dialogCaixa"
+                      header="Evento"  width="800"
+                      resizable="false"
+                      showEffect="clip" hideEffect="clip">  
+                <h:panelGroup id="eventDetails" layout="block" >
+                    <comp:selectOneLabel inp_valor="#{agendaDeEventosMB.evento.tipoEvento}" lab_valor="#{label.tipo_evento}" inp_class_tamanho="90" inp_require="true" >
+                        <f:selectItems value="#{agendaDeEventosMB.listaDeTiposDeEventos}" var="es" itemLabel="#{es.descricao}" itemValue="#{es}"/>
+                    </comp:selectOneLabel>
+
+                    <comp:input_label inp_valor="#{agendaDeEventosMB.evento.titulo}" lab_valor="#{label.titulo}" inp_class_tamanho="90" inp_require="true" />
+                    <comp:textarea_label  inp_valor="#{agendaDeEventosMB.evento.descricao}" lab_valor="#{label.descricao}"  inp_class_tamanho="90" inp_require="true" />
+                    <comp:input_label_data inp_valor="#{agendaDeEventosMB.evento.dataInicio}" inp_calendar_pattern="MM/dd/yyyy HH:mm" lab_valor="#{label.inicio}" inp_class_tamanho="30" inp_require="true"/>
+                    <comp:input_label_data inp_valor="#{agendaDeEventosMB.evento.dataFim}" inp_calendar_pattern="MM/dd/yyyy HH:mm" lab_valor="#{label.fim}" inp_class_tamanho="30" inp_require="true"/>
+                    <div class="EmptyBox20" />
+                    <div>
+                        <p:commandButton  class="Fright btnSalvar" value="#{label.salvar}"  icon="fa fa-floppy-o " actionListener="#{agendaDeEventosMB.salvar()}"  oncomplete="PF('meucalendario').update();PF('caixaDialogo').hide();" 
+                                          update="@(form)"   />  
+                        <p:commandButton  class="Fleft btnExcluir" value="#{label.excluir}"  icon="fa fa-trash-o " actionListener="#{agendaDeEventosMB.excluir()}"  oncomplete="PF('meucalendario').update();PF('caixaDialogo').hide();" 
+                                          update="@(form)"   >
+                            <p:confirm header="#{label.excluir}" message="#{msg.confirmacao}" icon="ui-icon-alert"  />
+
+                        </p:commandButton>  
+                    </div>
+                </h:panelGroup>
+            </p:dialog>  
+        </h:form>
+    </ui:define>
+
+</ui:composition>
+

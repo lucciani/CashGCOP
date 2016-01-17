@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:inp="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:btn="http://xmlns.jcp.org/jsf/composite/componentes/botoes"
+                xmlns:comp="http://xmlns.jcp.org/jsf/composite/componentes/inputs">
+    <composite:interface>
+
+
+    </composite:interface>
+    <composite:implementation id="compo">
+        <div  class="Container50 "  >
+            <p:panel>
+
+                <i class="icon-folder-open-empty Fleft Fs30   yellow "></i>
+                <div class="Fs27 Fleft  Wid70 hardblue fontItalic">#{label.projetos_andamento}</div>                                       
+            </p:panel>
+            <p:dataGrid var="car" value="#{dadosInicialMB.listaString}" columns="2" layout="grid"
+                        rows="6" paginator="true" id="cars"
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="6,12,16">
+
+
+                <p:panel header="&raquo; #{car}" style="text-align:left" class="pnl-projeto">
+                    <p:panelGrid  columns="2"  layout="grid" style="text-align: left;" columnClasses="label,value" >
+
+                        <h:outputText value="&#8227;Inicio: " />
+                        <h:outputText value="01/01/15" />
+
+                        <h:outputText value="&#8227;Tp. Projeto: " />
+                        <h:outputText value="Hidraulico" />
+
+                        <h:outputText value="&#8227;Fase: " />
+                        <h:outputText value="Elaboração" />
+
+                        <h:outputText value="&#8227;Cliente: " />
+                        <h:outputText value="Carlos Pereira da Silva" />
+
+                        <h:outputText value="&#8227;Resp.: " />
+                        <h:outputText value="Antônio Carlos Jobim" />
+
+                        <h:outputText value="&#8227;Documentos: "/>
+                        <p:commandLink  styleClass="ui-icon ui-icon-search"  />
+                    </p:panelGrid>
+                </p:panel>
+
+            </p:dataGrid>
+        </div>
+        <div class="Container50 ">
+            <p:panel>
+
+                <i class="icon-building Fleft Fs30 yellow "></i>
+                <div class="Fs27 Fleft  Wid70 hardblue fontItalic">#{label.obras_execucao}</div>                                       
+            </p:panel>
+            <p:dataGrid var="car2" value="#{dadosInicialMB.listaString2}" columns="2" layout="grid"
+                        rows="6" paginator="true" id="cars2" 
+                        paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                        rowsPerPageTemplate="6,12,16">
+
+
+                <p:panel header="&raquo; #{car2}" style="text-align:left" class="pnl-obra ">
+                    <p:panelGrid  columns="2" layout="grid" style="text-align: left" columnClasses="label,value" >
+
+                        <h:outputText value="&#8227;Inicio: " />
+                        <h:outputText value="01/01/15" />
+
+                        <h:outputText value="&#8227;Fase: " />
+                        <h:outputText value="Acabamento" />
+
+                        <h:outputText value="&#8227;Cliente: " />
+                        <h:outputText value="Carlos Pereira da Silva" />
+
+                        <h:outputText value="&#8227;Resp. " />
+                        <h:outputText value="Antônio Carlos Jobim" />
+
+                        <h:outputText value="&#8227;Documentos: "/>
+                        <p:commandLink  styleClass="ui-icon ui-icon-search"  />
+
+                        <h:outputText value="&#8227;Itens: "/>
+                        <p:commandLink  styleClass="ui-icon ui-icon-search"  />
+                    </p:panelGrid>
+                </p:panel>
+
+            </p:dataGrid>
+        </div>
+
+    </composite:implementation>
+</ui:composition>
+
+
+
+

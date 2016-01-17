@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <composite:interface>
+        <composite:attribute name="componente_to_update"  required="true"  shortDescription="componete atualizado apos selecionar a linha" />
+        <composite:attribute name="renderizar_btn" default="true"/>
+        <composite:attribute name="onclick"  default="" />
+        <composite:attribute name="complete"  default="" />
+        <composite:attribute name="process"  default="@this"/>
+        <composite:attribute name="value"  default=""/>
+        <composite:attribute name="label"  default=" "/>
+        <composite:attribute name="target"  default=""/>
+    </composite:interface>
+    <composite:implementation>
+        <p:commandButton icon="fa fa-check-square-o" onclick="#{cc.attrs.onclick}" title="#{label.selecionar}"  
+                         oncomplete="#{cc.attrs.complete}" rendered="#{cc.attrs.renderizar_btn}" update="#{cc.attrs.componente_to_update}" process="#{cc.attrs.process}">
+            <f:setPropertyActionListener target="#{cc.attrs.target}" value="#{cc.attrs.value}"/>
+            <composite:insertChildren/>
+        </p:commandButton>
+    </composite:implementation>
+</ui:composition>
+
+

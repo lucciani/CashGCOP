@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:inputs="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+                xmlns:usr="http://xmlns.jcp.org/jsf/composite/componentes/paginas/seguranca"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <composite:interface id="interCon">
+
+    </composite:interface>
+    <composite:implementation>
+        <h:panelGroup layout="block" class="Container100 Responsive">
+            <p:fieldset legend="#{label.selecionar} #{label.usuario}" >
+                <inputs:input_label_btn_click id="inputCol" inp_valor="#{gerenciarPermissaoMB.usuario.nomeDoColaborador}" lab_valor="#{label.usuario}" 
+                                              btn_onclick="PF('dialogUsuario').show()" btn_immediate="true" btn_update=":frm_cad:pnlPadrao:compCadastro:tabV" inp_require="true"  
+                                              btn_titulo="#{label.usuario}" inp_readonly="true" inp_class_tamanho="80"/>
+            </p:fieldset>
+            <p:tabView class="Container100 Responsive" id="tabV">
+                <p:tab title="#{label.empresa}" ariaLabel="#{label.empresa}" id="tabEmp">
+                    <p:dataTable value="#{gerenciarPermissaoMB.listaDeEmpresas}"  id="tabelaEmp" paginatorAlwaysVisible="false"  paginator="true" var="e" rows="10"
+                                 rowStyleClass="#{(empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row')  }"
+                                 rowIndexVar="rowIx" emptyMessage="#{mensagens['consulta.vazia']}"
+                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                 rowsPerPageTemplate="5,10,15"  reflow="true">
+
+                        <p:column headerText="#{label.nome}">
+                            <componentes:outputText value="#{e.nome}"/>
+                        </p:column>
+                        <p:column headerText="#{label.acao}" width="10%" class="TexAlCenter">
+                            <p:commandButton icon="fa fa-plus-circle" class="btnSalvar" title="#{label.adicionar} #{label.empresa}" actionListener="#{gerenciarPermissaoMB.addEmpresa(e)}" update="tabelaEmp" rendered="#{not gerenciarPermissaoMB.renderBtnAdd(e)}"/>
+                            <p:commandButton icon="fa fa-minus-circle" class="btnExcluir" title="#{label.remover} #{label.empresa}" actionListener="#{gerenciarPermissaoMB.delEmpresa(e)}" update="tabelaEmp" rendered="#{gerenciarPermissaoMB.renderBtnAdd(e)}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:tab>
+                <p:tab title="#{label.permissao_usuario}" ariaLabel="#{label.permissao_usuario}" id="tabPermi">
+                    <p:fieldset legend="#{label.adicionar} #{label.permissao}" id="wdgPer">
+                        <inputs:selectOneLabel inp_valor="#{gerenciarPermissaoMB.valorCampoConsuta}" inp_class_tamanho="33" lab_valor="#{label.modulo}" ajax_listener="#{gerenciarPermissaoMB.consultarTarefasPorModulos()}"
+                                               ajax_render="true" sel_update="wdgPer" >
+                            <f:selectItem noSelectionOption="true" itemLabel="---Selecione---"  value="#{null}" itemValue="#{null}" />
+                            <f:selectItems value="#{gerenciarPermissaoMB.listaDeModulos}" var="mo" itemLabel="#{mo.nome}" itemValue="#{mo.nome}" />
+                        </inputs:selectOneLabel> 
+                        <p:commandButton value="#{label.selecionar} #{label.tarefa}" icon="fa fa-external-link" class="MarTop30"   oncomplete="PF('dialogTarefa').show()" update="dialogTarefa" />
+                    </p:fieldset>
+                    <p:fieldset legend="#{label.permissoes} #{label.concedida}">
+
+                        <p:dataTable value="#{gerenciarPermissaoMB.listaDePermissao}" id="tabela" paginatorAlwaysVisible="false"  paginator="true" var="p" rows="10"
+                                     rowStyleClass="#{(empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row')  }"
+                                     rowIndexVar="rowIx" emptyMessage="#{mensagens['consulta.vazia']}"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,15"  reflow="true">
+
+
+                            <p:column headerText="#{label.modulo}" width="15%">
+                                <componentes:outputText value="#{p.tarefa.modulo.nome}"/>
+                            </p:column>
+                            <p:column headerText="#{label.tarefa}" width="25%">
+                                <componentes:outputText value="#{p.tarefa.nome}" />
+                            </p:column>
+                            <p:column headerText="#{label.descricao}" >
+                                <componentes:outputText value="#{p.tarefa.descricao}" />
+                            </p:column>
+                            <p:column headerText="#{label.incluir}" width="5%" class="TexAlCenter">
+                                <p:outputLabel class="icon-ok-circled Fs22" rendered="#{p.incluir}"/>
+                            </p:column>
+                            <p:column headerText="#{label.excluir}" width="5%" class="TexAlCenter">
+                                <p:outputLabel class="icon-ok-circled Fs22" rendered="#{p.excluir}"/>
+                            </p:column>
+                            <p:column headerText="#{label.editar}" width="5%" class="TexAlCenter">
+                                <p:outputLabel class="icon-ok-circled Fs22" rendered="#{p.editar}"/>
+                            </p:column>
+                            <p:column headerText="#{label.consulta}" width="6%" class="TexAlCenter">
+                                <p:outputLabel class="icon-ok-circled Fs22" rendered="#{p.consultar}"/>
+                            </p:column>
+                            <p:column headerText="#{label.acao}" width="5%" class="TexAlCenter">
+                                <p:commandButton oncomplete="PF('dialogPermissao').show()" update="dialogPermissao" icon="fa fa-pencil-square " class="btnEditar" 
+                                                 actionListener="#{gerenciarPermissaoMB.setarPermissao(p)}"/>
+                            </p:column>
+                        </p:dataTable>
+                    </p:fieldset>
+                </p:tab>
+                <p:tab title="#{label.clonar} #{label.usuario}"  id="tabClon">
+                    <usr:consultaUsuario id="compConsultaUsr" componente_to_update="@form" render_edit="false" >
+                        <p:commandButton title="#{label.clonar}" icon="fa fa-retweet" actionListener="#{gerenciarPermissaoMB.clonarPermissoes(p)}" update=":frm_cad:pnlPadrao:compCadastro:tabV" >
+                            <p:confirm header="#{label.clonar}" message="#{msg.confirmacao}" icon="fa fa-question-circle "  />
+                        </p:commandButton>
+                    </usr:consultaUsuario>
+                </p:tab>
+            </p:tabView>
+
+        </h:panelGroup>
+    </composite:implementation>
+</ui:composition>
+
+
+
+

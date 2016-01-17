@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <composite:interface>
+
+        <composite:attribute id="lab_val" name="lab_valor" shortDescription="Valor do Label" required="true"/>
+        <composite:attribute id="inp_valor" name="inp_valor" shortDescription="Valor do input" required="true"/>
+        <composite:attribute id="inp_class" name="inp_class_tamanho" shortDescription="Tamanho do input pela classe Container" default="100"/>
+        <composite:attribute id="inp_require" name="inp_require" default="false" />
+        <composite:attribute id="inp_mascara" name="inp_mascara" required="true" />
+        <composite:attribute id="inp_max" name="inp_tamanho_maximo" default="128" />
+        <composite:attribute id="inp_validador" name="inp_validador" default="none" shortDescription="Calsse para validar o valor do input" />
+
+    </composite:interface>
+    <composite:implementation id="compConsulta">  
+        <div class="Container#{cc.attrs.inp_class_tamanho} Responsive">
+            <div class="ContainerIndent">
+                <p:outputLabel value="#{cc.attrs.lab_valor}" for="input" />
+                <div>
+                    <p:inputMask id="input" required="#{cc.attrs.inp_require}" mask="#{cc.attrs.inp_mascara}"  maxlength="#{cc.attrs.inp_tamanho_maximo}"
+                                 styleClass="Wid90" value="#{cc.attrs.inp_valor}" >
+                        <c:if test="#{cc.attrs.inp_validador != 'none'}">
+                            <f:validator validatorId="#{cc.attrs.inp_validador}" for="input" rendered="#{cc.attrs.inp_validador}"/>
+                            <p:ajax event="blur" update="@this"/>
+                        </c:if>
+                    </p:inputMask>
+                </div>
+            </div>
+        </div>
+    </composite:implementation>
+</ui:composition>
+
+

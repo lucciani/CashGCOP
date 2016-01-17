@@ -1,0 +1,120 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                template="/WEB-INF/template.xhtml">
+
+    <ui:define name="content">
+        <h:outputScript name="jquery/jquery.js" library="primefaces" target="head"/>
+        
+        <h3 class="hardblue TexAlCenter">Empty Page</h3>
+        <span class="TexAlCenter DispBlock Wid100">Use this page to start from scratch and place your custom content.</span>
+    </ui:define>
+
+</ui:composition>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Nome do Sistema</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+
+        <h:outputScript name="js/layout.js" library="sentinel-layout" />
+        <h:outputScript name="navegacao.js" library="js" />
+
+    </h:head>
+
+    <h:body class="fontRegular back-login white-back">
+
+        <div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter PaddingTopPercent10">
+            <a href="" id="login-logo">
+                <h:graphicImage name="images/LOGO.svg" styleClass="Fleft" library="sentinel-layout"/>
+                <span class="Fs30 FontTitilliumSemiBoldItalic Fleft"><span class="softblue">Nome</span><span class="hardblue">Sistema</span></span>
+            </a>
+            <div class="EmptyBox10"></div>
+        </div>
+
+        <!-- LOGIN BOX COVER START -->
+        <form action="j_spring_security_check" method="post"  >
+            <div class="Container80 MaxWid500 white-back Fnone MarAuto BordRad10" id="login-box">
+                <div class="Container100" >
+                    <div class="Container100 TexAlCenter Animated05 BoxSizeBorder TabBtn left TabBtnActiveLeft" role="1">
+                        <div class="Container80 Fnone MarAuto FontBold"><i class="icon-lock"></i> Login</div>
+                    </div>
+
+
+                    <div class="Container90 Fnone MarAuto TexAlCenter TabContent" id="TAB1">
+                        <div class="EmptyBox50"></div>
+                        <p:inputText  placeholder="Login" id="j_username" styleClass="Container80 Fnone MarAuto Fs18"/>
+                        <div class="EmptyBox10"></div>
+                        <p:password  placeholder="Password" styleClass="Container80 Fnone MarAuto Fs18" id="j_password" feedback="false"/>
+                        <div class="EmptyBox20"></div>
+                        <div class="EmptyBox20"></div>
+                        <h:commandButton id="btnLogin"  styleClass="Fs16 btnLogin FontTitilliumSemiBoldItalic"   value="#{label.login}"  />
+                        <div class="EmptyBox50"></div>
+                        <h:panelGroup layout="block" rendered="#{param.erro}">
+                            <div  class="TexAlCenter Animated05 BoxSizeBorder TabBtn TabBtnActiveLeft Container80 Fnone MarAuto FontLight  red">
+                                <i class="icon-attention"></i>#{msg.usuario_senha_invalido}
+                            </div>
+                        </h:panelGroup>
+
+                    </div>
+
+
+                </div>
+            </div>
+        </form>
+
+        <!-- LOGIN BOX COVER END -->
+        <h:outputStylesheet name="default.css" library="css" />
+        <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
+    </h:body>
+
+    
+    
+    
+     <h:form>
+
+            <p:poll interval="15"  onstart="mudarImagem()"   />
+
+
+        </h:form>
+        <div  id="divLog"      >
+            <p:panel style="border-color:   #738FAB " class="Container100 MaxWid500 Fnone MarAuto MarTopPerc10 TexAlCenter PaddingTopPercent10 ">
+                <div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter  ">
+                    <a href="" id="login-logo">
+                        <h:graphicImage name="images/LOGO.svg" styleClass="Fleft" library="sentinel-layout"/>
+                        <span class="Fs30 FontTitilliumSemiBoldItalic Fleft"><span class="softblue">Nome</span><span class="hardblue">Sistema</span></span>
+                    </a>
+                </div>
+                <div class="circulo  MarAuto TexAlCenter transparencia  PaddingTopPercent4 ">
+                </div>
+                <!-- LOGIN BOX COVER START -->
+                <form action="j_spring_security_check" method="post"  >
+                    <div class="Container80 Fnone transparencia MarAuto  MarTop5 TexAlCenter TabContent" id="TAB1">
+                        <h:panelGroup layout="block" rendered="#{param.erro}">
+                            <div  class="TexAlCenter Animated05 BoxSizeBorder BordRad5 TabBtnActiveLeft Container100 Fnone MarAuto FontLight  red">
+                                <i class="icon-attention"></i>#{msg.usuario_senha_invalido}
+                            </div>
+                            <div class="EmptyBox10"></div>
+                        </h:panelGroup>
+                        <p:inputText  placeholder="Login" widgetVar="login" id="j_username" styleClass="Container80 Fnone MarAuto Fs18"/>
+                        <div class="EmptyBox10"></div>
+                        <p:password  placeholder="Password" styleClass="Container80 Fnone MarAuto Fs18" id="j_password" feedback="false"/>
+                        <div class="EmptyBox10"></div>
+                        <h:commandButton id="btnLogin"  styleClass="Fs23 btnLogin FontTitilliumSemiBoldItalic"   value="Entrar"  />
+                        <div class="EmptyBox50"></div>
+                    </div>
+                </form>
+            </p:panel>
+        </div>
+    
+</html>

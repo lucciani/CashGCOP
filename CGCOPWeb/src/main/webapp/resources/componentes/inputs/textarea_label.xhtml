@@ -1,0 +1,40 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <composite:interface>
+        <composite:attribute id="lab_val" name="lab_valor" shortDescription="Valor do Label" required="true"/>
+        <composite:attribute id="inp_valor" name="inp_valor" shortDescription="Valor do input" required="true"/>
+        <composite:attribute id="inp_class" name="inp_class_tamanho" shortDescription="Tamanho do input pela classe Wid10 Wid20" default="Wid100"/>
+        <composite:attribute id="inp_require" name="inp_require" default="false" />
+        <composite:attribute id="inp_require" name="inp_tamanho_maximo" default="1024" />
+        <composite:attribute id="inp_blur" name="inp_blur" default="none" />
+    </composite:interface>
+    <composite:implementation id="compPanel">
+        <div class="Container#{cc.attrs.inp_class_tamanho} Responsive">
+            <div class="ContainerIndent">
+                <p:outputLabel styleClass="label" value="#{cc.attrs.lab_valor}" class="Wid90" for="input"/>
+                <div>
+                    <c:if test="#{cc.attrs.inp_blur == 'none'}">
+                        <p:inputTextarea required="#{cc.attrs.inp_require}"  class="Wid90" maxlength="#{cc.attrs.inp_tamanho_maximo}" 
+                                         id="input"  value="#{cc.attrs.inp_valor}" />
+                    </c:if>
+                    <c:if test="#{cc.attrs.inp_blur != 'none'}">
+                        <p:inputTextarea required="#{cc.attrs.inp_require}"  class="Wid90" maxlength="#{cc.attrs.inp_tamanho_maximo}" 
+                                         id="input"  value="#{cc.attrs.inp_valor}" onkeydown="nextFocus('#{cc.attrs.inp_blur}')" />
+                    </c:if>
+
+                </div>
+            </div>
+        </div>
+
+    </composite:implementation>
+</ui:composition>
+
+

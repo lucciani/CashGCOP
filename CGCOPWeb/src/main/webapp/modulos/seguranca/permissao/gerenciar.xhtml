@@ -1,0 +1,120 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:usr="http://xmlns.jcp.org/jsf/composite/componentes/paginas/seguranca"
+
+                xmlns:inputs="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="corpo">
+
+        <h:form id="frm_cad" prependId="false" >
+            <componentes:panelPadrao id="pnlPadrao" class="Responsive" acao_cancelar="#{gerenciarPermissaoMB.init()}" 
+                                     acao_excluir="#{gerenciarPermissaoMB.init()}" btn_excluir="false"  btn_salvar="false" render_sep_1="false" render_sep_2="false"
+                                     render_sep_3="false" btn_limpar="false" acao_salvar="#{gerenciarPermissaoMB.init()}" 
+                                     cabecalho="#{label.gerenciar} #{label.permissao_usuario} " btn_imprimir="false" btn_ativar="false"
+                                     btn_dialog_rel="false" btn_cancelar="false" acao_ativar="#{gerenciarPermissaoMB.init()}" >
+                <usr:gerenciarPermissao id="compCadastro" />
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    <ui:define name="dialog" id="dialogs">
+        <p:dialog showEffect="fade" position="center center"   header="#{label.usuario} " id="dialogoAssinat" modal="true" hideEffect="fade" widgetVar="dialogUsuario">
+            <h:form id="frm_usr" >
+                <usr:consultaUsuario id="compUsr"  componente_to_update="@form" render_edit="false" >
+                    <p:commandButton actionListener="#{gerenciarPermissaoMB.setarUsuario(p)}" icon="fa fa-check-square-o" update="@(form)" onclick="PF('dialogUsuario').hide()" />
+                </usr:consultaUsuario>
+
+            </h:form>
+        </p:dialog>
+
+        <p:dialog showEffect="fade" position="center center"   header="#{label.permissao}" id="dialogPermissao" modal="true" hideEffect="fade" widgetVar="dialogPermissao">
+            <h:form prependId="false" id="frm_permissao" >
+                <p:commandButton value="#{label.atualizar} #{label.permissao}" class="ContainerIndent Responsive" icon="fa fa-refresh" actionListener="#{gerenciarPermissaoMB.editarPermissao()}" update=":frm_cad" />
+                <div class="EmptyBox20 MarTop10 Container100" />
+                <p:panelGrid columns="2" layout="grid" columnClasses="label,value"  id="grd_per" >
+                    <h:outputText value="Incluir: "/>
+                    <p:selectBooleanCheckbox value="#{gerenciarPermissaoMB.permissao.incluir}"/>
+                    <h:outputText value="Excluir: "/>
+                    <p:selectBooleanCheckbox value="#{gerenciarPermissaoMB.permissao.excluir}"/>
+                    <h:outputText value="Editar: "/>
+                    <p:selectBooleanCheckbox value="#{gerenciarPermissaoMB.permissao.editar}"/> 
+                    <h:outputText value="Consulta: "/>
+                    <p:selectBooleanCheckbox value="#{gerenciarPermissaoMB.permissao.consultar}"/>
+                </p:panelGrid>
+
+            </h:form>
+        </p:dialog>
+        <p:dialog showEffect="fade"  position="bottom"  dynamic="true" header="#{label.tarefa}" id="dialogTarefa" modal="true" hideEffect="fade" widgetVar="dialogTarefa">
+            <h:form prependId="false" id="frm_tarefa_dto"  class="Responsive ContainerIndent" >
+                <p:fieldset  legend="#{label.tarefa} #{label.selecionada}" class="ContainerIndent" >
+                    <div class="Fleft Container100 fontBoldItalic Fs25 hardblue">
+                        &bull; #{gerenciarPermissaoMB.tarefaPermissaoDTO.tarefa.nome}
+                    </div>  
+                    <div class="Container100 MarBot10" style="border: 1px #CDCDCD dashed" />
+                    <div class="Container25 Fleft">
+                        <p:outputLabel value="&bull; #{label.incluir}" class="Fleft MarAuto FontBold "/>
+                        <p:selectBooleanCheckbox class="Fleft MarAuto FontBold Fs20"  value="#{gerenciarPermissaoMB.tarefaPermissaoDTO.incluir}"/>
+                    </div>
+                    <div class="Container25 Fleft" >
+                        <p:outputLabel value="&bull; #{label.excluir}" class="Fleft MarAuto FontBold "/>
+                        <p:selectBooleanCheckbox  class="Fleft MarAuto FontBold Fs20" value="#{gerenciarPermissaoMB.tarefaPermissaoDTO.excluir}"/>
+                    </div>
+                    <div  class="Container25 Fleft">
+                        <p:outputLabel value="&bull; #{label.editar}" class="Fleft MarAuto FontBold "/>
+                        <p:selectBooleanCheckbox  class="Fleft MarAuto FontBold Fs20" value="#{gerenciarPermissaoMB.tarefaPermissaoDTO.editar}"/>
+                    </div>
+                    <div  class="Container25 Fleft">
+                        <p:outputLabel value="&bull; #{label.consulta}r" class="Fleft MarAuto FontBold "/>
+                        <p:selectBooleanCheckbox  class="Fleft MarAuto FontBold Fs20" value="#{gerenciarPermissaoMB.tarefaPermissaoDTO.consultar}"/>
+                    </div>
+                    <div class="Container100 MarBot10" style="border: 1px #CDCDCD dashed" />
+
+                    <p:commandButton value="#{label.salvar}" class="Fright  MarTop5 " icon="fa fa-save"  actionListener="#{gerenciarPermissaoMB.incluirPermissao()}" update="@(form)"/>
+                </p:fieldset>
+                <p:dataTable value="#{gerenciarPermissaoMB.listaDeTarefaPermissao}" id="tabela" paginatorAlwaysVisible="false"  paginator="true" var="t" rows="5"
+                             rowStyleClass="#{(empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row')  }"
+                             rowIndexVar="rowIx" emptyMessage="#{mensagens['consulta.vazia']}"
+                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                             reflow="true">
+
+
+                    <p:column headerText="#{label.modulo}" width="15%">
+                        <componentes:outputText value="#{t.tarefa.modulo.nome}"/>
+                    </p:column>
+                    <p:column headerText="#{label.tarefa}" width="25%">
+                        <componentes:outputText value="#{t.tarefa.nome}" />
+                    </p:column>
+                    <p:column headerText="#{label.descricao}" >
+                        <componentes:outputText value="#{t.tarefa.descricao}" />
+                    </p:column>
+                    <p:column headerText="#{label.incluir}" width="5%" class="TexAlCenter">
+                        <p:outputLabel class="icon-ok-circled Fs22" rendered="#{t.incluir}"/>
+                    </p:column>
+                    <p:column headerText="#{label.excluir}" width="5%" class="TexAlCenter">
+                        <p:outputLabel class="icon-ok-circled Fs22" rendered="#{t.excluir}"/>
+                    </p:column>
+                    <p:column headerText="#{label.editar}" width="5%" class="TexAlCenter">
+                        <p:outputLabel class="icon-ok-circled Fs22" rendered="#{t.editar}"/>
+                    </p:column>
+                    <p:column headerText="#{label.consulta}" width="6%" class="TexAlCenter">
+                        <p:outputLabel class="icon-ok-circled Fs22" rendered="#{t.consultar}"/>
+                    </p:column>
+                    <p:column headerText="#{label.acao}" width="5%" class="TexAlCenter">
+                        <p:commandButton  update="frm_tarefa_dto" actionListener="#{gerenciarPermissaoMB.setaTarefaPermissao(t)}" 
+                                          icon="fa fa-check-circle " class="btnSalvar"/>
+                    </p:column>
+                </p:dataTable>
+
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+
+</ui:composition>
+

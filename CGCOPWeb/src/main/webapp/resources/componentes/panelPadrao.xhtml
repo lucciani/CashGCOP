@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:botao="http://xmlns.jcp.org/jsf/composite/componentes/botoes">
+
+    <composite:interface>
+        <composite:attribute name="cabecalho" required="true" />
+        <composite:attribute name="btn_salvar_update"  default="@(form)" />
+        <composite:attribute name="btn_salvar"  default="true" />
+        <composite:attribute name="btn_cancelar"  default="true" />
+        <composite:attribute name="btn_excluir"  default="true" />
+        <composite:attribute name="btn_ativar"  default="true" />
+        <composite:attribute name="btn_limpar"  default="true" />
+        <composite:attribute name="btn_dialog_rel"  default="true" />
+        <composite:attribute name="btn_imprimir"  default="true" />
+        <composite:attribute name="render_sep_1"  default="true" />
+        <composite:attribute name="render_sep_2"  default="true" />
+        <composite:attribute name="render_sep_3"  default="true" />
+        <composite:attribute name="tipo_btn_ativo"  default="true" shortDescription="Informa se o botão vai setar o ativo ou inativo" />
+        <composite:attribute name="dialog_cadastro"  default="dialog" />
+        <composite:attribute name="dialog_rel"  default="dialog" />
+        <composite:attribute name="acao_salvar"   method-signature="java.lang.Void action()"/>
+        <composite:attribute name="acao_limpar"  method-signature="java.lang.Void action()"/>
+        <composite:attribute name="acao_excluir"  method-signature="java.lang.Void action()"/>
+        <composite:attribute name="acao_cancelar"  method-signature="java.lang.Void action()"/>
+        <composite:attribute name="acao_ativar"  method-signature="java.lang.Void action()"/>
+        <composite:attribute name="acao_imprimir"  method-signature="java.lang.Void action()"/>
+
+    </composite:interface>
+    <composite:implementation id="compPanel">
+
+        <p:panel id="panelPrincipal" class="ContainerIndent cabecalho"   header="#{cc.attrs.cabecalho}"  >
+
+            <f:facet name="header" id="fieldMenu">
+
+                <p:outputLabel value="#{cc.attrs.cabecalho}" class="FontTitilliumBoldItalic cabecalho"/>
+                <div id="full" style="height: auto;float: right;font-size: 14px;" >
+
+
+                    <p:toolbar class="toobarMenu"  style="border: none">
+                        <f:facet name="left">
+                            <h:panelGroup layout="block" rendered="#{cc.attrs.render_sep_1}" class="ui-separator red" >
+                                <span class="ui-icon ui-icon-grip-dotted-vertical red" />
+                            </h:panelGroup>
+                            <p:commandButton widgetVar="btn_salvar" id="btn_salvar" rendered="#{cc.attrs.btn_salvar}" class="btn-menu btnSalvar" update="#{cc.attrs.btn_salvar_update}" title="#{label['salvar']}" icon="fa fa-floppy-o fa-lg " actionListener="#{cc.attrs.acao_salvar}" />
+                            <p:commandButton widgetVar="btn_cancelar" id="btn_cancelar"  rendered="#{cc.attrs.btn_cancelar}" update="@form" immediate="true" class="btn-menu btnCancelar" title="#{label['cancelar']}" actionListener="#{cc.attrs.acao_cancelar}" icon="fa fa-ban fa-lg " >
+                                <p:confirm header="#{label['cancelar']}" message="#{msg['confirmacao']}" icon="fa fa-warning fa-lg  "   />
+                                <p:ajax event="click" immediate="true" update="@form"/>
+                            </p:commandButton>
+                            <p:commandButton rendered="#{cc.attrs.btn_dialog_rel}" immediate="true" onclick="PF('#{cc.attrs.dialog_rel}').show();" class="btn-menu btnOutro"  title="#{label.relatorio}" icon="fa  fa-list-alt fa-lg " />
+                            <p:commandButton rendered="#{cc.attrs.btn_excluir}" update="@form" class="btn-menu btnExcluir" title="#{label['excluir']}" icon="fa fa-trash fa-lg" actionListener="#{cc.attrs.acao_excluir}" >
+                                <p:confirm header="#{label['excluir']}" message="#{msg['confirmacao']}" icon="fa fa-warning fa-lg  "  />
+                            </p:commandButton>
+                            <botao:commandButtonAtivarDesativar acao_butao="#{cc.attrs.acao_ativar}" rendered="#{cc.attrs.btn_ativar}" renderizar_btn="#{cc.attrs.tipo_btn_ativo}" id="comBtn" classe="btn-menu" componente_to_update="@(form)" />
+                            <h:panelGroup layout="block" rendered="#{cc.attrs.render_sep_2}" class="ui-separator" >
+                                <span class="ui-icon ui-icon-grip-dotted-vertical red" />
+                            </h:panelGroup>
+
+                            <p:commandButton rendered="#{cc.attrs.btn_limpar}" update="@form" actionListener="#{cc.attrs.acao_limpar}" class="btn-menu btnLimpar" title="#{label.limpar}" immediate="true" icon="fa fa-refresh fa-lg " />
+                            <p:commandButton rendered="#{cc.attrs.btn_imprimir}" actionListener="#{cc.attrs.acao_imprimir}" class="btn-menu btnImprimir" title="#{label.imprimir}" icon="fa fa-print fa-lg "  id="btn_print" oncomplete="popup('/sgpo/RelatorioServlet.pdf')" update="@form"/>
+                            <h:panelGroup layout="block" rendered="#{cc.attrs.render_sep_3}" class="ui-separator hardblue" >
+                                <span class="ui-icon ui-icon-grip-dotted-vertical hardblue" />
+                            </h:panelGroup>
+                        </f:facet>
+
+
+
+                    </p:toolbar>
+                </div>
+                <div id="responseve" style="height: auto;float: right;font-size: 12px;">
+                    <p:commandButton id="dynaButton"   icon="fa fa-bars fa-lg" immediate="true" class="DisplayOnResponsive btn-menu-respon" />
+                    <p:tieredMenu overlay="true" trigger="dynaButton" my="left top" at="left bottom"  class="DisplayOnResponsive btn-menu-respon-item">
+
+                        <p:menuitem  rendered="#{cc.attrs.btn_salvar}" class="btn-menu-respon" update="@form" value="#{label['salvar']}" icon="fa fa-floppy-o  " actionListener="#{cc.attrs.acao_salvar}" />
+                        <p:menuitem rendered="#{cc.attrs.btn_cancelar}" update="@form" immediate="true" class="btn-menu-respon" value="#{label['cancelar']}" actionListener="#{cc.attrs.acao_cancelar}" icon="fa fa-ban " >
+                            <p:confirm header="#{label['cancelar']}" message="#{msg['confirmacao']}" icon="fa fa-warning fa-lg  "  />
+                        </p:menuitem>
+                        <p:menuitem rendered="#{cc.attrs.btn_dialog_rel}" immediate="true" onclick="PF('#{cc.attrs.dialog_rel}').show();" class="btn-menu-respon"  value="#{label.relatorio}" icon="fa  fa-list-alt" />
+                        <p:menuitem rendered="#{cc.attrs.btn_excluir}" update="@form" class="btn-menu-respon" value="#{label['excluir']}" icon="fa fa-trash-o  " actionListener="#{cc.attrs.acao_excluir}" >
+                            <p:confirm header="#{label['excluir']}" message="#{msg['confirmacao']}" icon="fa fa-warning fa-lg  "  />
+                        </p:menuitem>
+                        <p:menuitem rendered="#{cc.attrs.btn_ativar}" icon="fa fa-unlock-alt" update="@form" class="btn-menu-respon" value="#{label['ativar_desativar']}" actionListener="#{cc.attrs.btn_ativar}" />
+                        <p:separator rendered="#{cc.attrs.render_sep_2}"/>
+
+                        <p:menuitem rendered="#{cc.attrs.btn_limpar}" update="@form" actionListener="#{cc.attrs.acao_limpar}" immediate="true" class="btn-menu-respon" value="#{label['limpar']}" icon="fa fa-refresh  " />
+                        <p:menuitem rendered="#{cc.attrs.btn_imprimir}" actionListener="#{cc.attrs.acao_imprimir}" class="btn-menu-respon"   value="#{label.imprimir}" oncomplete="PF('dialog_relatorio').show();"  icon="fa fa-print  " />
+                        <p:separator rendered="#{cc.attrs.render_sep_3}"/>
+
+                    </p:tieredMenu>
+
+                </div>
+            </f:facet>
+            <!--<p:messages  autoUpdate="true" closable="true"   showDetail="true" showSummary="false"  />-->
+            <p:growl autoUpdate="true"   showSummary="true" />
+
+            <composite:insertChildren id="filhoPanelPrincipal" />
+        </p:panel>
+    </composite:implementation>
+</ui:composition>
+
+

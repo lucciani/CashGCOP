@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:inputs="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <composite:interface id="interCon">
+
+    </composite:interface>
+    <composite:implementation>
+        <p:fieldset legend="#{label.dados}" toggleable="true">
+            <h:panelGroup layout="block" class="Container100 Responsive">
+                <inputs:selectOneRadio inp_valor="#{pessoaMB.pessoa.tipoPessoa}" inp_class_tamanho="90" lab_valor="#{label.tipo_pessoa}" inp_require="true">
+                    <f:selectItems value="#{pessoaMB.listaTipoDePessoas}" var="tp" itemLabel="#{tp.descricao}" itemValue="#{tp}"/>
+                </inputs:selectOneRadio>
+                <inputs:input_label id="inpNom" inp_class_tamanho="60" inp_require="true" inp_valor="#{pessoaMB.pessoa.nome}" lab_valor="#{label.nome}"/>
+                <inputs:input_label id="inpAbr" inp_class_tamanho="40" inp_valor="#{pessoaMB.pessoa.descricao}" lab_valor="#{label.descricao}"/>
+            </h:panelGroup>
+        </p:fieldset>
+    </composite:implementation>
+</ui:composition>
+
+
+
+

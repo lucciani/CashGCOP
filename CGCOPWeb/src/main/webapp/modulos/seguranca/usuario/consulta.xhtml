@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:seg="http://xmlns.jcp.org/jsf/composite/componentes/paginas/seguranca/"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+                xmlns:cb="http://xmlns.jcp.org/jsf/composite/componentes/botoes">
+
+
+
+    <ui:define name="corpo">
+        <h:form id="frm_cons" prependId="false" >
+            <componentes:panelPadrao id="pnlPadrao" cabecalho="#{label.consulta} #{label.usuario}" acao_limpar="#{usuarioMB.init()}" btn_limpar="false" render_sep_1="false" render_sep_2="false" render_sep_3="false" btn_excluir="false" 
+                                     btn_cancelar="false" btn_salvar="false" btn_ativar="false" acao_imprimir="#{usuarioMB.init()}" 
+                                     dialog_cadastro="dialogCadastro" btn_imprimir="false" btn_dialog_rel="false" btn_salvar_update="false">
+                <seg:consultaUsuario id="compConsulta" componente_to_update="@form:pnlPadrao:compConsulta:tabela" >
+                    <cb:commandButtonAtivarDesativar acao_butao="#{usuarioMB.ativarOuDesativarUsuario(p)}" renderizar_btn="#{p.ativo}" componente_to_update="@form" />
+                </seg:consultaUsuario>
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    <ui:define name="dialog">
+     
+    </ui:define>
+
+</ui:composition>
+
+

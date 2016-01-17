@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:usr="http://xmlns.jcp.org/jsf/composite/componentes/paginas/seguranca"
+                xmlns:admin="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo"
+
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="corpo">
+
+        <h:form id="frm_cad" prependId="false" >
+            <componentes:panelPadrao id="pnlPadrao" class="Responsive" acao_cancelar="#{usuarioMB.init()}" 
+                                     acao_excluir="#{usuarioMB.init()}" btn_excluir="false"  acao_salvar="#{usuarioMB.salvar()}" 
+                                     btn_limpar="true" cabecalho="#{label.cadastro} #{label.usuario}" btn_imprimir="false" btn_ativar="false"
+                                     btn_dialog_rel="false" btn_cancelar="false" acao_ativar="#{usuarioMB.init()}" >
+                <usr:cadastroUsuario id="compCadastro"/>
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    <ui:define name="dialog" id="dialogs">
+        <p:dialog showEffect="fade" position="center center"   header="#{label.colaborador}" id="dialogoAssinat" modal="true" hideEffect="fade" widgetVar="dialogColaborador">
+            <h:form >
+                <admin:consultaColaborador componente_to_update="@form" render_edit="false" >
+                    <p:commandButton actionListener="#{usuarioMB.setarColaborador(c)}" icon="fa fa-check-square-o" update=":frm_cad:pnlPadrao:compCadastro:inputCol:input" onclick="PF('dialogColaborador').hide()" />
+                </admin:consultaColaborador>
+
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:panels="http://xmlns.jcp.org/jsf/composite/componentes/panels"
+                xmlns:inputs="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:btn="http://xmlns.jcp.org/jsf/composite/componentes/botoes"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
+
+    <composite:interface id="interCon">
+
+    </composite:interface>
+    <composite:implementation  >
+        <panels:panel titulo="#{label.dados_pessoais}" id="pnlDadPes" class="fieldDad">
+            <h:panelGroup layout="block"  class="Container100 Responsive" >
+                <inputs:input_label inp_valor="#{colaboradorMB.colaborador.nome}" lab_valor="#{label.nome}" inp_require="true" inp_class_tamanho="50" />
+                <inputs:inputMask_label inp_mascara="999.999.999-99" inp_validador="CPFValidador" id="inpCnpf" inp_class_tamanho="20" inp_valor="#{colaboradorMB.colaborador.cpf}" inp_require="true" lab_valor="#{label.cpf}"/>
+                <inputs:selectOneLabel  inp_valor="#{colaboradorMB.colaborador.pessoa}" id="sel_car" lab_valor="#{label.pessoa}"  ajax_render="true"
+                                        sel_converter="indexConverter" inp_class_tamanho="20">
+                    <f:selectItem noSelectionOption="true" itemLabel="-----Selecione-----" value="#{null}" itemValue="#{null}" />
+                    <f:selectItems value="#{colaboradorMB.listaDePessoas}" var="cg" itemLabel="#{cg.nome}" itemValue="#{cg}"/>
+                </inputs:selectOneLabel>
+            </h:panelGroup>
+        </panels:panel>
+        
+        <panels:panel titulo="#{label.contatos}">
+            <div class="Container100 Responsive">
+                <inputs:input_label inp_valor="#{colaboradorMB.colaborador.email}" lab_valor="#{label.email}" inp_class_tamanho="40"  />
+                <inputs:inputMask_label inp_mascara="(99)9999-9999"  inp_valor="#{colaboradorMB.colaborador.telefone}"  lab_valor="#{label.telefone_residencial}" inp_class_tamanho="20"  />
+                <inputs:inputMask_label inp_mascara="(99)99999-9999" inp_valor="#{colaboradorMB.colaborador.celular}" lab_valor="#{label.telefone_celular}" inp_class_tamanho="20"  />
+            </div>
+        </panels:panel>
+    </composite:implementation>
+</ui:composition>
+
+
+
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:util="http://xmlns.jcp.org/jsf/composite/componentes/util"
+      xmlns:p="http://primefaces.org/ui">
+    <f:view locale="#{localeController.currentLocale}"  contentType="text/html; charset=UTF-8" encoding="UTF-8">
+        <h:head>
+            <f:facet name="first">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
+                <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+                <meta name="apple-mobile-web-app-capable" content="yes" />
+            </f:facet>
+            <link rel="shortcut icon"  href="/resources/images/logo.ico"  />
+            <link rel="icon" type="image/svg" href="/resources/sentinel-layout/images/LOGO.svg" />
+
+
+
+            <title>#{label.sigla_sistema}</title>
+            <h:outputScript name="calendario_pt_BR.js" library="js" />
+            <h:outputScript name="js/layout.js" library="sentinel-layout" />
+            <h:outputScript library="js" name="navegacao.js" />
+            <h:outputText value="&lt;!--[if gte IE 9]&gt;" escape="false" />
+            <style type="text/css">
+                .ui-tabs-top .ui-tabs-nav li,
+                .ui-tabs .ui-tabs-nav li{margin-bottom: 0px !important;}
+            </style>
+            <h:outputText value="&lt;![endif]--&gt;" escape="false" />
+
+            <ui:insert name="head" />
+        </h:head>
+
+        <h:body>
+            <ui:include src="topbar.xhtml" />
+            <ui:include src="leftmenu.xhtml" />
+
+            <div id="layout-portlets-cover" class="fontRegular corpo">
+                <ui:insert name="corpo">
+
+                </ui:insert>
+                <div class="Container100">
+                    <div class="ContainerIndent">
+                        <ui:insert name="dialog">
+
+                        </ui:insert>
+                        <util:dialogIdioma/>
+                        <util:dialogAlterarSenha id="compAltSen"/>
+                    </div>
+                </div>
+                <ui:insert name="confirme">
+                    <p:confirmDialog global="true" header="Confirmação" closable="false" >
+                        <p:commandButton value="#{label.nao}" class="Fleft " type="button" styleClass="ui-confirmdialog-no" icon="fa fa-times "/>
+                        <p:commandButton value="#{label.sim}"  type="button" style="margin-left: 30px"  styleClass="ui-confirmdialog-yes" icon="fa fa-check-circle-o " />
+                    </p:confirmDialog>
+                </ui:insert>
+            </div>
+            <h:outputStylesheet name="botoes.css" library="css" />
+            <h:outputStylesheet name="agenda.css" library="css" />
+            <h:outputStylesheet name="default.css" library="css" />
+            <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
+            <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
+            <h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
+        </h:body>
+    </f:view>
+</html>

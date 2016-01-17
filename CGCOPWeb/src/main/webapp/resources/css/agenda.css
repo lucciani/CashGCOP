@@ -1,0 +1,79 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 20/09/2014, 04:29:17
+    Author     : Ari
+*/
+
+.pagamento {
+    background: rgba(179,220,237,1) !important;
+    background: -moz-linear-gradient(-45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%) !important;
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(179,220,237,1)), color-stop(50%, rgba(41,184,229,1)), color-stop(100%, rgba(188,224,238,1))) !important;
+    background: -webkit-linear-gradient(-45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%) !important;
+    background: -o-linear-gradient(-45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%) !important;
+    background: -ms-linear-gradient(-45deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%) !important;
+    background: linear-gradient(135deg, rgba(179,220,237,1) 0%, rgba(41,184,229,1) 50%, rgba(188,224,238,1) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3dced', endColorstr='#bce0ee', GradientType=1 ) !important;
+    border: solid 1px rgba(179,220,237,1) !important;
+    color: #686868  !important;
+}
+
+.reuniao {
+    background: rgba(241,231,103,1) !important;
+    /* Old Browsers */background: -moz-linear-gradient(-45deg, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%) !important;
+    /* FF3.6+ */background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(241,231,103,1)), color-stop(100%, rgba(254,182,69,1))) !important;
+    /* Chrome, Safari4+ */background: -webkit-linear-gradient(-45deg, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%) !important;
+    /* Chrome10+,Safari5.1+ */background: -o-linear-gradient(-45deg, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%) !important;
+    /* Opera 11.10+ */background: -ms-linear-gradient(-45deg, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%) !important;
+    /* IE 10+ */background: linear-gradient(135deg, rgba(241,231,103,1) 0%, rgba(254,182,69,1) 100%) !important;
+    /* W3C */filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#f1e767', endColorstr='#feb645', GradientType=1 ) !important;
+    /* IE6-9 fallback on horizontal gradient */
+    border: solid 1px rgba(241,231,103,10) !important;
+    color: #686868  !important;
+}
+.visita{
+    background: rgba(210,255,82,1) !important;
+    background: -moz-linear-gradient(-45deg, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%) !important;
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(210,255,82,1)), color-stop(100%, rgba(145,232,66,1))) !important;
+    background: -webkit-linear-gradient(-45deg, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%) !important;
+    background: -o-linear-gradient(-45deg, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%) !important;
+    background: -ms-linear-gradient(-45deg, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%) !important;
+    background: linear-gradient(135deg, rgba(210,255,82,1) 0%, rgba(145,232,66,1) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d2ff52', endColorstr='#91e842', GradientType=1 ) !important;
+    border: solid 1px rgba(210,255,82,1) !important;
+    color: #686868  !important;
+}
+.viagem {
+    background: #d5cea6 !important; /* Old browsers */
+    background: -moz-linear-gradient(top,  #d5cea6 0%, #c9c190 40%, #b7ad70 100%) !important; /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#d5cea6), color-stop(40%,#c9c190), color-stop(100%,#b7ad70)) !important; /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #d5cea6 0%,#c9c190 40%,#b7ad70 100%) !important; /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #d5cea6 0%,#c9c190 40%,#b7ad70 100%) !important; /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #d5cea6 0%,#c9c190 40%,#b7ad70 100%) !important; /* IE10+ */
+    background: linear-gradient(to bottom,  #d5cea6 0%,#c9c190 40%,#b7ad70 100%) !important; /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5cea6', endColorstr='#b7ad70',GradientType=0 ) !important; /* IE6-9 */
+    border: solid 1px #d5cea6 !important;
+    color: #686868  !important;
+}
+.outro {
+    background: rgba(212,228,239,1) !important;
+    background: -moz-linear-gradient(-45deg, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%) !important;
+    background: -webkit-gradient(left top, right bottom, color-stop(0%, rgba(212,228,239,1)), color-stop(100%, rgba(134,174,204,1))) !important;
+    background: -webkit-linear-gradient(-45deg, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%) !important;
+    background: -o-linear-gradient(-45deg, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%) !important;
+    background: -ms-linear-gradient(-45deg, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%) !important;
+    background: linear-gradient(135deg, rgba(212,228,239,1) 0%, rgba(134,174,204,1) 100%) !important;
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d4e4ef', endColorstr='#86aecc', GradientType=1 ) !important;
+    border: solid 1px rgba(212,228,239,1) !important;
+    color: #686868  !important;
+
+}
+
+
+
+
+
+

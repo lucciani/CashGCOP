@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:inp="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <composite:interface>
+
+        <composite:attribute name="id_busca" default="frmBusca"/>
+        <composite:attribute name="target" required="true"/>
+        <composite:attribute name="target_cep" default="#{logradouroMB.logradouro.cep}"/>
+        <composite:attribute name="target_pais" default="#{logradouroMB.logradouro.municipio.unidadeFederativa.pais.nome}"/>
+        <composite:attribute name="target_uf" default="#{logradouroMB.logradouro.municipio.unidadeFederativa.nome}"/>
+        <composite:attribute name="target_municipio" default="#{logradouroMB.logradouro.municipio.nome}"/>
+        <composite:attribute name="target_bairro" default="#{logradouroMB.logradouro.bairro}"/>
+        <composite:attribute name="target_rua" default="#{logradouroMB.logradouro.nome}"/>
+        <composite:attribute name="target_tipo_logradouro" default="#{logradouroMB.logradouro.tipoLogradouro.nome}"/>
+        <composite:attribute name="rende_target_pais" default="true"/>
+        <composite:attribute name="rende_target_uf" default="true"/>
+        <composite:attribute name="rende_target_municipio" default="true"/>
+        <composite:attribute name="rende_target_bairro" default="true"/>
+        <composite:attribute name="rende_target_cep" default="true"/>
+        <composite:attribute name="rende_target_rua" default="true"/>
+        <composite:attribute name="rende_target_tipo_logradouro" default="true"/>
+        <composite:facet name="btn"/>
+        <composite:attribute name="update" required="true"/>
+    </composite:interface>
+    <composite:implementation id="compo">
+        <h:form id="frmBusca">
+            <div class="ContainerIndent">
+                <inp:inputMask_label_btn_1 inp_mascara="99.999-999" inp_require="true" inp_valor="#{logradouroMB.cep}" btn_icon="fa fa-search" inp_class_tamanho="40" 
+                                           btn_acao="#{logradouroMB.encontraCEP()}"   btn_titulo="#{label.pesquisar}" lab_valor="#{label.cep}"/>
+                <h:panelGroup layout="block" class="Container100 Responsive" id="grd">
+                    <inp:input_label inp_readonly="true" inp_valor="#{logradouroMB.tipoLogradouro}" inp_class_tamanho="20" lab_valor="#{label.tipo_logradouro}" />
+                    <inp:input_label inp_readonly="true" inp_valor="#{logradouroMB.nomeLogradouro}" inp_class_tamanho="50" lab_valor="#{label.logradouro}" />
+                    <inp:input_label inp_readonly="true" inp_valor="#{logradouroMB.bairro}" inp_class_tamanho="30" lab_valor="#{label.bairro}" />
+                    <inp:input_label inp_readonly="true" inp_valor="#{logradouroMB.cidade}" inp_class_tamanho="70" lab_valor="#{label.cidade}" />
+                    <inp:input_label inp_readonly="true" inp_valor="#{logradouroMB.estado}" inp_class_tamanho="20" lab_valor="#{label.estado}" />
+                </h:panelGroup>
+                <p:commandButton value="#{label.fechar}" style="float: right" icon="ui-icon-check" onclick="PF('dialogCep').hide();" 
+                                 update="#{cc.attrs.update}" id="btnFecCep" partialSubmit="false" immediate="true">
+                    <f:setPropertyActionListener target="#{cc.attrs.target}" value="#{logradouroMB.logradouro}"/>
+                    <f:setPropertyActionListener rendered="#{cc.attrs.rende_target_pais}" target="#{cc.attrs.target_pais}" value="#{logradouroMB.logradouro.municipio.unidadeFederativa.pais.nome}"/>
+                    <f:setPropertyActionListener rendered="#{cc.attrs.rende_target_uf}" target="#{cc.attrs.target_uf}" value="#{logradouroMB.logradouro.municipio.unidadeFederativa.nome}"/>
+                    <f:setPropertyActionListener rendered="#{cc.attrs.rende_target_municipio}" target="#{cc.attrs.target_municipio}" value="#{logradouroMB.logradouro.municipio.nome}"/>
+                    <f:setPropertyActionListener rendered="#{cc.attrs.rende_target_bairro}" target="#{cc.attrs.target_bairro}" value="#{logradouroMB.logradouro.bairro}"/>
+                    <f:setPropertyActionListener rendered="#{cc.attrs.rende_target_rua}" target="#{cc.attrs.target_rua}" value="#{logradouroMB.logradouro.nome}"/>
+                    <f:setPropertyActionListener rendered="#{cc.attrs.rende_target_tipo_logradouro}" target="#{cc.attrs.target_tipo_logradouro}" value="#{logradouroMB.logradouro.tipoLogradouro.nome}"/>
+                    <f:setPropertyActionListener rendered="#{cc.attrs.rende_target_cep}" target="#{cc.attrs.target_cep}" value="#{logradouroMB.logradouro.cep}"/>
+                </p:commandButton>
+            </div>
+        </h:form>
+
+    </composite:implementation>
+</ui:composition>
+
+
+
+

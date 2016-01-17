@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:pessoa="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/pessoa"
+              
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
+
+    <ui:define name="corpo">
+        <h:form id="frm_cad" prependId="false" >
+            <componentes:panelPadrao id="pnlPadrao" class="Responsive" btn_excluir="false" btn_ativar="false" btn_imprimir="false"
+                                     acao_cancelar="#{pessoaMB.init()}" btn_dialog_rel="false" render_sep_3="true" 
+                                     acao_excluir="#{pessoaMB.init()}"  acao_salvar="#{pessoaMB.salvar()}"
+                                     btn_limpar="false" cabecalho="#{label.cadastro_pessoa}" >
+                <pessoa:cadastroPessoa id="compCadastro"/>
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    <ui:define name="dialog">
+
+    </ui:define>
+
+</ui:composition>
+

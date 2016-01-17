@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:inp="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:btn="http://xmlns.jcp.org/jsf/composite/componentes/botoes"
+                xmlns:comp="http://xmlns.jcp.org/jsf/composite/componentes/inputs">
+    <composite:interface>
+
+
+    </composite:interface>
+    <composite:implementation id="compo">
+        <p:panel>
+            <i class="icon-calendar-outlilne Fleft Fs30   yellow "></i>
+            <div class="Fs30 Fleft  Wid70 hardblue fontItalic">#{label.agenda_eventos}</div>                                       
+        </p:panel>
+        <p:fieldset>
+            
+        <div class="ContainerIndent Responsive">
+            <h:form id="frm_home" prependId="false" styleClass="painelAgendas">
+
+                <p:messages id="mensagens" showDetail="true" closable="true"  />
+
+                <p:schedule widgetVar="meucalendario" tooltip="true"  
+                            value="#{agendaDeEventosMB.eventModel}" id="sch" timeZone="#{initParam.timezone}" 
+                            clientTimeZone="false" locale="#{localeController.currentLocale}" timeFormat="HH:mm"   >
+
+                    <!-- eventos -->
+                    <p:ajax event="dateSelect" listener="#{agendaDeEventosMB.quandoNovo}" 
+                            oncomplete="PF('caixaDialogo').show()" update=":frmDialog:eventDetails"  />  
+                    <p:ajax event="eventSelect" listener="#{agendaDeEventosMB.quandoSelecionado}" 
+                            oncomplete="PF('caixaDialogo').show()"  update=":frmDialog:eventDetails"  />  
+                    <p:ajax event="eventMove" listener="#{agendaDeEventosMB.quandoMovido}" 
+                            update="mensagens" oncomplete="PF('meucalendario').update()" />  
+                    <p:ajax event="eventResize" listener="#{agendaDeEventosMB.quandoRedimensionado}" 
+                            update="mensagens" onsuccess="PF('meucalendario').update()" oncomplete="PF('meucalendario').update()"/>  
+                </p:schedule>
+            </h:form>
+        </div>
+
+        </p:fieldset>
+    </composite:implementation>
+</ui:composition>
+
+
+
+

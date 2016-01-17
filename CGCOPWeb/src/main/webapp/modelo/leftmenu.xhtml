@@ -1,0 +1,59 @@
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ps="http://primefaces.org/sentinel"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <div id="layout-menubar" class="Unselectable fontRegular">
+        <div class="layout-menubarinner-box" id="buttonArea">
+            <a href="#" id="layout-menubar-resize" class="BordRad3" title="Menu Resize"><i class="icon-th-list-2"></i></a>
+            <a href="#" id="layout-menubar-resize2" class="BordRad3" title="Open Menu"><i class="icon-menu"></i></a>
+        </div>
+        <h:form>
+            <ps:menu id="sm_leftmenu">
+                <p:menuitem id="sm_dashboard" value="#{label.inicio}" icon="icon-home-outline" outcome="#{administrativo.inicio}" containerStyleClass="layout-menubar-active"/>
+                <p:submenu label="#{label.administrativo}" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloAdministrativo()}" icon="icon-sitemap" >
+                    <p:submenu label="#{label.pessoa}" icon="icon-credit-card-1" 
+                               rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.pessoa_cadastro) 
+                                           or utilitarioNavegacaoMB.permissaoExiste(administrativo.pessoa_consulta) }" >
+                        <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.pessoa_cadastro)}" icon="icon-doc-text-1" outcome="#{administrativo.pessoa_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.pessoa_consulta)}" icon="icon-th-list-outline" outcome="#{administrativo.pessoa_consulta}"/>
+                    </p:submenu>
+                    <p:submenu label=" #{label.empresa}" icon="icon-bank "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_cadastro) 
+                                         or utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_consulta) }"  >
+                        <p:menuitem value="#{label.cadastro}" icon="icon-doc-text-1"  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_cadastro)}" outcome="#{administrativo.empresa_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_consulta)}" outcome="#{administrativo.empresa_consulta}"/>
+                    </p:submenu>
+                    <p:submenu label=" #{label.colaborador}" icon="icon-user "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_cadastro) 
+                                         or utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_consulta) }" >
+                        <p:menuitem value="#{label.cadastro}" icon="icon-doc-text-1"  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_cadastro)}" outcome="#{administrativo.colaborador_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_consulta)}" outcome="#{administrativo.colaborador_consulta}"/>
+                    </p:submenu>
+
+                </p:submenu>
+                <p:submenu label="#{label.modulo_seguranca}" icon="icon-lock-open-alt" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloSeguranca()}" >
+                    <p:submenu label="#{label.modulo}" icon="icon-cubes" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.modulo_consulta)}" >
+                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.modulo_consulta)}"  outcome="#{seguranca.modulo_consulta}"/>
+                    </p:submenu>
+                    <p:submenu label="#{label.tarefa}" icon="icon-cube" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.tarefa_consulta)}" >
+                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.tarefa_consulta)}"  outcome="#{seguranca.tarefa_consulta}"/>
+                    </p:submenu>
+                    <p:submenu label="#{label.usuario}" icon="icon-users"   rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_cadastro) or
+                                        utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_cadastro)}">
+                        <p:menuitem value="#{label.cadastro}" icon="icon-doc-text-1" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_cadastro)}" outcome="#{seguranca.usuario_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_consulta)}"  outcome="#{seguranca.usuario_consulta}"/>
+
+                    </p:submenu>
+                    <p:submenu label="#{label.permissao}" icon="icon-cog"   rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.gerenciar_permissao) }">
+                        <p:menuitem value="#{label.gerenciar} #{label.permissao}" icon="icon-wrench-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.gerenciar_permissao)}" outcome="#{seguranca.gerenciar_permissao}"/>
+
+                    </p:submenu>
+                </p:submenu>
+            </ps:menu>
+        </h:form>
+
+    </div>
+
+</ui:composition>

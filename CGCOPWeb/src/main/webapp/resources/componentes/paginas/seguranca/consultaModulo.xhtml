@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
+
+    <composite:interface>
+        <composite:attribute name="acao_butao" method-signature="java.lang.Void action()" default="#{cargoMB.consultar()}"/>
+        <composite:attribute name="acao_butao_selecionar" method-signature="java.lang.Void action()" default="#{cargoMB.consultar()}"/>
+        <composite:attribute name="componente_to_update"  shortDescription="componete atualizado apos selecionar a linha" default="@form" />
+        <composite:attribute name="btn_selecionar_update"  shortDescription="o que atualizar quando selecionar" default="@form" />
+        <composite:attribute name="renderizar_btn_selecionar"  type="java.lang.Boolean" default="true" />
+        <composite:attribute name="target"  default="#{cargoMB.cargo}" />
+        <composite:attribute id="dialogHide" name="dialogHide" shortDescription="o var do dialog que abriu a consulta"/>
+        <composite:attribute name="renderizar_btn"  type="java.lang.Boolean" default="true" />
+        
+        
+    </composite:interface>
+    <composite:implementation>
+      
+        <p:fieldset>
+            <p:dataTable value="#{moduloMB.listaDeModulos}" id="tabela" paginatorAlwaysVisible="false"  paginator="true" var="p" rows="10"
+                         rowStyleClass="#{(empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row') }"
+                         rowIndexVar="rowIx" emptyMessage="#{mensagens['consulta.vazia']}"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                         rowsPerPageTemplate="5,10,15"  reflow="true">
+               
+                <p:column headerText="#{label.id}">
+                    <componentes:outputText value="#{p.id}"/>
+                </p:column>
+                <p:column headerText="#{label.nome}">
+                    <componentes:outputText value="#{p.nome}"/>
+                </p:column>
+            </p:dataTable>
+        </p:fieldset>
+    </composite:implementation>
+</ui:composition>
+
+
+
+

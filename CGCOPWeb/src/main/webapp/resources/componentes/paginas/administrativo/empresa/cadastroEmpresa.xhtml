@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:inputs="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:panels="http://xmlns.jcp.org/jsf/composite/componentes/panels"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+    <composite:interface id="interCon">
+
+    </composite:interface>
+    <composite:implementation>
+        <p:fieldset>
+            <panels:panel  titulo="#{label.dados} #{label.empresa}" id="pnlNucleo">
+
+                <h:panelGroup  layout="block" class="Container100 Responsive">
+
+                    <inputs:inputMask_label inp_mascara="99.999.999/9999-99" inp_validador="CNPJValidador" id="inpCnpf" inp_class_tamanho="20" inp_valor="#{empresaMB.empresa.cnpj}" inp_require="true" lab_valor="#{label.cnpj}"/>
+                    <inputs:input_label id="inpNom" inp_class_tamanho="50" inp_valor="#{empresaMB.empresa.nome}" inp_require="true" lab_valor="#{label.nome}"/>
+                    <div class="Container20">
+                        <div class="EmptyBox20"/>
+                        <div class="EmptyBox5"/>
+                        <p:commandButton icon="fa fa-upload  "   value="#{label.incluir} #{label.logo}" onclick="PF('dialogoAssinat').show()" immediate="true"/>
+
+                    </div>
+                </h:panelGroup>
+
+            </panels:panel>
+        </p:fieldset>
+    </composite:implementation>
+</ui:composition>
+
+
+
+

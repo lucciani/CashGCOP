@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>#{label.sigla_sistema}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+        <link rel="shortcut icon"  href="resources/images/logo.ico"  />
+        <link rel="icon" type="image/svg" href="sentinel-layout/images/LOGO.svg" />
+        <h:outputScript name="js/layout.js" library="sentinel-layout" />
+        <h:outputScript name="navegacao.js" library="js" />
+        <script type="text/javaScript">  
+
+
+        </script>  
+
+    </h:head>
+
+    <h:body class="fontRegular back-login"  onload="setarFocu('login')">
+
+       
+        <div  id="divLog"      >
+            <p:panel  class="lg Container100 MaxWid500 Fnone  MarAuto MarTopPerc5 TexAlCenter ">
+                <div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter  ">
+
+                    <div class="Responsive Container100 "  >
+                        <p:graphicImage   height="33" library="sentinel-layout" name="images/LOGO.svg"/>
+                        <i class="softblue Fnone Fs40">#{label.sigla_sistema} </i>
+                        
+                    </div>
+                </div>
+
+
+                <div class="softgray  FontTitilliumSemiBoldItalic Fs25"  >#{label.titulo_sistema}</div>
+                <hr/>
+                <div class="EmptyBox20"/>
+
+                <div   class=" Fnone MarAuto circulo    TexAlCenter    "/>
+                <div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter  ">
+
+                    <p class="Fs25 FontLight  white" >#{configuracaoSistemaMB.paraCarregarNoLogin}</p>
+                </div>
+                <!-- LOGIN BOX COVER START -->
+                <form action="j_spring_security_check" method="post"   >
+                    
+                    <h:panelGroup layout="block" rendered="#{param.erro}">
+                        <div  class="TexAlCenter softBrownBack Animated05 BoxSizeBorder BordRad5 TabBtnActiveLeft Container100 Fnone MarAuto FontLight  red">
+                            <i class="icon-attention"></i>#{msg.usuario_senha_invalido}
+                        </div>
+                        <div class="EmptyBox10"></div>
+                    </h:panelGroup>
+                    <div class="Container100  Fleft Fnone   transparencia   TexAlCenter " id="TAB1">
+                        <div>
+
+                            <i class=" icon-user  Fnone Fs23  icones-login  "></i>
+                            <p:inputText  placeholder="Login" widgetVar="login" id="j_username"
+                                          styleClass=" Fleft Container60 Fnone  Fs16"/>
+
+                        </div>
+                        <div class="EmptyBox5"></div>
+
+                        <div>
+                            <i class="icon-key-1 Fs23 Fnone icones-login   " ></i>
+                            <p:password  placeholder="Password"  styleClass="Container60 Fnone  Fs16" 
+                                         id="j_password" feedback="false"/>
+
+                        </div>
+                        <div class="EmptyBox5"></div>
+                    </div>
+                    <div class="EmptyBox20"></div>
+                    <h:commandButton id="btnLogin"   styleClass=" Fs23 btnLogin FontTitilliumSemiBoldItalic"   value="Entrar"  />
+                    <div class="EmptyBox30"></div>
+                </form>
+            </p:panel>
+        </div>
+        <!-- LOGIN BOX COVER END -->
+        <h:outputStylesheet name="login.css" library="css" />
+        <h:outputStylesheet name="default.css" library="css" />
+        <h:outputStylesheet name="botoes.css" library="css" />
+        <h:outputStylesheet name="css/font-icon-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/sentinel-layout.css" library="sentinel-layout" />
+        <h:outputStylesheet name="css/core-layout.css" library="sentinel-layout" />
+    </h:body>
+
+</html>
