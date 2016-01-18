@@ -16,7 +16,7 @@
     <composite:implementation>
         <p:dialog header="#{cc.attrs.titulo}" id="dialog"  widgetVar="dialog_relatorio" height="410" showEffect="Fade">
             <p:fieldset legend="Relatório" id="conteudo_dialog_relatorio">
-                <object  type="application/pdf" data="/sgpo/RelatorioServlet.pdf" height="360px" width="860" codebase="#{cc.attrs.URL}.pdf">
+                <object  type="application/pdf" data="/cgcop/RelatorioServlet.pdf" height="360px" width="860" codebase="#{cc.attrs.URL}.pdf">
                     Seu navegador n&atilde;o suporta arquivos do tipo PDF.<br/>
                     Voc&ecirc; pode baixar arquivo clicando <a href="#{request.contextPath}/relatorio/#{cc.attrs.URL}">aqui</a>.
                 </object>

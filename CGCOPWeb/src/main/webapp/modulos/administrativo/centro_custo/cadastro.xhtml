@@ -4,18 +4,18 @@
                 template="/modelo/template.xhtml"
                 xmlns:ui="http://java.sun.com/jsf/facelets"
                 xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:fornecedor="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo"
+                xmlns:cen="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/centro_custo"
               
                 xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
 
     <ui:define name="corpo">
         <h:form id="frm_cad" prependId="false" >
-            <componentes:panelPadrao id="pnlPadrao" class="Responsive" acao_cancelar="#{fornecedorMB.init()}" 
-                                     acao_excluir="#{fornecedorMB.init()}" btn_excluir="false"  acao_salvar="#{fornecedorMB.salvar()}" 
+            <componentes:panelPadrao id="pnlPadrao" class="Responsive" acao_cancelar="#{centroDeCustoMB.init()}" 
+                                      acao_salvar="#{centroDeCustoMB.salvar()}"  
                                    
-                                     btn_limpar="true" cabecalho="#{label.cadastro} #{label.fornecedor}" btn_imprimir="false" btn_ativar="false"
-                                     btn_dialog_rel="false" btn_cancelar="false" acao_ativar="#{fornecedorMB.init()}" >
-                <fornecedor:cadastroFornecedor id="compCadastro"/>
+                                     btn_limpar="true" cabecalho="#{label.cadastro} #{label.centro_custo}" btn_imprimir="false" btn_ativar="false"
+                                     btn_dialog_rel="false" btn_cancelar="false" acao_ativar="#{centroDeCustoMB.init()}" >
+                <cen:cadastroCentroCusto id="compCadastro"/>
             </componentes:panelPadrao>
         </h:form>
     </ui:define>

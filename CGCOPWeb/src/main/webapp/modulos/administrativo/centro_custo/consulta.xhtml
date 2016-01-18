@@ -6,7 +6,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:cpa="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo">
+                xmlns:cen="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/centro_custo">
 
 
 
@@ -15,10 +15,9 @@
             <p:blockUI block="@(form)" trigger=":frm_cons:pnlPadrao:btn_print" widgetVar="blk">
                 <p:graphicImage library="images" name="carregar.gif"/>
             </p:blockUI>
-            <componentes:panelPadrao id="pnlPadrao" cabecalho=" #{label.consulta} #{label.fornecedor}" acao_limpar="#{fornecedorMB.init()}" render_sep_1="false" btn_excluir="false" 
-                                     btn_cancelar="false" btn_salvar="false" btn_ativar="false" acao_imprimir="#{fornecedorMB.geraImpressaoFornecedor()}" 
-                                     dialog_cadastro="dialogCadastro" btn_imprimir="TRUE" btn_dialog_rel="false" btn_salvar_update="false">
-                <cpa:consultaFornecedor id="compConsulta"  componente_to_update="@form:pnlPadrao:compConsulta:tabela"  />
+            <componentes:panelPadrao id="pnlPadrao" cabecalho=" #{label.consulta} #{label.centro_custo}" acao_limpar="#{centroDeCustoMB.init()}" render_sep_1="false" btn_excluir="false" 
+                                     btn_cancelar="false" btn_salvar="false" btn_ativar="false" dialog_cadastro="dialogCadastro" btn_imprimir="TRUE" btn_dialog_rel="false" btn_salvar_update="false">
+                <cen:consultaCentroCusto id="compConsulta"  componente_to_update="@form:pnlPadrao:compConsulta:tabela"  />
             </componentes:panelPadrao>
         </h:form>
     </ui:define>

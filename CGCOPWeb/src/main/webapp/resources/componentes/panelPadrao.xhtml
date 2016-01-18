@@ -63,7 +63,7 @@
                             </h:panelGroup>
 
                             <p:commandButton rendered="#{cc.attrs.btn_limpar}" update="@form" actionListener="#{cc.attrs.acao_limpar}" class="btn-menu btnLimpar" title="#{label.limpar}" immediate="true" icon="fa fa-refresh fa-lg " />
-                            <p:commandButton rendered="#{cc.attrs.btn_imprimir}" actionListener="#{cc.attrs.acao_imprimir}" class="btn-menu btnImprimir" title="#{label.imprimir}" icon="fa fa-print fa-lg "  id="btn_print" oncomplete="popup('/sgpo/RelatorioServlet.pdf')" update="@form"/>
+                            <p:commandButton rendered="#{cc.attrs.btn_imprimir}" actionListener="#{cc.attrs.acao_imprimir}" class="btn-menu btnImprimir" title="#{label.imprimir}" icon="fa fa-print fa-lg "  id="btn_print" oncomplete="popup('/cgcop/RelatorioServlet.pdf')" update="@form"/>
                             <h:panelGroup layout="block" rendered="#{cc.attrs.render_sep_3}" class="ui-separator hardblue" >
                                 <span class="ui-icon ui-icon-grip-dotted-vertical hardblue" />
                             </h:panelGroup>
