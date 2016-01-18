@@ -36,6 +36,11 @@
                         <p:menuitem value="#{label.cadastro}" icon="icon-doc-text-1"  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.centro_custo_cadastro)}" outcome="#{administrativo.centro_custo_cadastro}"/>
                         <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.centro_custo_consulta)}" outcome="#{administrativo.centro_custo_consulta}"/>
                     </p:submenu>
+                    <p:submenu label=" #{label.natureza}" icon="icon-leaf-1 "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_cadastro) 
+                                         or utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_consulta) }" >
+                        <p:menuitem value="#{label.cadastro}" icon="icon-doc-text-1"  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_cadastro)}" outcome="#{administrativo.natureza_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_consulta)}" outcome="#{administrativo.natureza_consulta}"/>
+                    </p:submenu>
 
                 </p:submenu>
                 <p:submenu label="#{label.modulo_seguranca}" icon="icon-lock-open-alt" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloSeguranca()}" >

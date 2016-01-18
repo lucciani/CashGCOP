@@ -9,6 +9,7 @@ import br.com.cgcop.administrativo.DAO.CentroDeCustoDAO;
 import br.com.cgcop.administrativo.modelo.CentroDeCusto;
 import br.com.cgcop.utilitario.ControllerGenerico;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 
@@ -21,6 +22,7 @@ public class CentroDeCustoController extends ControllerGenerico<CentroDeCusto, S
     @Inject
     private CentroDeCustoDAO dao;
 
+    @PostConstruct
     @Override
     protected void inicializaDAO() {
         setDAO(dao);

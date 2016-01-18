@@ -5,8 +5,8 @@
  */
 package br.com.cgcop.administrativo.managedbean;
 
-import br.com.cgcop.administrativo.controller.CentroDeCustoController;
-import br.com.cgcop.administrativo.modelo.CentroDeCusto;
+import br.com.cgcop.administrativo.controller.NaturezaController;
+import br.com.cgcop.administrativo.modelo.Natureza;
 import br.com.cgcop.utilitario.BeanGenerico;
 import br.com.cgcop.utilitario.mensagens.MensagensUtil;
 import java.io.Serializable;
@@ -27,39 +27,40 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class CentroDeCustoMB extends BeanGenerico implements Serializable {
+public class NaturezaMB extends BeanGenerico implements Serializable {
 
     @Inject
-    private CentroDeCustoController centroDeCustoController;
+    private NaturezaController naturezaController;
 
-    private CentroDeCusto centroDeCusto;
-    private List<CentroDeCusto> listaCentroDeCusto;
+    private Natureza natureza;
+    private List<Natureza> listaNatureza;
 
     @PostConstruct
     @Override
     public void init() {
         criarListaDeCamposDaConsulta();
-        centroDeCusto = (CentroDeCusto) lerRegistroDaSessao("centroCusto");
-        centroDeCusto = new CentroDeCusto();
-        listaCentroDeCusto = new ArrayList<>();
+        natureza = (Natureza) lerRegistroDaSessao("natureza");
+        natureza = new Natureza();
+        listaNatureza = new ArrayList<>();
+
     }
 
     public void salvar() {
         try {
-            centroDeCustoController.salvar(centroDeCusto);
-            MensagensUtil.enviarMessageParamentroInfo(MensagensUtil.REGISTRO_SUCESSO, centroDeCusto.getDescricao());
+            naturezaController.salvar(natureza);
+            MensagensUtil.enviarMessageParamentroInfo(MensagensUtil.REGISTRO_SUCESSO, natureza.getDescricao());
             init();
         } catch (Exception ex) {
             MensagensUtil.enviarMessageErro(MensagensUtil.REGISTRO_FALHA);
-            Logger.getLogger(CentroDeCustoMB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NaturezaMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public void consultarCentroDeCusto() {
+    public void consultarNatureza() {
         try {
-            listaCentroDeCusto = centroDeCustoController.consultarLike(getCampoConsuta(), getValorCampoConsuta().toUpperCase());
+            listaNatureza = naturezaController.consultarLike(getCampoConsuta(), getValorCampoConsuta().toUpperCase());
         } catch (Exception ex) {
-            Logger.getLogger(CentroDeCustoMB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(NaturezaMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -71,16 +72,16 @@ public class CentroDeCustoMB extends BeanGenerico implements Serializable {
         return map;
     }
 
-    public CentroDeCusto getCentroDeCusto() {
-        return centroDeCusto;
+    public Natureza getNatureza() {
+        return natureza;
     }
 
-    public void setCentroDeCusto(CentroDeCusto centroDeCusto) {
-        this.centroDeCusto = centroDeCusto;
+    public void setNatureza(Natureza natureza) {
+        this.natureza = natureza;
     }
 
-    public List<CentroDeCusto> getListaCentroDeCusto() {
-        return listaCentroDeCusto;
+    public List<Natureza> getListaNatureza() {
+        return listaNatureza;
     }
     
 }

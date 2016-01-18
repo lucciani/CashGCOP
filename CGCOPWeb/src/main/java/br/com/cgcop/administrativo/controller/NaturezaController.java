@@ -5,21 +5,28 @@
  */
 package br.com.cgcop.administrativo.controller;
 
+import br.com.cgcop.administrativo.DAO.NaturezaDAO;
 import br.com.cgcop.administrativo.modelo.Natureza;
 import br.com.cgcop.utilitario.ControllerGenerico;
 import java.io.Serializable;
+import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
 /**
  *
  * @author Gian
  */
 @Stateless
-public class NaturezaController extends ControllerGenerico<Natureza, String> implements Serializable{
+public class NaturezaController extends ControllerGenerico<Natureza, String> implements Serializable {
 
+    @Inject
+    private NaturezaDAO dao;
+
+    @PostConstruct
     @Override
     protected void inicializaDAO() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        setDAO(dao);
     }
-    
+
 }
