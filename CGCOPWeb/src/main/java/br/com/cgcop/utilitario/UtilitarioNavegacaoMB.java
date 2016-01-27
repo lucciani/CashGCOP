@@ -92,6 +92,14 @@ public class UtilitarioNavegacaoMB implements Serializable {
         }
         return false;
     }
+    public boolean existePermissaoModuloSolicitacao() {
+        for (Permissao p : listaDePermissaoDoUsuario) {
+            if (p.getTarefa().getModulo().getNome().equals("SOLICITAÇÕES")) {
+                return true;
+            }
+        }
+        return false;
+    }
     public boolean existePermissaoModuloSeguranca() {
         for (Permissao p : listaDePermissaoDoUsuario) {
             if (p.getTarefa().getModulo().getNome().equals("SEGURANÇA")) {

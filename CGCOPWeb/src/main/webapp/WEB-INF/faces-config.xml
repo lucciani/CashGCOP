@@ -1,0 +1,66 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.1"
+              xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_1.xsd">
+
+    <converter>
+        <converter-for-class>java.lang.Enum</converter-for-class>
+        <converter-class>javax.faces.convert.EnumConverter</converter-class>
+    </converter>
+    <!--    <converter>
+        <description>Conversor generico de entidades</description>
+        <converter-id>indexConverter</converter-id>
+        <converter-class>br.com.sisdelta.utilitarios.conversores.IndexConverter</converter-class>
+    </converter>-->
+  
+    <!--    <validator>
+        <description>Validador de CPF e CNPJ</description>
+        <validator-id>documentoValidator</validator-id>
+        <validator-class>br.com.sefincaucaia.utilitarios.validadores.DocumentoValidator</validator-class>
+    </validator>-->
+
+    <application>
+        <locale-config>
+            <default-locale>pt_BR</default-locale>
+            <supported-locale>en_US</supported-locale>
+        </locale-config>
+        
+        <managed-bean>
+            <managed-bean-name>localeController</managed-bean-name>
+            <managed-bean-class>br.com.cgcop.utilitarios.LocaleController</managed-bean-class>
+            <managed-bean-scope>session</managed-bean-scope>   
+        </managed-bean>
+        
+        <!--parametros para utilização do dialogFramework-->
+        <action-listener>org.primefaces.application.DialogActionListener</action-listener>
+        <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
+        <view-handler>org.primefaces.application.DialogViewHandler</view-handler>
+
+       
+        <resource-bundle>
+            <base-name>br.com.cgcop.utilitarios.arquivos.label</base-name>
+            <var>label</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>br.com.cgcop.utilitarios.arquivos.mensagens</base-name>
+            <var>msg</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>br.com.cgcop.arquivos.administrativo</base-name>
+            <var>administrativo</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>br.com.cgcop.arquivos.solicitacao</base-name>
+            <var>solicitacao</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>br.com.cgcop.arquivos.seguranca</base-name>
+            <var>seguranca</var>
+        </resource-bundle>
+       
+        
+
+    </application>
+
+</faces-config>

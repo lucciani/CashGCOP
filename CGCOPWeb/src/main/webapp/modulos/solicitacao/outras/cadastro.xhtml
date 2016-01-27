@@ -1,0 +1,58 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:outras="http://xmlns.jcp.org/jsf/composite/componentes/paginas/solicitacao/outras"
+                xmlns:custo="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/centro_custo"
+                xmlns:natureza="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/natureza"
+                xmlns:colaborador="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/colaborador"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
+
+    <ui:define name="corpo">
+        <h:form id="frm_cad" prependId="false" >
+            <componentes:panelPadrao id="pnlPadrao" class="Responsive" acao_cancelar="#{outrasMB.init()}" 
+                                     acao_salvar="#{outrasMB.salvar()}"  
+
+                                     btn_limpar="true" cabecalho="#{label.cadastro} #{label.outras} #{label.solicitações}" btn_imprimir="false" btn_ativar="false"
+                                     btn_dialog_rel="false" btn_cancelar="false" acao_ativar="#{outrasMB.init()}" >
+                <outras:cadastroOutras id="compCadastro"/>
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    
+    <ui:define name="dialog">
+        
+        <p:dialog showEffect="fade" closable="true" header="#{label.centro_custo}" id="dialogCosNuc" modal="true"  widgetVar="dialogCosNuc">
+            <h:form id="frm_dialogCosNuc">
+                <custo:consultaCentroCusto  render_ativ="false" render_edit="false" id="compConsulta" sel_con_update=":frm_dialogCosNuc:compConsulta:fielCon" >
+                    <p:commandButton actionListener="#{outrasMB.setarCentroDeCusto(c)}" oncomplete="PF('dialogCosNuc').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:inp_custo:input"  icon="fa fa-check-square"/>
+                </custo:consultaCentroCusto> 
+            </h:form>
+        </p:dialog>
+        
+        <p:dialog showEffect="fade" closable="true" header="#{label.natureza}" id="dialogCosNat" modal="true"  widgetVar="dialogCosNat">
+            <h:form id="frm_dialogCosNat">
+                <natureza:consultaNatureza  render_ativ="false" render_edit="false" id="compConsulta" sel_con_update=":frm_dialogCosNat:compConsulta:fielCon" >
+                    <p:commandButton actionListener="#{outrasMB.setarNatureza(n)}" oncomplete="PF('dialogCosNat').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:inp_natureza:input"  icon="fa fa-check-square"/>
+                </natureza:consultaNatureza> 
+            </h:form>
+        </p:dialog>
+        
+        <p:dialog showEffect="fade" closable="true" header="#{label.centro_custo}" id="dialogCosCol" modal="true"  widgetVar="dialogCosCol">
+            <h:form id="frm_dialogCosCol">
+                <colaborador:consultaColaborador  render_ativ="false" render_edit="false" id="compConsulta" sel_con_update=":frm_dialogCosCol:compConsulta:fielCon" >
+                    <p:commandButton actionListener="#{outrasMB.setarColaborador(col)}" oncomplete="PF('dialogCosCol').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:inp_colaborador:input"  icon="fa fa-check-square"/>
+                </colaborador:consultaColaborador> 
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+
+</ui:composition>
+

@@ -10,6 +10,7 @@ package br.com.cgcop.administrativo.enumeration;
  * @author Gian
  */
 public enum TipoPessoa {
+    ADM("Administrador"),
     SOLICITANTE("Solicitante"),
     REPRESENTANTE("Representante"),
     PROCURADORIA("Procuradoria"),

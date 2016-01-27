@@ -54,6 +54,15 @@ public class Colaborador implements Serializable{
     @Column(name = "col_celular")
     private String celular;
     
+    @Column(name = "col_agencia")
+    private String agencia;
+    
+    @Column(name = "col_conta")
+    private String conta;
+    
+    @Column(name = "col_banco")
+    private String banco;
+    
     @ManyToOne
     @JoinColumn(name = "pes_id", referencedColumnName = "pes_id")
     private Pessoa pessoa;
@@ -107,6 +116,30 @@ public class Colaborador implements Serializable{
 
     public void setCelular(String celular) {
         this.celular = StringUtil.removerCaracteresEspeciais(celular);
+    }
+
+    public String getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(String agencia) {
+        this.agencia = agencia;
+    }
+
+    public String getConta() {
+        return conta;
+    }
+
+    public void setConta(String conta) {
+        this.conta = conta;
+    }
+
+    public String getBanco() {
+        return banco;
+    }
+
+    public void setBanco(String banco) {
+        this.banco = banco;
     }
 
     public Pessoa getPessoa() {

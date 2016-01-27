@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:fixo="http://xmlns.jcp.org/jsf/composite/componentes/paginas/solicitacao/fundo_fixo"
+                xmlns:custo="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/centro_custo"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
+
+    <ui:define name="corpo">
+        <h:form id="frm_cad" prependId="false" >
+            <componentes:panelPadrao id="pnlPadrao" class="Responsive" acao_cancelar="#{fundoFixoMB.init()}" 
+                                     acao_salvar="#{fundoFixoMB.salvar()}"  
+
+                                     btn_limpar="true" cabecalho="#{label.cadastro} #{label.fundo_fixo}" btn_imprimir="false" btn_ativar="false"
+                                     btn_dialog_rel="false" btn_cancelar="false" acao_ativar="#{fundoFixoMB.init()}" >
+                <fixo:cadastroFundoFixo id="compCadastro"/>
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    <ui:define name="dialog">
+        <p:dialog showEffect="fade" closable="true" header="#{label.centro_custo}" id="dialogCosCtc" modal="true"  widgetVar="dialogCosCtc">
+            <h:form id="frm_dialogCosCtc">
+                <custo:consultaCentroCusto  render_ativ="false" render_edit="false" id="compConsulta" sel_con_update=":frm_dialogCosCtc:compConsulta" >
+                    <p:commandButton actionListener="#{fundoFixoMB.setarCentroDeCusto(c)}" oncomplete="PF('dialogCosCtc').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:inp_custo:input"  icon="fa fa-check-square"/>
+                </custo:consultaCentroCusto> 
+            </h:form>
+        </p:dialog>
+
+    </ui:define>
+
+</ui:composition>
+

@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:fixo="http://xmlns.jcp.org/jsf/composite/componentes/paginas/solicitacao/fundo_fixo">
+
+
+
+    <ui:define name="corpo">
+        <h:form id="frm_cons" prependId="false" >
+            <p:blockUI block="@(form)" trigger=":frm_cons:pnlPadrao:btn_print" widgetVar="blk">
+                <p:graphicImage library="images" name="carregar.gif"/>
+            </p:blockUI>
+            <componentes:panelPadrao id="pnlPadrao" cabecalho=" #{label.consulta} #{label.fundo_fixo}" acao_limpar="#{fundoFixoMB.init()}" render_sep_1="false" btn_excluir="false" 
+                                     btn_cancelar="false" btn_salvar="false" btn_ativar="false" 
+                                     dialog_cadastro="dialogCadastro" btn_imprimir="TRUE" btn_dialog_rel="false" btn_salvar_update="false">
+                <fixo:consultaFundoFixo id="compConsulta"  componente_to_update="@form:pnlPadrao:compConsulta:tabela"  />
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    <ui:define name="dialog">
+
+    </ui:define>
+
+</ui:composition>
+
+

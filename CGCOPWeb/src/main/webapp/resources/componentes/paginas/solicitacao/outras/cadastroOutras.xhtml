@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:panels="http://xmlns.jcp.org/jsf/composite/componentes/panels"
+                xmlns:inputs="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:btn="http://xmlns.jcp.org/jsf/composite/componentes/botoes"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
+
+    <composite:interface id="interCon">
+
+    </composite:interface>
+    <composite:implementation  >
+        <panels:panel titulo="#{label.outras} #{label.solicitações}" id="pnlDadPes" class="fieldDad">
+            <h:panelGroup layout="block"  class="Container100 Responsive" >
+                <inputs:input_label_data id="input_dts"  inp_class_tamanho="20" inp_valor="#{outrasMB.outras.dataDaSolicitacao}" lab_valor="#{label.data} #{label.da} #{label.solicitacao}"/>
+                <inputs:input_label_data id="input_dtl"  inp_class_tamanho="20" inp_valor="#{outrasMB.outras.dataLimiteRecebimento}" lab_valor="#{label.data} #{label.limite} #{label.recebimento}"/>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block"  class="Container100 Responsive" >
+                <inputs:selectOneLabel  inp_valor="#{outrasMB.outras.empresa}" id="sel_em" lab_valor="#{label.empresa}"  ajax_render="true"
+                                        sel_converter="indexConverter" inp_class_tamanho="20">
+                    <f:selectItem noSelectionOption="true" itemLabel="-----Selecione-----" value="#{null}" itemValue="#{null}" />
+                    <f:selectItems value="#{outrasMB.listaDeEmpresas}" var="em" itemLabel="#{em.nome}" itemValue="#{em}"/>
+                </inputs:selectOneLabel>
+            </h:panelGroup>
+
+            <h:panelGroup layout="block"  class="Container100 Responsive" >
+                <inputs:input_label_btn_click  id="inp_custo" btn_titulo="#{label.centro_custo}" btn_immediate="true" btn_onclick="PF('dialogCosNuc').show()"
+                                               inp_readonly="true"  inp_valor="#{fundoFixoMB.fundoFixo.centroDeCusto.id}"  inp_class_tamanho="40"
+                                               lab_valor="#{label.centro_custo}" btn_update="@form" inp_require="true" />
+                <inputs:input_label_btn_click  id="inp_colaborador" btn_titulo="#{label.colaborador}" btn_immediate="true" btn_onclick="PF('dialogCosCol').show()"
+                                               inp_readonly="true"  inp_valor="#{outrasMB.outras.colaborador.nome}"  inp_class_tamanho="40"
+                                               lab_valor="#{label.colaborador}" btn_update="@form" inp_require="true" />
+                <inputs:input_label_btn_click  id="inp_natureza" btn_titulo="#{label.natureza}" btn_immediate="true" btn_onclick="PF('dialogCosNat').show()"
+                                               inp_readonly="true"  inp_valor="#{outrasMB.outras.natureza.descricao}"  inp_class_tamanho="40"
+                                               lab_valor="#{label.natureza}" btn_update="@form" inp_require="true" />
+            </h:panelGroup>
+
+            <h:panelGroup layout="block"  class="Container100 Responsive" >
+                <inputs:input_label_btn_click  id="inp_diretor" btn_titulo="#{label.direcao}" btn_immediate="true" btn_onclick="PF('dialogCosCol').show()"
+                                               inp_readonly="true"  inp_valor="#{outrasMB.outras.colaborador.nome}"  inp_class_tamanho="40"
+                                               lab_valor="#{label.direcao}" btn_update="@form" inp_require="true" />
+                <inputs:input_label lab_valor="#{label.valor}" inp_valor="#{outrasMB.outras.valor}" inp_require="true" inp_class_tamanho="20" />
+                <inputs:textarea_label lab_valor="#{label.motivo}" inp_blur="btn_salvar" inp_valor="#{outrasMB.outras.motivo}" 
+                                       inp_class_tamanho="80" />
+            </h:panelGroup>
+        </panels:panel>
+
+
+
+    </composite:implementation>
+</ui:composition>
+
+
+
+

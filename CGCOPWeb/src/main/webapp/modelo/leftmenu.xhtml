@@ -43,6 +43,22 @@
                     </p:submenu>
 
                 </p:submenu>
+                <p:submenu label="#{label.solicitacao}" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloSolicitacao()}" icon="icon-doc-text-inv" >
+                    <p:submenu label="#{label.fundo_fixo}" icon="icon-medkit " 
+                               rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.fundo_fixo_cadastro) 
+                                           or utilitarioNavegacaoMB.permissaoExiste(solicitacao.fundo_fixo_consulta) }" >
+                        <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.fundo_fixo_cadastro)}" icon="icon-doc-text-1" outcome="#{solicitacao.fundo_fixo_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.fundo_fixo_consulta)}" icon="icon-th-list-outline" outcome="#{solicitacao.fundo_fixo_consulta}"/>
+                    </p:submenu>
+                    <p:submenu label="#{label.outras} #{label.solicitações}" icon="icon-asterisk " 
+                               rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_cadastro) 
+                                           or utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_consulta) }" >
+                        <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_cadastro)}" icon="icon-doc-text-1" outcome="#{solicitacao.outras_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_consulta)}" icon="icon-th-list-outline" outcome="#{solicitacao.outras_consulta}"/>
+                    </p:submenu>
+
+                </p:submenu>
+
                 <p:submenu label="#{label.modulo_seguranca}" icon="icon-lock-open-alt" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloSeguranca()}" >
                     <p:submenu label="#{label.modulo}" icon="icon-cubes" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.modulo_consulta)}" >
                         <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.modulo_consulta)}"  outcome="#{seguranca.modulo_consulta}"/>
