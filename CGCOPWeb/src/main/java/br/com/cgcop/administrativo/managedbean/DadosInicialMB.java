@@ -40,9 +40,9 @@ public class DadosInicialMB implements Serializable {
         listaString2 = new ArrayList<>();
         String a;
         for (int i = 0; i < 10; i++) {
-            a = "Projeto: ".concat(String.valueOf(i+1));
+            a = "Pendentes: ".concat(String.valueOf(i+1));
             listaString.add(a);
-            a = "Obra: ".concat(String.valueOf(i+1));
+            a = "Concluídas: ".concat(String.valueOf(i+1));
             listaString2.add(a);
         }
 
@@ -51,7 +51,7 @@ public class DadosInicialMB implements Serializable {
     private void createLineModels() {
 
         lineModel = initCategoryModel();
-        lineModel.setTitle("(Projetos | Obras)");
+        lineModel.setTitle("(Pendentes | Concluídas)");
         lineModel.setLegendPosition("e");
         lineModel.setShowPointLabels(true);
         lineModel.getAxes().put(AxisType.X, new CategoryAxis("(Mes)"));
@@ -66,7 +66,7 @@ public class DadosInicialMB implements Serializable {
         LineChartModel model = new LineChartModel();
 
         ChartSeries boys = new ChartSeries();
-        boys.setLabel("Projeto");
+        boys.setLabel("Pendentes");
         boys.set(Mes.JANEIRO.getAbreviacao(), 10);
         boys.set(Mes.FEVEREIRO.getAbreviacao(), 15);
         boys.set(Mes.MARÇO.getAbreviacao(), 5);
@@ -81,7 +81,7 @@ public class DadosInicialMB implements Serializable {
         boys.set(Mes.DEZEMBRO.getAbreviacao(), 12);
       
         ChartSeries girls = new ChartSeries();
-        girls.setLabel("Obras");
+        girls.setLabel("Concluídas");
         girls.set(Mes.JANEIRO.getAbreviacao(), 8);
         girls.set(Mes.FEVEREIRO.getAbreviacao(), 5);
         girls.set(Mes.MARÇO.getAbreviacao(), 1);

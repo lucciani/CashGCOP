@@ -16,6 +16,9 @@ public abstract class PastasRelatorio {
     public static final String REL_ADMINISTRATIVO_CLIENTE = "/WEB-INF/relatorios/administrativo/rel_clientes.jasper";
     public static final String REL_ADMINISTRATIVO_FORNECEDOR = "/WEB-INF/relatorios/administrativo/rel_fornecedor.jasper";
     public static final String REL_ADMINISTRATIVO_COLABORADOR = "/WEB-INF/relatorios/administrativo/rel_colaborador.jasper";
+    
+    public static final String RESOURCE_SOLICITACOES = "WEB-INF/relatorios/solicitacao";
+    public static final String REL_SOLICITACAO_FUNDO_FIXO = "WEB-INF/relatorios/solicitacao/fundo_fixo/rel_fundo_fixo.jasper";
 
   
 

@@ -17,6 +17,7 @@
         <composite:attribute id="render_ativ" name="render_ativ"  default="true" shortDescription="se vai renderizar o btn ativar_desativar"/>
         <composite:attribute name="acao_butao_selecionar_fixo" default="#{fundoFixoMB.setarColaborador(c)}"  method-signature="java.lang.Void action()"/>
         <composite:attribute name="acao_butao_selecionar_outras" default="#{outrasMB.setarColaborador(c)}"  method-signature="java.lang.Void action()"/>
+        <composite:attribute name="acao_butao_selecionar_out" default="#{outrasMB.setarDiretor(c)}"  method-signature="java.lang.Void action()"/>
         <composite:attribute id="btn_selecionar_update" name="btn_selecionar_update"  />
         <composite:attribute id="renderizar_btn_selecionar" name="renderizar_btn_selecionar"  default="false" />
         <composite:attribute id="target" name="target"   />
@@ -72,6 +73,9 @@
                                                          complete="#{cc.attrs.dialogHide}" target="#{cc.attrs.target}"  value="#{c}">
                     </botao:commandButton_selecionar_acao>
                     <botao:commandButton_selecionar_acao acao_butao="#{cc.attrs.acao_butao_selecionar_outras}"  componente_to_update="#{cc.attrs.btn_selecionar_update}" renderizar_btn="#{cc.attrs.renderizar_btn_selecionar}" 
+                                                         complete="#{cc.attrs.dialogHide}" target="#{cc.attrs.target}"  value="#{c}">
+                    </botao:commandButton_selecionar_acao>
+                    <botao:commandButton_selecionar_acao acao_butao="#{cc.attrs.acao_butao_selecionar_out}"  componente_to_update="#{cc.attrs.btn_selecionar_update}" renderizar_btn="#{cc.attrs.renderizar_btn_selecionar}" 
                                                          complete="#{cc.attrs.dialogHide}" target="#{cc.attrs.target}"  value="#{c}">
                     </botao:commandButton_selecionar_acao>
                     <composite:insertChildren/>

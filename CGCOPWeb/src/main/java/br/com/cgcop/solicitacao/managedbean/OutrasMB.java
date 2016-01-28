@@ -53,6 +53,7 @@ public class OutrasMB extends BeanGenerico implements Serializable {
     @Inject
     private ColaboradorController colaboradorController;
     private Colaborador colaborador;
+    private Colaborador diretor;
     private List<Colaborador> listaDeColaboradores;
     @Inject
     private NaturezaController naturezaController;
@@ -60,6 +61,7 @@ public class OutrasMB extends BeanGenerico implements Serializable {
     private List<Natureza> listaNatureza;
     
     private Date dataSolicitacao;
+    private Date dataFinal;
     private Date dataRecebimento;
 
     @PostConstruct
@@ -72,9 +74,11 @@ public class OutrasMB extends BeanGenerico implements Serializable {
                 outras = new Outras();
                 dataSolicitacao = new Date();
                 dataRecebimento = new Date();
+                dataFinal = new Date();
                 outras.setEmpresa(new Empresa());
                 outras.setCentroDeCusto(new CentroDeCusto());
                 outras.setColaborador(new Colaborador());
+                outras.setDiretor(new Colaborador());
                 outras.setNatureza(new Natureza());
             }
             listaOutras = new ArrayList<>();
@@ -100,7 +104,7 @@ public class OutrasMB extends BeanGenerico implements Serializable {
 
     public void consultarOutras() {
         try {
-            listaOutras = outrasController.consultarLike(getCampoConsuta(), getValorCampoConsuta().toUpperCase());
+            listaOutras = outrasController.consultarPorPeriodo(dataSolicitacao, dataFinal);
         } catch (Exception ex) {
             Logger.getLogger(OutrasMB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -109,7 +113,7 @@ public class OutrasMB extends BeanGenerico implements Serializable {
     @Override
     protected Map<String, Object> getCampo() {
         Map<String, Object> map = new HashMap<>();
-        map.put("Código", "id");
+        map.put("Data", "dataDaSolicitacao");
         return map;
     }
     
@@ -122,6 +126,10 @@ public class OutrasMB extends BeanGenerico implements Serializable {
     }
     public void setarColaborador(Colaborador col){
         outras.setColaborador(col);
+    }
+    
+    public void setarDiretor(Colaborador col){
+        outras.setDiretor(col);
     }
 
     public Outras getOutras() {
@@ -154,6 +162,14 @@ public class OutrasMB extends BeanGenerico implements Serializable {
 
     public void setColaborador(Colaborador colaborador) {
         this.colaborador = colaborador;
+    }
+
+    public Colaborador getDiretor() {
+        return diretor;
+    }
+
+    public void setDiretor(Colaborador diretor) {
+        this.diretor = diretor;
     }
 
     public Natureza getNatureza() {
@@ -198,6 +214,14 @@ public class OutrasMB extends BeanGenerico implements Serializable {
 
     public List<Natureza> getListaNatureza() {
         return listaNatureza;
+    }
+
+    public Date getDataFinal() {
+        return dataFinal;
+    }
+
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
     }
     
 }

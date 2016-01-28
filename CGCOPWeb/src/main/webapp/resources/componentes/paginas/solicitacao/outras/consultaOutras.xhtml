@@ -20,10 +20,8 @@
     </composite:interface>
     <composite:implementation>
         <p:fieldset>
-            <inputs:selectOneLabel lab_valor="#{label.buscar_por}" inp_valor="#{outrasMB.campoConsuta}" inp_class_tamanho="20">
-                <f:selectItems value="#{outrasMB.itensDeConsulta}" />
-            </inputs:selectOneLabel>
-            <inputs:input_label  lab_valor="#{label.valor}" inp_valor="#{outrasMB.valorCampoConsuta}" inp_class_tamanho="40" />
+            <inputs:input_label_data inp_valor="#{outrasMB.dataSolicitacao}" lab_valor="#{label.data_inicial}" inp_class_tamanho="20"  />
+            <inputs:input_label_data inp_valor="#{outrasMB.dataFinal}" lab_valor="#{label.data_final}" inp_class_tamanho="20"  />
             <botao:commandButton_consulta inp_class_tamanho="20" acao_butao="#{cc.attrs.acao_butao}"  componente_to_update="#{cc.attrs.componente_to_update}"  />
         </p:fieldset>
         <p:fieldset>
@@ -36,27 +34,27 @@
                 <p:column width="5%">
                     <p:rowToggler  />
                 </p:column>
-                <p:column headerText="#{label.id}">
+                <p:column headerText="#{label.id}" width="10%">
                     <componentes:outputText value="#{o.id}"/>
                 </p:column>
                 <p:column headerText="#{label.colaborador}">
-                    <componentes:outputText value="#{o.colaborador}"/>
+                    <componentes:outputText value="#{o.colaborador.nome}"/>
                 </p:column>
-                <p:column headerText="#{label.direcao}">
-                    <componentes:outputText value="#{o.diretor}"/>
+                <p:column headerText="#{label.diretor}">
+                    <componentes:outputText value="#{o.diretor.nome}"/>
                 </p:column>
                 <p:rowExpansion>
                     <p:panelGrid  columns="2" columnClasses="label,value" style="width:100%">
                         <componentes:outputText value="#{label.data} #{label.da} #{label.solicitacao}" />
                         <componentes:outputText tipo="d" value="#{o.dataDaSolicitacao}" />
                         <componentes:outputText value="#{label.centro_custo}" />
-                        <componentes:outputText tipo="d" value="#{o.centroDeCusto}" />
+                        <componentes:outputText tipo="d" value="#{o.centroDeCusto.id}" />
                         <componentes:outputText value="#{label.empresa}" />
-                        <componentes:outputText tipo="d" value="#{o.empresa}" />
+                        <componentes:outputText tipo="d" value="#{o.empresa.nome}" />
                         <componentes:outputText value="#{label.natureza}" />
-                        <componentes:outputText tipo="d" value="#{o.natureza}" />
+                        <componentes:outputText tipo="d" value="#{o.natureza.id}" />
                         <componentes:outputText value="#{label.valor}" />
-                        <componentes:outputText tipo="d" value="#{o.valor}" />
+                        <componentes:outputText value="#{label.rs} #{o.valor} #{label.reais}" tipo="n" />
                         <componentes:outputText value="#{label.motivo}" />
                         <componentes:outputText tipo="d" value="#{o.motivo}" />
                         <componentes:outputText value="#{label.data} #{label.limite} #{label.recebimento}" />

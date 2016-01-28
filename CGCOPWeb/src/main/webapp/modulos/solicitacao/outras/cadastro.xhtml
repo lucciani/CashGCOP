@@ -7,8 +7,8 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:outras="http://xmlns.jcp.org/jsf/composite/componentes/paginas/solicitacao/outras"
                 xmlns:custo="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/centro_custo"
-                xmlns:natureza="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/natureza"
-                xmlns:colaborador="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/colaborador"
+                xmlns:nat="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/natureza"
+                xmlns:col="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/colaborador"
                 xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
 
     <ui:define name="corpo">
@@ -22,33 +22,38 @@
             </componentes:panelPadrao>
         </h:form>
     </ui:define>
-    
+
     <ui:define name="dialog">
-        
-        <p:dialog showEffect="fade" closable="true" header="#{label.centro_custo}" id="dialogCosNuc" modal="true"  widgetVar="dialogCosNuc">
-            <h:form id="frm_dialogCosNuc">
-                <custo:consultaCentroCusto  render_ativ="false" render_edit="false" id="compConsulta" sel_con_update=":frm_dialogCosNuc:compConsulta:fielCon" >
-                    <p:commandButton actionListener="#{outrasMB.setarCentroDeCusto(c)}" oncomplete="PF('dialogCosNuc').hide()" 
-                                     update=":frm_cad:pnlPadrao:compCadastro:inp_custo:input"  icon="fa fa-check-square"/>
+        <p:dialog showEffect="fade" closable="true" header="#{label.centro_custo}" id="dialogCosCtc" modal="true"  widgetVar="dialogCosCtc">
+            <h:form id="frmDialogCosCtc">
+                <custo:consultaCentroCusto  render_ativ="false" render_edit="false" id="compConsCusto" componente_to_update="@form">
+                    <p:commandButton actionListener="#{outrasMB.setarCentroDeCusto(c)}" onclick="PF('dialogCosCtc').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:pnlDadPes:inp_outCusto:input"  icon="fa fa-check-square"/>
                 </custo:consultaCentroCusto> 
             </h:form>
         </p:dialog>
-        
-        <p:dialog showEffect="fade" closable="true" header="#{label.natureza}" id="dialogCosNat" modal="true"  widgetVar="dialogCosNat">
-            <h:form id="frm_dialogCosNat">
-                <natureza:consultaNatureza  render_ativ="false" render_edit="false" id="compConsulta" sel_con_update=":frm_dialogCosNat:compConsulta:fielCon" >
-                    <p:commandButton actionListener="#{outrasMB.setarNatureza(n)}" oncomplete="PF('dialogCosNat').hide()" 
-                                     update=":frm_cad:pnlPadrao:compCadastro:inp_natureza:input"  icon="fa fa-check-square"/>
-                </natureza:consultaNatureza> 
+        <p:dialog showEffect="fade" closable="true" header="#{label.colaborador}" id="dialogCosCol" modal="true"  widgetVar="dialogCosCol">
+            <h:form id="frmDialogCosCol">
+                <col:consultaColaborador  render_ativ="false" render_edit="false" id="compConsCol" componente_to_update="@form">
+                    <p:commandButton actionListener="#{outrasMB.setarColaborador(c)}" onclick="PF('dialogCosCol').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:pnlDadPes:inp_outColaborador:input"  icon="fa fa-check-square"/>
+                </col:consultaColaborador> 
             </h:form>
         </p:dialog>
-        
-        <p:dialog showEffect="fade" closable="true" header="#{label.centro_custo}" id="dialogCosCol" modal="true"  widgetVar="dialogCosCol">
-            <h:form id="frm_dialogCosCol">
-                <colaborador:consultaColaborador  render_ativ="false" render_edit="false" id="compConsulta" sel_con_update=":frm_dialogCosCol:compConsulta:fielCon" >
-                    <p:commandButton actionListener="#{outrasMB.setarColaborador(col)}" oncomplete="PF('dialogCosCol').hide()" 
-                                     update=":frm_cad:pnlPadrao:compCadastro:inp_colaborador:input"  icon="fa fa-check-square"/>
-                </colaborador:consultaColaborador> 
+        <p:dialog showEffect="fade" closable="true" header="#{label.colaborador}" id="dialogCosDir" modal="true"  widgetVar="dialogCosDir">
+            <h:form id="frmDialogCosDir">
+                <col:consultaColaborador  render_ativ="false" render_edit="false" id="compConsDir" componente_to_update="@form">
+                    <p:commandButton actionListener="#{outrasMB.setarDiretor(c)}" onclick="PF('dialogCosDir').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:pnlDadPes:inp_outDiretor:input"  icon="fa fa-check-square"/>
+                </col:consultaColaborador> 
+            </h:form>
+        </p:dialog>
+        <p:dialog showEffect="fade" closable="true" header="#{label.natureza}" id="dialogCosNat" modal="true"  widgetVar="dialogCosNat">
+            <h:form id="frmDialogCosNat">
+                <nat:consultaNatureza  render_ativ="false" render_edit="false" id="compConsNat" componente_to_update="@form">
+                    <p:commandButton actionListener="#{outrasMB.setarNatureza(n)}" onclick="PF('dialogCosNat').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:pnlDadPes:inp_outNatureza:input"  icon="fa fa-check-square"/>
+                </nat:consultaNatureza> 
             </h:form>
         </p:dialog>
 

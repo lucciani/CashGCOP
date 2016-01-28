@@ -9,6 +9,8 @@ import br.com.cgcop.solicitacao.DAO.OutrasDAO;
 import br.com.cgcop.solicitacao.modelo.Outras;
 import br.com.cgcop.utilitario.ControllerGenerico;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -27,4 +29,7 @@ public class OutrasController extends ControllerGenerico<Outras, Long> implement
         setDAO(dao);
     }
 
+    public List<Outras> consultarPorPeriodo(Date data, Date dataFinal) {
+      return dao.consultarPorPeriodo(data,dataFinal);
+    }
 }

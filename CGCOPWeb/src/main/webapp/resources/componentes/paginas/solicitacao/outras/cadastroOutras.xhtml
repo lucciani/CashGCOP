@@ -24,29 +24,27 @@
 
             <h:panelGroup layout="block"  class="Container100 Responsive" >
                 <inputs:selectOneLabel  inp_valor="#{outrasMB.outras.empresa}" id="sel_em" lab_valor="#{label.empresa}"  ajax_render="true"
-                                        sel_converter="indexConverter" inp_class_tamanho="20">
+                                        sel_converter="indexConverter" inp_class_tamanho="30">
                     <f:selectItem noSelectionOption="true" itemLabel="-----Selecione-----" value="#{null}" itemValue="#{null}" />
                     <f:selectItems value="#{outrasMB.listaDeEmpresas}" var="em" itemLabel="#{em.nome}" itemValue="#{em}"/>
                 </inputs:selectOneLabel>
             </h:panelGroup>
 
             <h:panelGroup layout="block"  class="Container100 Responsive" >
-                <inputs:input_label_btn_click  id="inp_custo" btn_titulo="#{label.centro_custo}" btn_immediate="true" btn_onclick="PF('dialogCosNuc').show()"
-                                               inp_readonly="true"  inp_valor="#{fundoFixoMB.fundoFixo.centroDeCusto.id}"  inp_class_tamanho="40"
-                                               lab_valor="#{label.centro_custo}" btn_update="@form" inp_require="true" />
-                <inputs:input_label_btn_click  id="inp_colaborador" btn_titulo="#{label.colaborador}" btn_immediate="true" btn_onclick="PF('dialogCosCol').show()"
-                                               inp_readonly="true"  inp_valor="#{outrasMB.outras.colaborador.nome}"  inp_class_tamanho="40"
-                                               lab_valor="#{label.colaborador}" btn_update="@form" inp_require="true" />
-                <inputs:input_label_btn_click  id="inp_natureza" btn_titulo="#{label.natureza}" btn_immediate="true" btn_onclick="PF('dialogCosNat').show()"
-                                               inp_readonly="true"  inp_valor="#{outrasMB.outras.natureza.descricao}"  inp_class_tamanho="40"
-                                               lab_valor="#{label.natureza}" btn_update="@form" inp_require="true" />
+                <inputs:input_label_btn_click inp_valor="#{outrasMB.outras.centroDeCusto.id}" id="inp_outCusto" lab_valor="#{label.centro_custo}" inp_readonly="true" inp_require="true" 
+                                              btn_immediate="true" btn_onclick="PF('dialogCosCtc').show()" btn_process="@this" inp_class_tamanho="30" />
+                
+                <inputs:input_label_btn_click inp_valor="#{outrasMB.outras.colaborador.nome}" id="inp_outColaborador" lab_valor="#{label.colaborador}" inp_readonly="true" inp_require="true" 
+                                              btn_immediate="true" btn_onclick="PF('dialogCosCol').show()" btn_process="@this" inp_class_tamanho="30" />
+                
+                <inputs:input_label_btn_click inp_valor="#{outrasMB.outras.natureza.id}" id="inp_outNatureza" lab_valor="#{label.natureza}" inp_readonly="true" inp_require="true" 
+                                              btn_immediate="true" btn_onclick="PF('dialogCosNat').show()" btn_process="@this" inp_class_tamanho="30" />
             </h:panelGroup>
 
             <h:panelGroup layout="block"  class="Container100 Responsive" >
-                <inputs:input_label_btn_click  id="inp_diretor" btn_titulo="#{label.direcao}" btn_immediate="true" btn_onclick="PF('dialogCosCol').show()"
-                                               inp_readonly="true"  inp_valor="#{outrasMB.outras.colaborador.nome}"  inp_class_tamanho="40"
-                                               lab_valor="#{label.direcao}" btn_update="@form" inp_require="true" />
-                <inputs:input_label lab_valor="#{label.valor}" inp_valor="#{outrasMB.outras.valor}" inp_require="true" inp_class_tamanho="20" />
+                <inputs:input_label_btn_click inp_valor="#{outrasMB.outras.diretor.nome}" id="inp_outDiretor" lab_valor="#{label.diretor}" inp_readonly="true" inp_require="true" 
+                                              btn_immediate="true" btn_onclick="PF('dialogCosDir').show()" btn_process="@this" inp_class_tamanho="30" />
+                <inputs:input_label_number lab_valor="#{label.valor}" inp_valor="#{outrasMB.outras.valor}" inp_require="true" inp_class_tamanho="20" />
                 <inputs:textarea_label lab_valor="#{label.motivo}" inp_blur="btn_salvar" inp_valor="#{outrasMB.outras.motivo}" 
                                        inp_class_tamanho="80" />
             </h:panelGroup>

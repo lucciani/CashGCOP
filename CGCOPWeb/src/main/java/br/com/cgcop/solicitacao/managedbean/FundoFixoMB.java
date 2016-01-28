@@ -15,6 +15,9 @@ import br.com.cgcop.solicitacao.Controller.FundoFixoController;
 import br.com.cgcop.solicitacao.modelo.FundoFixo;
 import br.com.cgcop.utilitario.BeanGenerico;
 import br.com.cgcop.utilitario.mensagens.MensagensUtil;
+import br.com.cgcop.utilitario.relatorio.RelatorioSession;
+import br.com.cgcop.utilitarios.relatorios.AssistentedeRelatorio;
+import br.com.cgcop.utilitarios.relatorios.PastasRelatorio;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -92,6 +95,16 @@ public class FundoFixoMB extends BeanGenerico implements Serializable {
         } catch (Exception ex) {
             MensagensUtil.enviarMessageErro(MensagensUtil.REGISTRO_FALHA);
             Logger.getLogger(FundoFixoMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void geraImpressaoFundoFixo() {
+        try {
+            Map<String, Object> m = new HashMap<>();
+            byte[] rel = new AssistentedeRelatorio().relatorioemByte(listaFundoFixo, m, PastasRelatorio.RESOURCE_SOLICITACOES, PastasRelatorio.REL_SOLICITACAO_FUNDO_FIXO, "");
+            RelatorioSession.setBytesRelatorioInSession(rel);
+        } catch (Exception e) {
+//            erroCliente.adicionaErro(e);
         }
     }
 

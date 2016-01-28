@@ -20,13 +20,13 @@ import javax.persistence.TypedQuery;
  * @author Gian
  */
 @Stateless
-public class FundoFixoDAO extends DAOGenerico<FundoFixo, Long> implements Serializable{
-    
+public class FundoFixoDAO extends DAOGenerico<FundoFixo, Long> implements Serializable {
+
     public FundoFixoDAO() {
         super(FundoFixo.class);
     }
-    
-     public List<FundoFixo> consultarPorPeriodo(Date data, Date dataFinal) {
+
+    public List<FundoFixo> consultarPorPeriodo(Date data, Date dataFinal) {
         TypedQuery<FundoFixo> tq;
         tq = getEm().createQuery("SELECT e FROM FundoFixo e WHERE e.dataDeSolicitacao BETWEEN :dtIni and :dtFim ORDER BY e.dataDeSolicitacao", FundoFixo.class)
                 .setParameter("dtIni", MetodosUtilitariosData.processarDataInicial(data))
