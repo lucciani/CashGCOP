@@ -57,7 +57,8 @@ public class FundoFixoMB extends BeanGenerico implements Serializable {
     private Colaborador colaborador;
     private List<Colaborador> listaDeColaboradores;
 
-    private Date dataSolicitacao;
+    private Date data;
+    private Date dataFinal;
 
     @PostConstruct
     @Override
@@ -67,7 +68,8 @@ public class FundoFixoMB extends BeanGenerico implements Serializable {
             fundoFixo = (FundoFixo) lerRegistroDaSessao("fundoFixo");
             if (fundoFixo == null) {
                 fundoFixo = new FundoFixo();
-                dataSolicitacao = new Date();
+                data = new Date();
+                dataFinal = new Date();
                 fundoFixo.setEmpresa(new Empresa());
                 fundoFixo.setCentroDeCusto(new CentroDeCusto());
                 fundoFixo.setColaborador(new Colaborador());
@@ -95,7 +97,7 @@ public class FundoFixoMB extends BeanGenerico implements Serializable {
 
     public void consultarFundoFixo() {
         try {
-            listaFundoFixo = fundoFixoController.consultarLike(getCampoConsuta(), getValorCampoConsuta().toUpperCase());
+            listaFundoFixo = fundoFixoController.consultarPorPeriodo(data, dataFinal);
         } catch (Exception ex) {
             Logger.getLogger(FundoFixoMB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -104,7 +106,7 @@ public class FundoFixoMB extends BeanGenerico implements Serializable {
     @Override
     protected Map<String, Object> getCampo() {
         Map<String, Object> map = new HashMap<>();
-        map.put("Código", "id");
+        map.put("Data", "dataDeSolicitacao");
         return map;
     }
 
@@ -148,13 +150,22 @@ public class FundoFixoMB extends BeanGenerico implements Serializable {
         this.colaborador = colaborador;
     }
 
-    public Date getDataSolicitacao() {
-        return dataSolicitacao;
+    public Date getData() {
+        return data;
     }
 
-    public void setDataSolicitacao(Date dataSolicitacao) {
-        this.dataSolicitacao = dataSolicitacao;
+    public void setData(Date data) {
+        this.data = data;
     }
+
+    public Date getDataFinal() {
+        return dataFinal;
+    }
+
+    public void setDataFinal(Date dataFinal) {
+        this.dataFinal = dataFinal;
+    }
+
 
     public List<FundoFixo> getListaFundoFixo() {
         return listaFundoFixo;

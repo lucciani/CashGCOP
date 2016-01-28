@@ -9,6 +9,8 @@ import br.com.cgcop.solicitacao.DAO.FundoFixoDAO;
 import br.com.cgcop.solicitacao.modelo.FundoFixo;
 import br.com.cgcop.utilitario.ControllerGenerico;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -29,4 +31,7 @@ public class FundoFixoController extends ControllerGenerico<FundoFixo, Long> imp
         setDAO(dao);
     }
     
+    public List<FundoFixo> consultarPorPeriodo(Date data, Date dataFinal) {
+      return dao.consultarPorPeriodo(data,dataFinal);
+    }
 }

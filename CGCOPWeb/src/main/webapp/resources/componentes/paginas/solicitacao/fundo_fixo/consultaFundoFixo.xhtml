@@ -20,15 +20,13 @@
     </composite:interface>
     <composite:implementation>
         <p:fieldset>
-            <inputs:selectOneLabel lab_valor="#{label.buscar_por}" inp_valor="#{fundoFixoMB.campoConsuta}" inp_class_tamanho="20">
-                <f:selectItems value="#{fundoFixoMB.itensDeConsulta}" />
-            </inputs:selectOneLabel>
-            <inputs:input_label  lab_valor="#{label.valor}" inp_valor="#{fundoFixoMB.valorCampoConsuta}" inp_class_tamanho="40" />
+            <inputs:input_label_data inp_valor="#{fundoFixoMB.data}" lab_valor="#{label.data_inicial}" inp_class_tamanho="20"  />
+            <inputs:input_label_data inp_valor="#{fundoFixoMB.dataFinal}" lab_valor="#{label.data_final}" inp_class_tamanho="20"  />
             <botao:commandButton_consulta inp_class_tamanho="20" acao_butao="#{cc.attrs.acao_butao}"  componente_to_update="#{cc.attrs.componente_to_update}"  />
         </p:fieldset>
         <p:fieldset>
             <p:dataTable value="#{fundoFixoMB.listaFundoFixo}" id="tabela" paginatorAlwaysVisible="false"  paginator="true" var="f" rows="10"
-                         rowStyleClass="#{f.ativo ? (empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row') : (empty rowIx or rowIx mod 2 ne 0 ? 'linha-desativada-even-row' : 'linha-desativada-odd-row')  }"
+                         rowStyleClass="#{(empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row') }"
                          rowIndexVar="rowIx" emptyMessage="#{mensagens['consulta.vazia']}"
                          paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
                          rowsPerPageTemplate="5,10,15"  reflow="true">
@@ -40,23 +38,23 @@
                     <componentes:outputText value="#{f.id}"/>
                 </p:column>
                 <p:column headerText="#{label.colaborador}">
-                    <componentes:outputText value="#{f.colaborador}"/>
+                    <componentes:outputText value="#{f.colaborador.nome}"/>
                 </p:column>
                 <p:rowExpansion>
                     <p:panelGrid  columns="2" columnClasses="label,value" style="width:100%">
                         <componentes:outputText value="#{label.data}" />
                         <componentes:outputText tipo="d" value="#{f.dataDeSolicitacao}" />
                         <componentes:outputText value="#{label.centro_custo}" />
-                        <componentes:outputText tipo="d" value="#{f.centroDeCusto}" />
-                         <componentes:outputText value="#{label.empresa}" />
-                        <componentes:outputText tipo="d" value="#{f.empresa}" />
+                        <componentes:outputText tipo="d" value="#{f.centroDeCusto.id}" />
+                        <componentes:outputText value="#{label.empresa}" />
+                        <componentes:outputText tipo="d" value="#{f.empresa.nome}" />
                         <componentes:outputText value="#{label.valor}" />
-                        <componentes:outputText tipo="d" value="#{f.valor}" />
+                        <componentes:outputText value="#{label.rs} #{f.valor} #{label.reais}" tipo="n" />
                     </p:panelGrid>
                 </p:rowExpansion>
                 <p:column headerText="#{label.acao}" width="10%">
                     <composite:insertChildren/>
-                    <botao:commandButton_editar rendered="#{cc.attrs.render_edit}" acao_butao="#{colaboradorMB.escreverRegistroNasessaoNavegarParaEditar(c,administrativo.colaborador_cadastro,'colaborador')}" componente_to_update="@(form)" renderizar_btn="true" />
+                    <botao:commandButton_editar rendered="#{cc.attrs.render_edit}" acao_butao="#{fundoFixoMB.escreverRegistroNasessaoNavegarParaEditar(f,solicitacao.fundo_fixo_cadastro,'fundoFixo')}" componente_to_update="@(form)" renderizar_btn="true" />
                 </p:column>
             </p:dataTable>
         </p:fieldset>

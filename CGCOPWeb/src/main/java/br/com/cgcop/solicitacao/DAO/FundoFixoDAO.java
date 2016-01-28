@@ -7,8 +7,13 @@ package br.com.cgcop.solicitacao.DAO;
 
 import br.com.cgcop.solicitacao.modelo.FundoFixo;
 import br.com.cgcop.utilitario.DAOGenerico;
+import br.com.cgcop.utilitarios.MetodosUtilitariosData;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.Stateless;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -21,4 +26,11 @@ public class FundoFixoDAO extends DAOGenerico<FundoFixo, Long> implements Serial
         super(FundoFixo.class);
     }
     
+     public List<FundoFixo> consultarPorPeriodo(Date data, Date dataFinal) {
+        TypedQuery<FundoFixo> tq;
+        tq = getEm().createQuery("SELECT e FROM FundoFixo e WHERE e.dataDeSolicitacao BETWEEN :dtIni and :dtFim ORDER BY e.dataDeSolicitacao", FundoFixo.class)
+                .setParameter("dtIni", MetodosUtilitariosData.processarDataInicial(data))
+                .setParameter("dtFim", MetodosUtilitariosData.processarDataFinal(dataFinal));
+        return tq.getResultList().isEmpty() ? new ArrayList<>() : tq.getResultList();
+    }
 }

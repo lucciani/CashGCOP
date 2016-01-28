@@ -7,6 +7,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:fixo="http://xmlns.jcp.org/jsf/composite/componentes/paginas/solicitacao/fundo_fixo"
                 xmlns:custo="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/centro_custo"
+                xmlns:col="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/colaborador"
                 xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
 
     <ui:define name="corpo">
@@ -22,11 +23,19 @@
     </ui:define>
     <ui:define name="dialog">
         <p:dialog showEffect="fade" closable="true" header="#{label.centro_custo}" id="dialogCosCtc" modal="true"  widgetVar="dialogCosCtc">
-            <h:form id="frm_dialogCosCtc">
-                <custo:consultaCentroCusto  render_ativ="false" render_edit="false" id="compConsulta" sel_con_update=":frm_dialogCosCtc:compConsulta" >
-                    <p:commandButton actionListener="#{fundoFixoMB.setarCentroDeCusto(c)}" oncomplete="PF('dialogCosCtc').hide()" 
-                                     update=":frm_cad:pnlPadrao:compCadastro:inp_custo:input"  icon="fa fa-check-square"/>
+            <h:form id="frmDialogCosCtc">
+                <custo:consultaCentroCusto  render_ativ="false" render_edit="false" id="compConsCusto" componente_to_update="@form">
+                    <p:commandButton actionListener="#{fundoFixoMB.setarCentroDeCusto(c)}" onclick="PF('dialogCosCtc').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:pnlDadPes:inp_custo:input"  icon="fa fa-check-square"/>
                 </custo:consultaCentroCusto> 
+            </h:form>
+        </p:dialog>
+        <p:dialog showEffect="fade" closable="true" header="#{label.colaborador}" id="dialogCosCol" modal="true"  widgetVar="dialogCosCol">
+            <h:form id="frmDialogCosCol">
+                <col:consultaColaborador  render_ativ="false" render_edit="false" id="compConsCusto" componente_to_update="@form">
+                    <p:commandButton actionListener="#{fundoFixoMB.setarColaborador(c)}" onclick="PF('dialogCosCol').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:pnlDadPes:inp_colaborador:input"  icon="fa fa-check-square"/>
+                </col:consultaColaborador> 
             </h:form>
         </p:dialog>
 

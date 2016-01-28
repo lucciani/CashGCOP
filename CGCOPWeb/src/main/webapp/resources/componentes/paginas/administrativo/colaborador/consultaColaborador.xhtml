@@ -15,7 +15,6 @@
         <composite:attribute name="acao_butao" method-signature="java.lang.Void action()" default="#{colaboradorMB.consultarColaborador()}"/>
         <composite:attribute name="componente_to_update"  shortDescription="componete atualizado apos selecionar a linha" default="@form" />
         <composite:attribute id="render_ativ" name="render_ativ"  default="true" shortDescription="se vai renderizar o btn ativar_desativar"/>
-        <composite:attribute id="sel_con_update" name="sel_con_update" default=":frm_cons:pnlPadrao:compConsulta:grdGeral"  shortDescription="Componente que sera atualizado ao selecionar o campo de consulta" />
         <composite:attribute name="acao_butao_selecionar_fixo" default="#{fundoFixoMB.setarColaborador(c)}"  method-signature="java.lang.Void action()"/>
         <composite:attribute name="acao_butao_selecionar_outras" default="#{outrasMB.setarColaborador(c)}"  method-signature="java.lang.Void action()"/>
         <composite:attribute id="btn_selecionar_update" name="btn_selecionar_update"  />

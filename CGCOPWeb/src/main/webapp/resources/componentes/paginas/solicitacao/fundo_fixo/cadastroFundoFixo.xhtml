@@ -18,28 +18,25 @@
     <composite:implementation  >
         <panels:panel titulo="#{label.fundo_fixo}" id="pnlDadPes" class="fieldDad">
             <h:panelGroup layout="block"  class="Container100 Responsive" >
-                <inputs:input_label_data id="input_dtl"  inp_class_tamanho="20" inp_valor="#{fundoFixoMB.fundoFixo.dataDeSolicitacao}" lab_valor="#{label.data}"/>
+                <inputs:input_label_data id="input_dtl"  inp_class_tamanho="20" inp_valor="#{fundoFixoMB.fundoFixo.dataDeSolicitacao}" lab_valor="#{label.data} #{label.da} #{label.solicitacao}"/>
             </h:panelGroup>
-            
+
             <h:panelGroup layout="block"  class="Container100 Responsive" >
                 <inputs:selectOneLabel  inp_valor="#{fundoFixoMB.fundoFixo.empresa}" id="sel_em" lab_valor="#{label.empresa}"  ajax_render="true"
-                                        sel_converter="indexConverter" inp_class_tamanho="20">
+                                        sel_converter="indexConverter" inp_class_tamanho="30">
                     <f:selectItem noSelectionOption="true" itemLabel="-----Selecione-----" value="#{null}" itemValue="#{null}" />
                     <f:selectItems value="#{fundoFixoMB.listaDeEmpresas}" var="em" itemLabel="#{em.nome}" itemValue="#{em}"/>
                 </inputs:selectOneLabel>
             </h:panelGroup>
-            
+
             <h:panelGroup layout="block"  class="Container100 Responsive" >
-                <inputs:input_label_btn_click  id="inp_custo" btn_titulo="#{label.centro_custo}" btn_immediate="true" btn_onclick="PF('dialogCosCtc').show()"
-                                               inp_readonly="true"  inp_valor="#{fundoFixoMB.fundoFixo.centroDeCusto.id}"  inp_class_tamanho="40"
-                                               lab_valor="#{label.centro_custo}" btn_update="@form" inp_require="true" />
+                <inputs:input_label_btn_click inp_valor="#{fundoFixoMB.fundoFixo.centroDeCusto.id}" id="inp_custo" lab_valor="#{label.centro_custo}" inp_readonly="true" inp_require="true" 
+                                              btn_immediate="true" btn_onclick="PF('dialogCosCtc').show()" btn_process="@this" inp_class_tamanho="30" />
                 
-                <inputs:selectOneLabel  inp_valor="#{fundoFixoMB.fundoFixo.colaborador}" id="sel_col" lab_valor="#{label.colaborador}"  ajax_render="true"
-                                        sel_converter="indexConverter" inp_class_tamanho="20">
-                    <f:selectItem noSelectionOption="true" itemLabel="-----Selecione-----" value="#{null}" itemValue="#{null}" />
-                    <f:selectItems value="#{fundoFixoMB.listaDeColaboradores}" var="col" itemLabel="#{col.nome}" itemValue="#{col}"/>
-                </inputs:selectOneLabel>
-                <inputs:input_label lab_valor="#{label.valor}" inp_valor="#{fundoFixoMB.fundoFixo.valor}" inp_require="true" inp_class_tamanho="20" />
+                <inputs:input_label_btn_click inp_valor="#{fundoFixoMB.fundoFixo.colaborador.nome}" id="inp_colaborador" lab_valor="#{label.colaborador}" inp_readonly="true" inp_require="true" 
+                                              btn_immediate="true" btn_onclick="PF('dialogCosCol').show()" btn_process="@this" inp_class_tamanho="30" />
+
+                <inputs:input_label_number lab_valor="#{label.valor}" inp_valor="#{fundoFixoMB.fundoFixo.valor}" inp_require="true" inp_class_tamanho="20" />
 
             </h:panelGroup>
         </panels:panel>
