@@ -13,67 +13,86 @@
         </div>
         <h:form>
             <ps:menu id="sm_leftmenu">
-                <p:menuitem id="sm_dashboard" value="#{label.inicio}" icon="icon-home-outline" outcome="#{administrativo.inicio}" containerStyleClass="layout-menubar-active"/>
-                <p:submenu label="#{label.administrativo}" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloAdministrativo()}" icon="icon-sitemap" >
-                    <p:submenu label="#{label.pessoa}" icon="icon-credit-card-1" 
+                <p:menuitem id="sm_dashboard" value="#{label.inicio}" icon=" icon-home-outline" outcome="#{administrativo.inicio}" containerStyleClass="layout-menubar-active"/>
+                <p:submenu label="#{label.administrativo}" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloAdministrativo()}" icon=" icon-sitemap " >
+                    <p:submenu label="#{label.pessoa}" icon=" icon-credit-card-1 " 
                                rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.pessoa_cadastro) 
                                            or utilitarioNavegacaoMB.permissaoExiste(administrativo.pessoa_consulta) }" >
-                        <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.pessoa_cadastro)}" icon="icon-doc-text-1" outcome="#{administrativo.pessoa_cadastro}"/>
-                        <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.pessoa_consulta)}" icon="icon-th-list-outline" outcome="#{administrativo.pessoa_consulta}"/>
+                        <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.pessoa_cadastro)}" icon=" icon-doc-text-1 " outcome="#{administrativo.pessoa_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.pessoa_consulta)}" icon=" icon-th-list-outline " outcome="#{administrativo.pessoa_consulta}"/>
                     </p:submenu>
-                    <p:submenu label=" #{label.empresa}" icon="icon-bank "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_cadastro) 
+                    <p:submenu label=" #{label.empresa}" icon=" icon-bank "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_cadastro) 
                                          or utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_consulta) }"  >
-                        <p:menuitem value="#{label.cadastro}" icon="icon-doc-text-1"  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_cadastro)}" outcome="#{administrativo.empresa_cadastro}"/>
-                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_consulta)}" outcome="#{administrativo.empresa_consulta}"/>
+                        <p:menuitem value="#{label.cadastro}" icon=" icon-doc-text-1 "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_cadastro)}" outcome="#{administrativo.empresa_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" icon=" icon-th-list-outline " rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.empresa_consulta)}" outcome="#{administrativo.empresa_consulta}"/>
                     </p:submenu>
-                    <p:submenu label=" #{label.colaborador}" icon="icon-user "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_cadastro) 
+                    <p:submenu label=" #{label.colaborador}" icon=" icon-user "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_cadastro) 
                                          or utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_consulta) }" >
-                        <p:menuitem value="#{label.cadastro}" icon="icon-doc-text-1"  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_cadastro)}" outcome="#{administrativo.colaborador_cadastro}"/>
-                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_consulta)}" outcome="#{administrativo.colaborador_consulta}"/>
+                        <p:menuitem value="#{label.cadastro}" icon=" icon-doc-text-1 "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_cadastro)}" outcome="#{administrativo.colaborador_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" icon=" icon-th-list-outline " rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.colaborador_consulta)}" outcome="#{administrativo.colaborador_consulta}"/>
                     </p:submenu>
-                    <p:submenu label=" #{label.centro_custo}" icon="icon-money "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.centro_custo_cadastro) 
+                    <p:submenu label=" #{label.centro_custo}" icon=" icon-money "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.centro_custo_cadastro) 
                                          or utilitarioNavegacaoMB.permissaoExiste(administrativo.centro_custo_consulta) }" >
-                        <p:menuitem value="#{label.cadastro}" icon="icon-doc-text-1"  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.centro_custo_cadastro)}" outcome="#{administrativo.centro_custo_cadastro}"/>
-                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.centro_custo_consulta)}" outcome="#{administrativo.centro_custo_consulta}"/>
+                        <p:menuitem value="#{label.cadastro}" icon=" icon-doc-text-1 "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.centro_custo_cadastro)}" outcome="#{administrativo.centro_custo_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" icon=" icon-th-list-outline " rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.centro_custo_consulta)}" outcome="#{administrativo.centro_custo_consulta}"/>
                     </p:submenu>
-                    <p:submenu label=" #{label.natureza}" icon="icon-leaf-1 "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_cadastro) 
+                    <p:submenu label=" #{label.natureza}" icon=" icon-leaf-1 "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_cadastro) 
                                          or utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_consulta) }" >
-                        <p:menuitem value="#{label.cadastro}" icon="icon-doc-text-1"  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_cadastro)}" outcome="#{administrativo.natureza_cadastro}"/>
-                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_consulta)}" outcome="#{administrativo.natureza_consulta}"/>
+                        <p:menuitem value="#{label.cadastro}" icon=" icon-doc-text-1 "  rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_cadastro)}" outcome="#{administrativo.natureza_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" icon=" icon-th-list-outline " rendered="#{utilitarioNavegacaoMB.permissaoExiste(administrativo.natureza_consulta)}" outcome="#{administrativo.natureza_consulta}"/>
                     </p:submenu>
 
                 </p:submenu>
-                <p:submenu label="#{label.solicitacao}" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloSolicitacao()}" icon="icon-doc-text-inv" >
-                    <p:submenu label="#{label.fundo_fixo}" icon="icon-medkit " 
+                <p:submenu label="#{label.solicitacao}" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloSolicitacao()}" icon=" icon-newspaper " >
+                    <p:submenu label="#{label.fundo_fixo}" icon=" icon-medkit " 
                                rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.fundo_fixo_cadastro) 
                                            or utilitarioNavegacaoMB.permissaoExiste(solicitacao.fundo_fixo_consulta) }" >
-                        <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.fundo_fixo_cadastro)}" icon="icon-doc-text-1" outcome="#{solicitacao.fundo_fixo_cadastro}"/>
-                        <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.fundo_fixo_consulta)}" icon="icon-th-list-outline" outcome="#{solicitacao.fundo_fixo_consulta}"/>
+                        <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.fundo_fixo_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.fundo_fixo_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.fundo_fixo_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.fundo_fixo_consulta}"/>
                     </p:submenu>
-                    <p:submenu label="#{label.outras} #{label.solicitações}" icon="icon-asterisk " 
+                    <p:submenu label="#{label.outras} #{label.solicitações}" icon=" icon-asterisk " 
                                rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_cadastro) 
                                            or utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_consulta) }" >
-                        <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_cadastro)}" icon="icon-doc-text-1" outcome="#{solicitacao.outras_cadastro}"/>
-                        <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_consulta)}" icon="icon-th-list-outline" outcome="#{solicitacao.outras_consulta}"/>
+                        <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.outras_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.outras_consulta}"/>
                     </p:submenu>
-
+                    <p:submenu label="#{label.viagem}" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloSolicitacao()}" icon="icon-plane-outline " >
+                        <p:submenu label="#{label.dados} #{label.da} #{label.viagem}" icon=" icon-briefcase-1 " 
+                                   rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.viagem_cadastro) 
+                                               or utilitarioNavegacaoMB.permissaoExiste(solicitacao.viagem_consulta) }" >
+                            <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.viagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.viagem_cadastro}"/>
+                            <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.viagem_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.viagem_consulta}"/>
+                        </p:submenu>
+                        <p:submenu label="#{label.dados} #{label.passageiro}" icon=" icon-users-outline " 
+                                   rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_cadastro) 
+                                               or utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_consulta) }" >
+                            <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.passageiro_cadastro}"/>
+                            <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.passageiro_consulta}"/>
+                        </p:submenu>
+                        <p:submenu label="#{label.dados} #{label.passagem}" icon=" icon-ticket-1 " 
+                                   rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_cadastro) 
+                                               or utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_consulta) }" >
+                            <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.passagem_cadastro}"/>
+                            <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.passagem_consulta}"/>
+                        </p:submenu>
+                    </p:submenu>
                 </p:submenu>
 
-                <p:submenu label="#{label.modulo_seguranca}" icon="icon-lock-open-alt" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloSeguranca()}" >
-                    <p:submenu label="#{label.modulo}" icon="icon-cubes" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.modulo_consulta)}" >
-                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.modulo_consulta)}"  outcome="#{seguranca.modulo_consulta}"/>
+                <p:submenu label="#{label.modulo_seguranca}" icon=" icon-lock-open-alt " rendered="#{utilitarioNavegacaoMB.existePermissaoModuloSeguranca()}" >
+                    <p:submenu label="#{label.modulo}" icon=" icon-cubes " rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.modulo_consulta)}" >
+                        <p:menuitem value="#{label.consulta}" icon=" icon-th-list-outline " rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.modulo_consulta)}"  outcome="#{seguranca.modulo_consulta}"/>
                     </p:submenu>
-                    <p:submenu label="#{label.tarefa}" icon="icon-cube" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.tarefa_consulta)}" >
-                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.tarefa_consulta)}"  outcome="#{seguranca.tarefa_consulta}"/>
+                    <p:submenu label="#{label.tarefa}" icon=" icon-cube " rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.tarefa_consulta)}" >
+                        <p:menuitem value="#{label.consulta}" icon=" icon-th-list-outline " rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.tarefa_consulta)}"  outcome="#{seguranca.tarefa_consulta}"/>
                     </p:submenu>
-                    <p:submenu label="#{label.usuario}" icon="icon-users"   rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_cadastro) or
+                    <p:submenu label="#{label.usuario}" icon=" icon-users "   rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_cadastro) or
                                         utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_cadastro)}">
-                        <p:menuitem value="#{label.cadastro}" icon="icon-doc-text-1" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_cadastro)}" outcome="#{seguranca.usuario_cadastro}"/>
-                        <p:menuitem value="#{label.consulta}" icon="icon-th-list-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_consulta)}"  outcome="#{seguranca.usuario_consulta}"/>
+                        <p:menuitem value="#{label.cadastro}" icon=" icon-doc-text-1 " rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_cadastro)}" outcome="#{seguranca.usuario_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" icon=" icon-th-list-outline " rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.usuario_consulta)}"  outcome="#{seguranca.usuario_consulta}"/>
 
                     </p:submenu>
-                    <p:submenu label="#{label.permissao}" icon="icon-cog"   rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.gerenciar_permissao) }">
-                        <p:menuitem value="#{label.gerenciar} #{label.permissao}" icon="icon-wrench-outline" rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.gerenciar_permissao)}" outcome="#{seguranca.gerenciar_permissao}"/>
+                    <p:submenu label="#{label.permissao}" icon=" icon-cog "   rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.gerenciar_permissao) }">
+                        <p:menuitem value="#{label.gerenciar} #{label.permissao}" icon=" icon-wrench-outline " rendered="#{utilitarioNavegacaoMB.permissaoExiste(seguranca.gerenciar_permissao)}" outcome="#{seguranca.gerenciar_permissao}"/>
 
                     </p:submenu>
                 </p:submenu>

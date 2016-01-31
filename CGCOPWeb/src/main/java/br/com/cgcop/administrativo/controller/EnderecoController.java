@@ -34,9 +34,9 @@ public class EnderecoController extends ControllerGenerico<Endereco, Long> imple
     }
 
     
-      public Endereco buscarOuCriarLogradouroPor(String unidadeFederativa, String nomeCidade, String cep, String nomeLogradouro,  String bairro,String numero,String complemento) throws Exception {
+      public Endereco buscarOuCriarLogradouroPor(String unidadeFederativa, String nomeCidade) throws Exception {
 //        Logradouro logradouro = daoConsulta.buscarPor(unidadeFederativa, nomeCidade, cep, nomeLogradouro, tipoLogradouro, bairro);
-        Endereco endereco = dao.buscarPor(nomeCidade, cep, nomeLogradouro, bairro,numero,complemento);
+        Endereco endereco = dao.buscarPor(nomeCidade);
 
         if (endereco.getId() != null) {
             return endereco;
@@ -47,11 +47,6 @@ public class EnderecoController extends ControllerGenerico<Endereco, Long> imple
                 throw new Exception("Não existe cidade cadastrada!");
             }
             endereco.setMunicipio(cidade);
-            endereco.setCep(cep);
-            endereco.setBairro(bairro);
-            endereco.setNome(nomeLogradouro);
-            endereco.setNumero(numero);
-            endereco.setComplemento(complemento);
 
             return salvarComRetorno(endereco);
         }

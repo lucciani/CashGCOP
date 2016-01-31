@@ -5,7 +5,6 @@
  */
 package br.com.cgcop.administrativo.modelo;
 
-import br.com.cgcop.utilitarios.RemoveCaracteresUtil;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
@@ -19,8 +18,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
-import org.hibernate.validator.constraints.NotBlank;
-import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -34,21 +31,6 @@ public class Endereco implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "end_id", nullable = false)
     private Long id;
-    @Column(name = "end_cep", nullable = false)
-    @NotBlank
-    private String cep;
-    @NotNull(message = "O nome do logradouro não pode ser nulo")
-    @NotEmpty(message = "O nome do logradouro não pode ser vazio")
-    @NotBlank
-    @Column(name = "end_nome", nullable = false, length = 50)
-    private String nome;
-    @Column(name = "end_bairro", nullable = false, length = 50)
-    private String bairro;
-    @Column(name = "end_numero",  length = 50)
-    private String numero;
-  
-    @Column(name = "end_complemento")
-    private String complemento;
   
     @ManyToOne
     @NotNull
@@ -87,31 +69,6 @@ public class Endereco implements Serializable {
         this.id = id;
     }
 
-    public String getCep() {
-        return cep;
-    }
-
-    public void setCep(String cep) {
-        this.cep = cep.replaceAll("[^0-9]", "");
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = RemoveCaracteresUtil.removeAccentos(nome.toUpperCase());
-    }
-
-    public String getBairro() {
-        return bairro;
-    }
-
-    public void setBairro(String bairro) {
-        this.bairro = RemoveCaracteresUtil.removeAccentos(bairro.toUpperCase());
-    }
-
- 
     public Municipio getMunicipio() {
         return municipio;
     }
@@ -125,22 +82,6 @@ public class Endereco implements Serializable {
     
     public UnidadeFederativa getUnidadeFederativa(){
         return municipio.getUnidadeFederativa();
-    }
-
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getComplemento() {
-        return complemento;
-    }
-
-    public void setComplemento(String complemento) {
-        this.complemento = complemento;
     }
 
     @Override
@@ -164,7 +105,7 @@ public class Endereco implements Serializable {
 
     @Override
     public String toString() {
-        return "CEP: " + cep + ", Rua: " + nome +", "+numero+", "+complemento  + ", Bairro: " + bairro + " " + municipio.getNome()+"-"+municipio.getUnidadeFederativa().getSigla() ;
+        return " " + municipio.getNome()+"-"+municipio.getUnidadeFederativa().getSigla() ;
     }
 
 }

@@ -23,9 +23,9 @@
 
 
     </composite:interface>
-    <composite:implementation id="compConsulta">
-        <h:panelGroup id="selOne" layout="block" class="Container#{cc.attrs.inp_class_tamanho} Responsive">
-            <div class="ContainerIndent">
+   <composite:implementation id="compConsulta">
+        <div id="selOne"  class="Container#{cc.attrs.inp_class_tamanho} Responsive">
+            <h:panelGroup layout="block" class="ContainerIndent">
                 <p:outputLabel value="#{cc.attrs.lab_valor}" for="input" />
                 <div>
                     <c:if test="#{cc.attrs.sel_converter == 'none'}">
@@ -44,8 +44,8 @@
                         </p:selectOneMenu>
                     </c:if>
                 </div>
-            </div>
-        </h:panelGroup>
+            </h:panelGroup>
+        </div>
     </composite:implementation>
 </ui:composition>
 

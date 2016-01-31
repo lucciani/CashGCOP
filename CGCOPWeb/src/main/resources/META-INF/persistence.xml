@@ -20,6 +20,9 @@
     <class>br.com.cgcop.administrativo.modelo.Colaborador</class>
     <class>br.com.cgcop.solicitacao.modelo.FundoFixo</class>
     <class>br.com.cgcop.solicitacao.modelo.Outras</class>
+    <class>br.com.cgcop.solicitacao.modelo.Viagem</class>
+    <class>br.com.cgcop.solicitacao.modelo.Passageiro</class>
+    <class>br.com.cgcop.solicitacao.modelo.Passagem</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <!--<property name="hibernate.show_sql" value="true"/>-->
