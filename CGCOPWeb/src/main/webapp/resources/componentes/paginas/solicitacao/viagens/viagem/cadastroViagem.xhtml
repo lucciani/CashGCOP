@@ -16,7 +16,7 @@
 
     </composite:interface>
     <composite:implementation  >
-        <panels:panel titulo="#{label.viagem}" id="pnlDadPes" class="fieldDad">
+        <panels:panel titulo="#{label.dados} #{label.da} #{label.viagem}" id="pnlDadPes" class="fieldDad">
             <h:panelGroup layout="block"  class="Container100 Responsive" >
                 <inputs:input_label_data id="input_dtl"  inp_class_tamanho="20" inp_valor="#{viagemMB.viagem.dataDaSolicitacao}" lab_valor="#{label.data} #{label.da} #{label.solicitacao}"/>
                 <inputs:input_label inp_valor="#{viagemMB.viagem.referencia}" lab_valor="#{label.referencia_viagem}" inp_require="true" inp_class_tamanho="50" />
@@ -34,6 +34,36 @@
             </h:panelGroup>
 
         </panels:panel>
+        <p:dataTable value="#{viagemMB.viagem.colaboradores}" id="tabela" paginatorAlwaysVisible="false"  paginator="true" var="v" rows="10"
+                     rowStyleClass="#{(empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row') }"
+                     rowIndexVar="rowIx" emptyMessage="#{mensagens['consulta.vazia']}"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                     rowsPerPageTemplate="5,10,15"  reflow="true">
+
+            <p:column width="5%">
+                <p:rowToggler  />
+            </p:column>
+            <p:column headerText="#{label.id}" width="10%">
+                <componentes:outputText value="#{v.id}"/>
+            </p:column>
+            <p:column headerText="#{label.referencia_viagem}">
+                <componentes:outputText value="#{v.referencia}"/>
+            </p:column>
+            <p:rowExpansion>
+                <p:panelGrid  columns="2" columnClasses="label,value" style="width:100%">
+                    <componentes:outputText value="#{label.data}" />
+                    <componentes:outputText tipo="d" value="#{v.dataDaSolicitacao}" />
+                    <componentes:outputText value="#{label.centro_custo}" />
+                    <componentes:outputText tipo="d" value="#{v.centroDeCusto.id}" />
+                    <componentes:outputText value="#{label.empresa}" />
+                    <componentes:outputText tipo="d" value="#{v.empresa.nome}" />
+                </p:panelGrid>
+            </p:rowExpansion>
+            <p:column headerText="#{label.acao}" width="10%">
+                <composite:insertChildren/>
+                <btn:commandButton_editar rendered="#{cc.attrs.render_edit}" acao_butao="#{viagemMB.escreverRegistroNasessaoNavegarParaEditar(v,solicitacao.viagem_cadastro,'viagem')}" componente_to_update="@(form)" renderizar_btn="true" />
+            </p:column>
+        </p:dataTable>
 
     </composite:implementation>
 </ui:composition>

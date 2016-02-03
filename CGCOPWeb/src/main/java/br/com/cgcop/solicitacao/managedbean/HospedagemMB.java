@@ -10,9 +10,9 @@ import br.com.cgcop.administrativo.controller.UnidadeFederativaController;
 import br.com.cgcop.administrativo.modelo.Endereco;
 import br.com.cgcop.administrativo.modelo.Municipio;
 import br.com.cgcop.administrativo.modelo.UnidadeFederativa;
-import br.com.cgcop.solicitacao.Controller.PassagemController;
+import br.com.cgcop.solicitacao.Controller.HospedagemController;
 import br.com.cgcop.solicitacao.Controller.ViagemController;
-import br.com.cgcop.solicitacao.modelo.Passagem;
+import br.com.cgcop.solicitacao.modelo.Hospedagem;
 import br.com.cgcop.solicitacao.modelo.Viagem;
 import br.com.cgcop.utilitario.BeanGenerico;
 import br.com.cgcop.utilitario.mensagens.MensagensUtil;
@@ -35,12 +35,12 @@ import javax.inject.Named;
  */
 @Named
 @ViewScoped
-public class PassagemMB extends BeanGenerico implements Serializable {
+public class HospedagemMB extends BeanGenerico implements Serializable {
 
     @Inject
-    private PassagemController passagemController;
-    private Passagem passagem;
-    private List<Passagem> listaPassagem;
+    private HospedagemController hospedagemController;
+    private Hospedagem hospedagem;
+    private List<Hospedagem> listaHospedagem;
     @Inject
     private MunicipioController municipioController;
     private List<Municipio> listaDeMunicpios;
@@ -57,25 +57,22 @@ public class PassagemMB extends BeanGenerico implements Serializable {
     public void init() {
         try {
             criarListaDeCamposDaConsulta();
-            passagem = (Passagem) lerRegistroDaSessao("passagem");
-            if (passagem == null) {
-                passagem = new Passagem();
+            hospedagem = (Hospedagem) lerRegistroDaSessao("hospedagem");
+            if (hospedagem == null) {
+                hospedagem = new Hospedagem();
+                data = new Date();
+                dataFinal = new Date();
                 unidadeFederativa = new UnidadeFederativa();
-                passagem.setOrigem(new Endereco());
-                passagem.setDestino(new Endereco());
-                passagem.setDataPartida(new Date());
-                passagem.setDataRetorno(new Date());
+                hospedagem.setCidade(new Endereco());
             } else {
-                unidadeFederativa = passagem.getDestino().getUnidadeFederativa();
-                unidadeFederativa = passagem.getOrigem().getUnidadeFederativa();
+                unidadeFederativa = hospedagem.getCidade().getUnidadeFederativa();
                 consultarMuncipioPorUf();
             }
-            listaPassagem = new ArrayList<>();
+            listaHospedagem = new ArrayList<>();
             listaDeUnidadeFederativas = unidadeFederativaController.consultarTodosOrdenadorPor("sigla");
         } catch (Exception ex) {
-            Logger.getLogger(PassagemMB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HospedagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }
 
     public void consultarMuncipioPorUf() {
@@ -84,37 +81,44 @@ public class PassagemMB extends BeanGenerico implements Serializable {
 
     public void salvar() {
         try {
-            passagemController.salvar(passagem);
-            MensagensUtil.enviarMessageParamentroInfo(MensagensUtil.REGISTRO_SUCESSO, passagem.getClass());
+            hospedagemController.salvar(hospedagem);
+            MensagensUtil.enviarMessageParamentroInfo(MensagensUtil.REGISTRO_SUCESSO, hospedagem.getClass());
             init();
         } catch (Exception ex) {
             MensagensUtil.enviarMessageErro(MensagensUtil.REGISTRO_FALHA);
-            Logger.getLogger(PassagemMB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HospedagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
-    public void consultarPassagem() {
+    public void consultarHospedagem() {
         try {
-            listaPassagem = passagemController.consultarPorPeriodo(data, dataFinal);
+            listaHospedagem = hospedagemController.consultarPorPeriodo(data, dataFinal);
         } catch (Exception ex) {
-            Logger.getLogger(PassagemMB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(HospedagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
     protected Map<String, Object> getCampo() {
         Map<String, Object> map = new HashMap<>();
-        map.put("Data", "dataPartida");
+        map.put("Data", "dataEntrada");
         return map;
     }
-
-    public Passagem getPassagem() {
-        return passagem;
+    
+    public Hospedagem getHospedagem() {
+        return hospedagem;
     }
 
-    public void setPassagem(Passagem passagem) {
-        this.passagem = passagem;
+    public void setHospedagem(Hospedagem hospedagem) {
+        this.hospedagem = hospedagem;
+    }
+
+    public UnidadeFederativa getUnidadeFederativa() {
+        return unidadeFederativa;
+    }
+
+    public void setUnidadeFederativa(UnidadeFederativa unidadeFederativa) {
+        this.unidadeFederativa = unidadeFederativa;
     }
 
     public Date getData() {
@@ -133,12 +137,8 @@ public class PassagemMB extends BeanGenerico implements Serializable {
         this.dataFinal = dataFinal;
     }
 
-    public List<Passagem> getListaPassagem() {
-        return listaPassagem;
-    }
-
-    public void setListaPassagem(List<Passagem> listaPassagem) {
-        this.listaPassagem = listaPassagem;
+    public List<Hospedagem> getListaHospedagem() {
+        return listaHospedagem;
     }
 
     public List<Municipio> getListaDeMunicpios() {
@@ -149,16 +149,4 @@ public class PassagemMB extends BeanGenerico implements Serializable {
         return listaDeUnidadeFederativas;
     }
 
-    public void setListaDeUnidadeFederativas(List<UnidadeFederativa> listaDeUnidadeFederativas) {
-        this.listaDeUnidadeFederativas = listaDeUnidadeFederativas;
-    }
-
-    public UnidadeFederativa getUnidadeFederativa() {
-        return unidadeFederativa;
-    }
-
-    public void setUnidadeFederativa(UnidadeFederativa unidadeFederativa) {
-        this.unidadeFederativa = unidadeFederativa;
-    }
-    
 }

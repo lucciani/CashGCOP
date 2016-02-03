@@ -17,7 +17,7 @@
         <composite:attribute id="form" name="form" default=":frm_cad" shortDescription="Form que esta inserido o componentes" />
     </composite:interface>
     <composite:implementation  >
-        <panels:panel titulo="#{label.passagem}" id="pnlDadPes" class="fieldDad">
+        <panels:panel titulo="#{label.dados} #{label.da} #{label.passagem}" id="pnlDadPes" class="fieldDad">
 
             <h:panelGroup layout="block"  class="Container100 Responsive" >
                 <inputs:input_label_data id="input_dtp"  inp_class_tamanho="20" inp_valor="#{passagemMB.passagem.dataPartida}" lab_valor="#{label.data_partida}"/>
@@ -27,30 +27,30 @@
             </h:panelGroup>
 
             <panels:panel  titulo="#{label.endereco} #{label.de} #{label.origem}" id="pnlEnderecoOri">
-                <h:panelGroup layout="block" class="Container100 Responsive" id="grdEnd">
+                <h:panelGroup layout="block" class="Container100 Responsive" id="grdEndOri">
                     <inputs:selectOneLabel  inp_valor="#{passagemMB.unidadeFederativa}" id="sel_ufo" lab_valor="#{label.estado}"  ajax_render="true"
-                                            sel_converter="indexConverter" inp_class_tamanho="20" sel_update="#{cc.attrs.form}:pnlPadrao:compCadastro:pnlEnderecoOri:sel_muno:input" 
+                                            sel_converter="indexConverter" inp_class_tamanho="20" sel_update="#{cc.attrs.form}:pnlPadrao:compCadastro:pnlEnderecoOri:sel_muno:selOne:input" 
                                             ajax_listener="#{passagemMB.consultarMuncipioPorUf()}" >
                         <f:selectItem noSelectionOption="true" itemLabel="-----Selecione-----" value="#{null}" itemValue="#{null}" />
-                        <f:selectItems value="#{passagemMB.listaDeUnidadeFederativas}" var="ufo" itemLabel="#{ufo.sigla.toUpperCase()}" itemValue="#{ufo}"/>
+                        <f:selectItems value="#{passagemMB.listaDeUnidadeFederativas}" var="uf" itemLabel="#{uf.sigla.toUpperCase()}" itemValue="#{uf}"/>
                     </inputs:selectOneLabel>
                     <inputs:selectOneLabel  inp_valor="#{passagemMB.passagem.origem.municipio}" id="sel_muno" lab_valor="#{label.municipio}" 
                                             sel_converter="indexConverter" inp_class_tamanho="20"  >
-                        <f:selectItems value="#{passagemMB.listaDeMunicpios}" var="muo" itemLabel="#{muo.nome}" itemValue="#{muo}"/>
+                        <f:selectItems value="#{passagemMB.listaDeMunicpios}" var="mu" itemLabel="#{mu.nome}" itemValue="#{mu}"/>
                     </inputs:selectOneLabel>
                 </h:panelGroup>
             </panels:panel>
             <panels:panel  titulo="#{label.endereco} #{label.de} #{label.destino}" id="pnlEnderecoDes">
-                <h:panelGroup layout="block" class="Container100 Responsive" id="grdEnd">
+                <h:panelGroup layout="block" class="Container100 Responsive" id="grdEndDes">
                     <inputs:selectOneLabel  inp_valor="#{passagemMB.unidadeFederativa}" id="sel_ufd" lab_valor="#{label.estado}"  ajax_render="true"
-                                            sel_converter="indexConverter" inp_class_tamanho="20" sel_update="#{cc.attrs.form}:pnlPadrao:compCadastro:pnlEnderecoDes:sel_mund:input" 
+                                            sel_converter="indexConverter" inp_class_tamanho="20" sel_update="#{cc.attrs.form}:pnlPadrao:compCadastro:pnlEnderecoDes:sel_mund:selOne:input" 
                                             ajax_listener="#{passagemMB.consultarMuncipioPorUf()}" >
                         <f:selectItem noSelectionOption="true" itemLabel="-----Selecione-----" value="#{null}" itemValue="#{null}" />
-                        <f:selectItems value="#{passagemMB.listaDeUnidadeFederativas}" var="ufd" itemLabel="#{ufd.sigla.toUpperCase()}" itemValue="#{ufd}"/>
+                        <f:selectItems value="#{passagemMB.listaDeUnidadeFederativas}" var="uf" itemLabel="#{uf.sigla.toUpperCase()}" itemValue="#{uf}"/>
                     </inputs:selectOneLabel>
                     <inputs:selectOneLabel  inp_valor="#{passagemMB.passagem.destino.municipio}" id="sel_mund" lab_valor="#{label.municipio}" 
                                             sel_converter="indexConverter" inp_class_tamanho="20"  >
-                        <f:selectItems value="#{passagemMB.listaDeMunicpios}" var="mud" itemLabel="#{mud.nome}" itemValue="#{mud}"/>
+                        <f:selectItems value="#{passagemMB.listaDeMunicpios}" var="mu" itemLabel="#{mu.nome}" itemValue="#{mu}"/>
                     </inputs:selectOneLabel>
                 </h:panelGroup>
             </panels:panel>

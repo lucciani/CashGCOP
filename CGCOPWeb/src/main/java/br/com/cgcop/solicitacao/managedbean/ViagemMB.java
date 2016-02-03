@@ -12,6 +12,7 @@ import br.com.cgcop.administrativo.modelo.CentroDeCusto;
 import br.com.cgcop.administrativo.modelo.Colaborador;
 import br.com.cgcop.administrativo.modelo.Empresa;
 import br.com.cgcop.solicitacao.Controller.ViagemController;
+import br.com.cgcop.solicitacao.modelo.Passageiro;
 import br.com.cgcop.solicitacao.modelo.Viagem;
 import br.com.cgcop.utilitario.BeanGenerico;
 import br.com.cgcop.utilitario.mensagens.MensagensUtil;
@@ -43,18 +44,8 @@ public class ViagemMB extends BeanGenerico implements Serializable {
     private ViagemController viagemController;
     private Viagem viagem;
     private List<Viagem> listaViagem;
-    @Inject
-    private EmpresaController empresaController;
-    private Empresa empresa;
     private List<Empresa> listaEmpresa;
-    @Inject
-    private CentroDeCustoController centroDeCustoController;
-    private CentroDeCusto centroDeCusto;
     private List<CentroDeCusto> listaCentroDeCusto;
-    @Inject
-    private ColaboradorController colaboradorController;
-    private Colaborador colaborador;
-    private List<Colaborador> listaColaborador;
 
     private Date dataDaSolicitacao;
     private Date dataFinal;
@@ -73,8 +64,6 @@ public class ViagemMB extends BeanGenerico implements Serializable {
                 viagem.setCentroDeCusto(new CentroDeCusto());
             }
             listaViagem = new ArrayList<>();
-            listaCentroDeCusto = centroDeCustoController.consultarTodosOrdenadorPor("id");
-            listaEmpresa = empresaController.consultarTodosOrdenadorPor("nome");
         } catch (Exception ex) {
             Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -119,30 +108,6 @@ public class ViagemMB extends BeanGenerico implements Serializable {
         this.viagem = viagem;
     }
 
-    public Empresa getEmpresa() {
-        return empresa;
-    }
-
-    public void setEmpresa(Empresa empresa) {
-        this.empresa = empresa;
-    }
-
-    public CentroDeCusto getCentroDeCusto() {
-        return centroDeCusto;
-    }
-
-    public void setCentroDeCusto(CentroDeCusto centroDeCusto) {
-        this.centroDeCusto = centroDeCusto;
-    }
-
-    public Colaborador getColaborador() {
-        return colaborador;
-    }
-
-    public void setColaborador(Colaborador colaborador) {
-        this.colaborador = colaborador;
-    }
-
     public Date getDataDaSolicitacao() {
         return dataDaSolicitacao;
     }
@@ -171,9 +136,4 @@ public class ViagemMB extends BeanGenerico implements Serializable {
         return listaCentroDeCusto;
     }
 
-    public List<Colaborador> getListaColaborador() {
-        return listaColaborador;
-    }
-
-    
 }

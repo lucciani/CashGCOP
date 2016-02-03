@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:hos="http://xmlns.jcp.org/jsf/composite/componentes/paginas/solicitacao/viagens/hospedagem"
+                xmlns:col="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/colaborador"
+                xmlns:via="http://xmlns.jcp.org/jsf/composite/componentes/paginas/solicitacao/viagens/viagem"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
+
+    <ui:define name="corpo">
+        <h:form id="frm_cad" prependId="false" >
+            <componentes:panelPadrao id="pnlPadrao" class="Responsive" acao_cancelar="#{hospedagemMB.init()}" 
+                                     acao_salvar="#{hospedagemMB.salvar()}"  
+
+                                     btn_limpar="true" cabecalho="#{label.cadastro} #{label.da} #{label.hospedagem}" btn_imprimir="false" btn_ativar="false"
+                                     btn_dialog_rel="false" btn_cancelar="false" acao_ativar="#{hospedagemMB.init()}" >
+                <hos:cadastroHospedagem id="compCadastro"/>
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    <ui:define name="dialog">
+        <p:dialog showEffect="fade" closable="true" header="#{label.viagem}" id="dialogCosVia" modal="true"  widgetVar="dialogCosVia">
+            <h:form id="frmDialogCosVia">
+                <via:consultaViagem  render_ativ="false" render_edit="false" id="compConsVia" componente_to_update="@form">
+                    <p:commandButton actionListener="#{hospedagemMB.setarViagem(v)}" onclick="PF('dialogCosVia').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:pnlDadPes:inp_viagem:input"  icon="fa fa-check-square"/>
+                </via:consultaViagem> 
+            </h:form>
+        </p:dialog>
+    </ui:define>
+
+</ui:composition>
+

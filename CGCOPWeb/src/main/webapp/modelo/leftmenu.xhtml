@@ -63,17 +63,29 @@
                             <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.viagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.viagem_cadastro}"/>
                             <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.viagem_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.viagem_consulta}"/>
                         </p:submenu>
-                        <p:submenu label="#{label.dados} #{label.passageiro}" icon=" icon-users-outline " 
+                        <p:submenu label="#{label.dados} #{label.do} #{label.passageiro}" icon=" icon-users-outline " 
                                    rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_cadastro) 
                                                or utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_consulta) }" >
                             <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.passageiro_cadastro}"/>
                             <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.passageiro_consulta}"/>
                         </p:submenu>
-                        <p:submenu label="#{label.dados} #{label.passagem}" icon=" icon-ticket-1 " 
+                        <p:submenu label="#{label.dados} #{label.da} #{label.passagem}" icon=" icon-ticket-1 " 
                                    rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_cadastro) 
                                                or utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_consulta) }" >
                             <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.passagem_cadastro}"/>
                             <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.passagem_consulta}"/>
+                        </p:submenu>
+                        <p:submenu label="#{label.dados} #{label.da} #{label.hospedagem}" icon=" icon-building-filled " 
+                                   rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.hospedagem_cadastro) 
+                                               or utilitarioNavegacaoMB.permissaoExiste(solicitacao.hospedagem_consulta) }" >
+                            <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.hospedagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.hospedagem_cadastro}"/>
+                            <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.hospedagem_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.hospedagem_consulta}"/>
+                        </p:submenu>
+                        <p:submenu label="#{label.dados} #{label.de} #{label.despesas}" icon=" icon-dollar " 
+                                   rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.despesas_cadastro) 
+                                               or utilitarioNavegacaoMB.permissaoExiste(solicitacao.despesas_consulta) }" >
+                            <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.despesas_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.despesas_cadastro}"/>
+                            <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.despesas_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.despesas_consulta}"/>
                         </p:submenu>
                     </p:submenu>
                 </p:submenu>

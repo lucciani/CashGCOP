@@ -5,9 +5,8 @@
  */
 package br.com.cgcop.solicitacao.modelo;
 
-import br.com.cgcop.administrativo.modelo.Endereco;
 import java.io.Serializable;
-import java.util.Date;
+import java.math.BigDecimal;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +16,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
@@ -28,26 +26,24 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * @author Gian
  */
 @Entity
-@Table(name = "passagem", schema = "solicitacao")
+@Table(name = "item_despesas", schema = "solicitacao")
 @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-public class Passagem implements Serializable{
-    
+public class ItemDespesas implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "psg_id", nullable = false)
+    @Column(name = "itd_id", nullable = false)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "psg_origem_end_id", referencedColumnName = "end_id")
-    private Endereco origem;
-    @ManyToOne
-    @JoinColumn(name = "psg_destino_end_id", referencedColumnName = "end_id")
-    private Endereco destino;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "via_data_partida")
-    private Date dataPartida;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "via_data_retorno")
-    private Date dataRetorno;
+    @Column(name = "itd_descricao", length = 1024)
+    private String descricao;
+    @NotNull
+    @Min(value = 0)
+    @Column(name = "itd_quantidade", nullable = false)
+    private BigDecimal quantidade;
+    @NotNull
+    @Min(value = 0)
+    @Column(name = "itd_valor_diario", nullable = false)
+    private BigDecimal valorDiario;
 
     public Long getId() {
         return id;
@@ -57,42 +53,38 @@ public class Passagem implements Serializable{
         this.id = id;
     }
 
-    public Endereco getOrigem() {
-        return origem;
+    public String getDescricao() {
+        return descricao;
     }
 
-    public void setOrigem(Endereco origem) {
-        this.origem = origem;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public Endereco getDestino() {
-        return destino;
+    public BigDecimal getQuantidade() {
+        return quantidade;
     }
 
-    public void setDestino(Endereco destino) {
-        this.destino = destino;
+    public void setQuantidade(BigDecimal quantidade) {
+        this.quantidade = quantidade;
     }
 
-    public Date getDataPartida() {
-        return dataPartida;
+    public BigDecimal getValorDiario() {
+        return valorDiario;
     }
 
-    public void setDataPartida(Date dataPartida) {
-        this.dataPartida = dataPartida;
+    public void setValorDiario(BigDecimal valorDiario) {
+        this.valorDiario = valorDiario;
     }
 
-    public Date getDataRetorno() {
-        return dataRetorno;
-    }
-
-    public void setDataRetorno(Date dataRetorno) {
-        this.dataRetorno = dataRetorno;
+    public BigDecimal getTotalDiario() {
+        return quantidade.multiply(valorDiario);
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 29 * hash + Objects.hashCode(this.id);
+        int hash = 3;
+        hash = 53 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -107,11 +99,11 @@ public class Passagem implements Serializable{
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Passagem other = (Passagem) obj;
+        final ItemDespesas other = (ItemDespesas) obj;
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
         return true;
     }
-    
+
 }
