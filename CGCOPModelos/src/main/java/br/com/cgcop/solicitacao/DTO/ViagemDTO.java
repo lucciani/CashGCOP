@@ -12,6 +12,8 @@ import br.com.cgcop.solicitacao.modelo.ItemDespesas;
 import br.com.cgcop.solicitacao.modelo.Passageiro;
 import br.com.cgcop.solicitacao.modelo.Passagem;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,8 +21,8 @@ import java.util.List;
  *
  * @author Gian
  */
-public class ViagemDTO implements Serializable{
-    
+public class ViagemDTO implements Serializable {
+
     private CentroDeCusto centroDeCusto;
     private Empresa empresa;
     private List<Passageiro> passageiros;
@@ -35,9 +37,6 @@ public class ViagemDTO implements Serializable{
         itensDespesas = new ArrayList<>();
     }
 
-    
-    
-    
     public CentroDeCusto getCentroDeCusto() {
         return centroDeCusto;
     }
@@ -85,10 +84,13 @@ public class ViagemDTO implements Serializable{
     public void setItensDespesas(List<ItemDespesas> itensDespesas) {
         this.itensDespesas = itensDespesas;
     }
-    
-    
-    
-    
-    
-    
+
+    public BigDecimal getTotal() {
+        BigDecimal total = new BigDecimal(BigInteger.ZERO);
+        for (ItemDespesas dsp : itensDespesas) {
+            total = total.add(dsp.getTotalDiario());
+        }
+        return total;
+    }
+
 }

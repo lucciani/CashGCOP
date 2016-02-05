@@ -145,17 +145,9 @@ public class Viagem implements Serializable {
     }
 
     public void addPassageiros(Passageiro pas) {
-        if (this.passageiros == null) {
-            passageiros = new ArrayList<>();
+        if (!passageiros.contains(pas)) {
+            passageiros.add(pas);
         }
-        passageiros.add(pas);
-    }
-
-    public void addPassageiros(List<Passageiro> pas) {
-        if (this.passageiros == null) {
-            passageiros = new ArrayList<>();
-        }
-        passageiros.addAll(pas);
     }
 
     public void removerPassageiro(Passageiro pas) {
@@ -165,17 +157,9 @@ public class Viagem implements Serializable {
     }
 
     public void addPassagem(Passagem psg) {
-        if (this.passagens == null) {
-            passagens = new ArrayList<>();
+        if (!passagens.contains(psg)) {
+            passagens.add(psg);
         }
-        passagens.add(psg);
-    }
-
-    public void addPassagens(List<Passagem> psg) {
-        if (this.passagens == null) {
-            passagens = new ArrayList<>();
-        }
-        passagens.addAll(psg);
     }
 
     public void removerPassagem(Passagem psg) {
@@ -185,17 +169,9 @@ public class Viagem implements Serializable {
     }
 
     public void addHospedagem(Hospedagem hos) {
-        if (this.hospedagens == null) {
-            hospedagens = new ArrayList<>();
+        if (!hospedagens.contains(hos)) {
+            hospedagens.add(hos);
         }
-        hospedagens.add(hos);
-    }
-
-    public void addHospedagens(List<Hospedagem> hos) {
-        if (this.hospedagens == null) {
-            hospedagens = new ArrayList<>();
-        }
-        hospedagens.addAll(hos);
     }
 
     public void removerHospedagem(Hospedagem hos) {
@@ -205,17 +181,9 @@ public class Viagem implements Serializable {
     }
 
     public void addItemDespesa(ItemDespesas des) {
-        if (this.itensDespesas == null) {
-            itensDespesas = new ArrayList<>();
+        if (!itensDespesas.contains(des)) {
+           itensDespesas.add(des);
         }
-        itensDespesas.add(des);
-    }
-
-    public void addItensDespesas(List<ItemDespesas> des) {
-        if (this.itensDespesas == null) {
-            itensDespesas = new ArrayList<>();
-        }
-        itensDespesas.addAll(des);
     }
 
     public void removerItemDespesa(ItemDespesas des) {

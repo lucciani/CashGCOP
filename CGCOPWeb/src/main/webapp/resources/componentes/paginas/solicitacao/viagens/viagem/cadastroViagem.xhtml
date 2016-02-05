@@ -17,10 +17,6 @@
     </composite:interface>
     <composite:implementation  >
         <panels:panel titulo="#{label.dados} #{label.da} #{label.viagem}" id="pnlDadPes" class="fieldDad">
-            <h:panelGroup layout="block"  class="Container100 Responsive" >
-                <inputs:input_label_data id="input_dtl"  inp_class_tamanho="20" inp_valor="#{viagemMB.viagem.dataDaSolicitacao}" lab_valor="#{label.data} #{label.da} #{label.solicitacao}"/>
-                <inputs:input_label inp_valor="#{viagemMB.viagem.referencia}" lab_valor="#{label.referencia_viagem}" inp_require="true" inp_class_tamanho="50" />
-            </h:panelGroup>
 
             <h:panelGroup layout="block"  class="Container100 Responsive" >
                 <inputs:selectOneLabel  inp_valor="#{viagemMB.viagem.empresa}" id="sel_em" lab_valor="#{label.empresa}"  ajax_render="true"
@@ -34,7 +30,16 @@
             </h:panelGroup>
 
         </panels:panel>
-        <p:dataTable value="#{viagemMB.viagem.colaboradores}" id="tabela" paginatorAlwaysVisible="false"  paginator="true" var="v" rows="10"
+        <panels:panel titulo="#{label.dados} #{label.do} #{label.passageiro}" id="pnlDadPas" class="fieldDad">
+
+            <h:panelGroup layout="block"  class="Container100 Responsive" >
+
+                <inputs:input_label_btn_click inp_valor="#{viagemMB.viagem.passageiros}" id="inp_passageiros" lab_valor="#{label.passageiro}" inp_readonly="true" inp_require="true" 
+                                              btn_immediate="true" btn_onclick="PF('dialogCosPas').show()" btn_process="@this" inp_class_tamanho="30" />
+            </h:panelGroup>
+
+        </panels:panel>
+        <p:dataTable value="#{viagemMB.viagem.passageiros}" id="tabela" paginatorAlwaysVisible="false"  paginator="true" var="v" rows="10"
                      rowStyleClass="#{(empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row') }"
                      rowIndexVar="rowIx" emptyMessage="#{mensagens['consulta.vazia']}"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -46,19 +51,9 @@
             <p:column headerText="#{label.id}" width="10%">
                 <componentes:outputText value="#{v.id}"/>
             </p:column>
-            <p:column headerText="#{label.referencia_viagem}">
-                <componentes:outputText value="#{v.referencia}"/>
+            <p:column headerText="#{label.colaborador}">
+                <componentes:outputText value="#{v.colaborador}"/>
             </p:column>
-            <p:rowExpansion>
-                <p:panelGrid  columns="2" columnClasses="label,value" style="width:100%">
-                    <componentes:outputText value="#{label.data}" />
-                    <componentes:outputText tipo="d" value="#{v.dataDaSolicitacao}" />
-                    <componentes:outputText value="#{label.centro_custo}" />
-                    <componentes:outputText tipo="d" value="#{v.centroDeCusto.id}" />
-                    <componentes:outputText value="#{label.empresa}" />
-                    <componentes:outputText tipo="d" value="#{v.empresa.nome}" />
-                </p:panelGrid>
-            </p:rowExpansion>
             <p:column headerText="#{label.acao}" width="10%">
                 <composite:insertChildren/>
                 <btn:commandButton_editar rendered="#{cc.attrs.render_edit}" acao_butao="#{viagemMB.escreverRegistroNasessaoNavegarParaEditar(v,solicitacao.viagem_cadastro,'viagem')}" componente_to_update="@(form)" renderizar_btn="true" />
