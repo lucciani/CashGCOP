@@ -8,14 +8,19 @@ package br.com.cgcop.solicitacao.managedbean;
 import br.com.cgcop.administrativo.controller.CentroDeCustoController;
 import br.com.cgcop.administrativo.controller.ColaboradorController;
 import br.com.cgcop.administrativo.controller.EmpresaController;
+import br.com.cgcop.administrativo.controller.MunicipioController;
 import br.com.cgcop.administrativo.controller.UnidadeFederativaController;
 import br.com.cgcop.administrativo.modelo.CentroDeCusto;
 import br.com.cgcop.administrativo.modelo.Colaborador;
 import br.com.cgcop.administrativo.modelo.Empresa;
 import br.com.cgcop.administrativo.modelo.Municipio;
 import br.com.cgcop.administrativo.modelo.UnidadeFederativa;
+import br.com.cgcop.solicitacao.Controller.HospedagemController;
+import br.com.cgcop.solicitacao.Controller.PassagemController;
 import br.com.cgcop.solicitacao.Controller.ViagemController;
+import br.com.cgcop.solicitacao.modelo.Hospedagem;
 import br.com.cgcop.solicitacao.modelo.Passageiro;
+import br.com.cgcop.solicitacao.modelo.Passagem;
 import br.com.cgcop.solicitacao.modelo.Viagem;
 import br.com.cgcop.utilitario.BeanGenerico;
 import br.com.cgcop.utilitario.mensagens.MensagensUtil;
@@ -56,9 +61,19 @@ public class ViagemMB extends BeanGenerico implements Serializable {
     private Colaborador colaborador;
     private List<Colaborador> passageiros;
     @Inject
+    private PassagemController passagemController;
+    private Passagem passagem;
+    private List<Passagem> listaDePassagens;
+    @Inject
+    private HospedagemController hospedagemController;
+    private Hospedagem hospedagem;
+    private List<Hospedagem> listaDeHospedagens;
+    @Inject
     private UnidadeFederativaController unidadeFederativaController;
     private UnidadeFederativa unidadeFederativa;
     private List<UnidadeFederativa> listaDeUnidadeFederativas;
+    @Inject
+    private MunicipioController municipioController;
     private List<Municipio> listaDeMunicpios;
 
     private List<CentroDeCusto> listaCentroDeCusto;
@@ -81,7 +96,7 @@ public class ViagemMB extends BeanGenerico implements Serializable {
                 viagem.setCentroDeCusto(new CentroDeCusto());
                 viagem.setEmpresa(new Empresa());
                 viagem.setPassageiros(new ArrayList<>());
-            }else{
+                viagem.setPassagens(new ArrayList<>());
             }
             listaViagem = new ArrayList<>();
             listaEmpresa = empresaController.consultarTodosOrdenadorPor("nome");
@@ -115,6 +130,10 @@ public class ViagemMB extends BeanGenerico implements Serializable {
         } catch (Exception ex) {
             Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public void consultarMuncipioPorUf() {
+        listaDeMunicpios = municipioController.consultarMunicipioPor(unidadeFederativa);
     }
 
     @Override
@@ -218,6 +237,38 @@ public class ViagemMB extends BeanGenerico implements Serializable {
 
     public List<Colaborador> getPassageiros() {
         return passageiros;
+    }
+
+    public Passagem getPassagem() {
+        return passagem;
+    }
+
+    public void setPassagem(Passagem passagem) {
+        this.passagem = passagem;
+    }
+
+    public List<Passagem> getListaDePassagens() {
+        return listaDePassagens;
+    }
+
+    public List<UnidadeFederativa> getListaDeUnidadeFederativas() {
+        return listaDeUnidadeFederativas;
+    }
+
+    public List<Municipio> getListaDeMunicpios() {
+        return listaDeMunicpios;
+    }
+
+    public Hospedagem getHospedagem() {
+        return hospedagem;
+    }
+
+    public void setHospedagem(Hospedagem hospedagem) {
+        this.hospedagem = hospedagem;
+    }
+
+    public List<Hospedagem> getListaDeHospedagens() {
+        return listaDeHospedagens;
     }
 
 }
