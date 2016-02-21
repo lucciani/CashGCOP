@@ -8,9 +8,12 @@ package br.com.cgcop.solicitacao.managedbean;
 import br.com.cgcop.administrativo.controller.CentroDeCustoController;
 import br.com.cgcop.administrativo.controller.ColaboradorController;
 import br.com.cgcop.administrativo.controller.EmpresaController;
+import br.com.cgcop.administrativo.controller.UnidadeFederativaController;
 import br.com.cgcop.administrativo.modelo.CentroDeCusto;
 import br.com.cgcop.administrativo.modelo.Colaborador;
 import br.com.cgcop.administrativo.modelo.Empresa;
+import br.com.cgcop.administrativo.modelo.Municipio;
+import br.com.cgcop.administrativo.modelo.UnidadeFederativa;
 import br.com.cgcop.solicitacao.Controller.ViagemController;
 import br.com.cgcop.solicitacao.modelo.Passageiro;
 import br.com.cgcop.solicitacao.modelo.Viagem;
@@ -44,7 +47,20 @@ public class ViagemMB extends BeanGenerico implements Serializable {
     private ViagemController viagemController;
     private Viagem viagem;
     private List<Viagem> listaViagem;
+    @Inject
+    private EmpresaController empresaController;
+    private Empresa empresa;
     private List<Empresa> listaEmpresa;
+    @Inject
+    private ColaboradorController colaboradorController;
+    private Colaborador colaborador;
+    private List<Colaborador> passageiros;
+    @Inject
+    private UnidadeFederativaController unidadeFederativaController;
+    private UnidadeFederativa unidadeFederativa;
+    private List<UnidadeFederativa> listaDeUnidadeFederativas;
+    private List<Municipio> listaDeMunicpios;
+
     private List<CentroDeCusto> listaCentroDeCusto;
 
     private Date dataDaSolicitacao;
@@ -60,10 +76,15 @@ public class ViagemMB extends BeanGenerico implements Serializable {
                 viagem = new Viagem();
                 dataDaSolicitacao = new Date();
                 dataFinal = new Date();
+                unidadeFederativa = new UnidadeFederativa();
                 viagem.setEmpresa(new Empresa());
                 viagem.setCentroDeCusto(new CentroDeCusto());
+                viagem.setEmpresa(new Empresa());
+                viagem.setPassageiros(new ArrayList<>());
+            }else{
             }
             listaViagem = new ArrayList<>();
+            listaEmpresa = empresaController.consultarTodosOrdenadorPor("nome");
         } catch (Exception ex) {
             Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -79,11 +100,18 @@ public class ViagemMB extends BeanGenerico implements Serializable {
             Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
     public void consultarViagem() {
         try {
             listaViagem = viagemController.consultarPorPeriodo(dataDaSolicitacao, dataFinal);
+        } catch (Exception ex) {
+            Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void consultarPassageiro() {
+        try {
+            passageiros = colaboradorController.consultarAtivo(getCampoConsuta(), getValorCampoConsuta(), "col_ativo=true");
         } catch (Exception ex) {
             Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -95,11 +123,47 @@ public class ViagemMB extends BeanGenerico implements Serializable {
         map.put("Data", "dataDeSolicitacao");
         return map;
     }
-    
-    public void setarCentroDeCusto(CentroDeCusto c){
+
+    public void setarViagem(Viagem v) {
+        try {
+            viagem = v;
+            passageiros = colaboradorController.consultarTodosOrdenadorPor("nome");
+        } catch (Exception ex) {
+            Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void setarCentroDeCusto(CentroDeCusto c) {
         viagem.setCentroDeCusto(c);
     }
-    
+
+    public void addPassageiro(Colaborador c) {
+        try {
+            viagem.addPassageiros(c);
+            viagemController.atualizar(viagem);
+            MensagensUtil.enviarMessageInfo(MensagensUtil.REGISTRO_SUCESSO);
+        } catch (Exception ex) {
+            MensagensUtil.enviarMessageErro(MensagensUtil.REGISTRO_FALHA);
+            Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void delPassageiro(Colaborador c) {
+        try {
+            viagem.removerPassageiro(c);
+            viagemController.atualizar(viagem);
+            MensagensUtil.enviarMessageInfo(MensagensUtil.REGISTRO_SUCESSO);
+        } catch (Exception ex) {
+            MensagensUtil.enviarMessageErro(MensagensUtil.REGISTRO_FALHA);
+            Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public boolean renderBtnAdd(Colaborador c) {
+        return viagem.getPassageiros().contains(c);
+    }
+
     public Viagem getViagem() {
         return viagem;
     }
@@ -134,6 +198,26 @@ public class ViagemMB extends BeanGenerico implements Serializable {
 
     public List<CentroDeCusto> getListaCentroDeCusto() {
         return listaCentroDeCusto;
+    }
+
+    public Empresa getEmpresa() {
+        return empresa;
+    }
+
+    public void setEmpresa(Empresa empresa) {
+        this.empresa = empresa;
+    }
+
+    public Colaborador getColaborador() {
+        return colaborador;
+    }
+
+    public void setColaborador(Colaborador colaborador) {
+        this.colaborador = colaborador;
+    }
+
+    public List<Colaborador> getPassageiros() {
+        return passageiros;
     }
 
 }

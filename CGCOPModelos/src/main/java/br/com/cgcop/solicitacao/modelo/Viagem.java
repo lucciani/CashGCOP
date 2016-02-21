@@ -63,7 +63,7 @@ public class Viagem implements Serializable {
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @ManyToMany(fetch = FetchType.EAGER)
     @Fetch(FetchMode.SELECT)
-    private List<Passageiro> passageiros;
+    private List<Colaborador> passageiros;
 
     @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
     @ManyToMany(fetch = FetchType.EAGER)
@@ -88,11 +88,11 @@ public class Viagem implements Serializable {
         this.id = id;
     }
 
-    public List<Passageiro> getPassageiros() {
+    public List<Colaborador> getPassageiros() {
         return Collections.unmodifiableList(passageiros);
     }
 
-    public void setPassageiros(List<Passageiro> passageiros) {
+    public void setPassageiros(List<Colaborador> passageiros) {
         this.passageiros = passageiros;
     }
 
@@ -144,13 +144,13 @@ public class Viagem implements Serializable {
         this.itensDespesas = itensDespesas;
     }
 
-    public void addPassageiros(Passageiro pas) {
+    public void addPassageiros(Colaborador pas) {
         if (!passageiros.contains(pas)) {
             passageiros.add(pas);
         }
     }
 
-    public void removerPassageiro(Passageiro pas) {
+    public void removerPassageiro(Colaborador pas) {
         if (passageiros.contains(pas)) {
             passageiros.remove(pas);
         }

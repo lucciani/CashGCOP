@@ -6,7 +6,7 @@
                 xmlns:h="http://java.sun.com/jsf/html"
                 xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes"
                 xmlns:p="http://primefaces.org/ui"
-                xmlns:hos="http://xmlns.jcp.org/jsf/composite/componentes/paginas/solicitacao/viagens/hospedagem">
+                xmlns:viagem="http://xmlns.jcp.org/jsf/composite/componentes/paginas/solicitacao/viagens/dados_viagem">
 
 
 
@@ -15,10 +15,10 @@
             <p:blockUI block="@(form)" trigger=":frm_cons:pnlPadrao:btn_print" widgetVar="blk">
                 <p:graphicImage library="images" name="carregar.gif"/>
             </p:blockUI>
-            <componentes:panelPadrao id="pnlPadrao" cabecalho=" #{label.consulta} #{label.hospedagem}" acao_limpar="#{hospedagemMB.init()}" render_sep_1="false" btn_excluir="false" 
+            <componentes:panelPadrao id="pnlPadrao" cabecalho=" #{label.consulta} #{label.viagem}" acao_limpar="#{viagemMB.init()}" render_sep_1="false" btn_excluir="false" 
                                      btn_cancelar="false" btn_salvar="false" btn_ativar="false" 
                                      dialog_cadastro="dialogCadastro" btn_imprimir="TRUE" btn_dialog_rel="false" btn_salvar_update="false">
-                <hos:consultaHospedagem id="compConsulta"  componente_to_update="@form:pnlPadrao:compConsulta:tabela"  />
+                <viagem:consultaDadosViagem id="compConsulta"  componente_to_update="@form:pnlPadrao:compConsulta:tabela"  />
             </componentes:panelPadrao>
         </h:form>
     </ui:define>
