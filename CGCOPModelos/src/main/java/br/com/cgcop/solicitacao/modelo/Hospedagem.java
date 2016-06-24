@@ -38,17 +38,17 @@ public class Hospedagem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hos_id", nullable = false)
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "hos_cidade_end_id", referencedColumnName = "end_id")
-    private Endereco cidade;
+    @Column(name = "hos_cidade_end_id", length = 1024)
+    private String cidade;
     @Column(name = "hos_local_evento", length = 1024)
     private String localDoEvento;
     @Temporal(TemporalType.DATE)
     @Column(name = "hos_data_entrada")
     private Date dataEntrada;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "hos_data_saida")
-    private Date dataSaida;
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "hos_via_id", referencedColumnName = "via_id", nullable = false)
+    private Viagem viagem;
     @NotNull
     @Min(value = 0)
     @Column(name = "hos_diarias", nullable = false)
@@ -62,14 +62,14 @@ public class Hospedagem implements Serializable {
         this.id = id;
     }
 
-    public Endereco getCidade() {
+    public String getCidade() {
         return cidade;
     }
 
-    public void setCidade(Endereco cidade) {
+    public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-
+    
     public String getLocalDoEvento() {
         return localDoEvento;
     }
@@ -86,14 +86,6 @@ public class Hospedagem implements Serializable {
         this.dataEntrada = dataEntrada;
     }
 
-    public Date getDataSaida() {
-        return dataSaida;
-    }
-
-    public void setDataSaida(Date dataSaida) {
-        this.dataSaida = dataSaida;
-    }
-
     public BigDecimal getDiarias() {
         return diarias;
     }
@@ -102,6 +94,14 @@ public class Hospedagem implements Serializable {
         this.diarias = diarias;
     }
 
+    public Viagem getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(Viagem viagem) {
+        this.viagem = viagem;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 3;

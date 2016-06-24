@@ -39,6 +39,11 @@ public class Passageiro implements Serializable{
     @JoinColumn(name = "pas_col_id", referencedColumnName = "col_id", nullable = false)
     private Colaborador colaborador;
     
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "pas_via_id", referencedColumnName = "via_id", nullable = false)
+    private Viagem viagem;
+    
     public Long getId() {
         return id;
     }
@@ -55,10 +60,18 @@ public class Passageiro implements Serializable{
         this.colaborador = colaborador;
     }
 
+    public Viagem getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(Viagem viagem) {
+        this.viagem = viagem;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 71 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -79,5 +92,7 @@ public class Passageiro implements Serializable{
         }
         return true;
     }
+
+    
     
 }

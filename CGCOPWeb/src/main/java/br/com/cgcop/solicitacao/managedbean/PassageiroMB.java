@@ -42,6 +42,10 @@ public class PassageiroMB extends BeanGenerico implements Serializable{
     private ColaboradorController colaboradorController;
     private Colaborador colaborador;
     private List<Colaborador> listaColaborador;
+    @Inject
+    private ViagemController viagemController;
+    private Viagem viagem;
+    
     
     @PostConstruct
     @Override
@@ -52,6 +56,7 @@ public class PassageiroMB extends BeanGenerico implements Serializable{
             if(passageiro == null){
                 passageiro = new Passageiro();
                 passageiro.setColaborador(new Colaborador());
+                passageiro.setViagem(new Viagem());
             }
             listaPassageiro = new ArrayList<>();
             listaColaborador = colaboradorController.consultarTodosOrdenadorPor("nome");
@@ -92,6 +97,10 @@ public class PassageiroMB extends BeanGenerico implements Serializable{
         passageiro.setColaborador(c);
     }
     
+    public void setarViagem(Viagem v) {
+           passageiro.setViagem(v);
+    }
+    
     public Passageiro getPassageiro() {
         return passageiro;
     }
@@ -116,4 +125,11 @@ public class PassageiroMB extends BeanGenerico implements Serializable{
         return listaColaborador;
     }
 
+    public Viagem getViagem() {
+        return viagem;
+    }
+
+    public void setViagem(Viagem viagem) {
+        this.viagem = viagem;
+    }
 }

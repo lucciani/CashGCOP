@@ -34,12 +34,6 @@ public class HospedagemController extends ControllerGenerico<Hospedagem, Long> i
         setDAO(dao);
     }
 
-    @Override
-    public void salvar(Hospedagem hosp) throws Exception {
-        hosp.setCidade(enderecoController.buscarOuCriarLogradouroPor(hosp.getCidade().getAbreviacaoUnidadeFederativa(), hosp.getCidade().getNomeDaCidade()));
-        dao.atualizar(hosp);
-    }
-
     public List<Hospedagem> consultarPorPeriodo(Date data, Date dataFinal) {
         return dao.consultarPorPeriodo(data, dataFinal);
     }

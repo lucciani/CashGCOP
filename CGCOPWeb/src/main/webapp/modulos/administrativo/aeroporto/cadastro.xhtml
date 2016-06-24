@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                template="/modelo/template.xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:aero="http://xmlns.jcp.org/jsf/composite/componentes/paginas/administrativo/aeroporto"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
+
+    <ui:define name="corpo">
+        <h:form id="frm_cad" prependId="false" >
+            <componentes:panelPadrao id="pnlPadrao" class="Responsive" acao_cancelar="#{aeroportoMB.init()}" 
+                                     acao_salvar="#{aeroportoMB.salvar()}"  
+                                   
+                                     btn_limpar="true" cabecalho="#{label.cadastro} #{label.aeroporto}" btn_imprimir="false" btn_ativar="false"
+                                     btn_dialog_rel="false" btn_cancelar="false" acao_ativar="#{aeroportoMB.init()}" >
+                <aero:cadastroAeroporto id="compCadastro"/>
+            </componentes:panelPadrao>
+        </h:form>
+    </ui:define>
+    <ui:define name="dialog" id="dialogs">
+      
+        
+    </ui:define>
+
+</ui:composition>
+

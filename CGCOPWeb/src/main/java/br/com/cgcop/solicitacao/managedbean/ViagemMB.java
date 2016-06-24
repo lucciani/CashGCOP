@@ -94,9 +94,8 @@ public class ViagemMB extends BeanGenerico implements Serializable {
                 unidadeFederativa = new UnidadeFederativa();
                 viagem.setEmpresa(new Empresa());
                 viagem.setCentroDeCusto(new CentroDeCusto());
-                viagem.setEmpresa(new Empresa());
-                viagem.setPassageiros(new ArrayList<>());
-                viagem.setPassagens(new ArrayList<>());
+//                viagem.setPassageiros(new ArrayList<>());
+//                viagem.setPassagens(new ArrayList<>());
             }
             listaViagem = new ArrayList<>();
             listaEmpresa = empresaController.consultarTodosOrdenadorPor("nome");
@@ -159,7 +158,7 @@ public class ViagemMB extends BeanGenerico implements Serializable {
 
     public void addPassageiro(Colaborador c) {
         try {
-            viagem.addPassageiros(c);
+//            viagem.addPassageiros(c);
             viagemController.atualizar(viagem);
             MensagensUtil.enviarMessageInfo(MensagensUtil.REGISTRO_SUCESSO);
         } catch (Exception ex) {
@@ -170,7 +169,7 @@ public class ViagemMB extends BeanGenerico implements Serializable {
 
     public void delPassageiro(Colaborador c) {
         try {
-            viagem.removerPassageiro(c);
+//            viagem.removerPassageiro(c);
             viagemController.atualizar(viagem);
             MensagensUtil.enviarMessageInfo(MensagensUtil.REGISTRO_SUCESSO);
         } catch (Exception ex) {
@@ -179,9 +178,9 @@ public class ViagemMB extends BeanGenerico implements Serializable {
         }
     }
 
-    public boolean renderBtnAdd(Colaborador c) {
-        return viagem.getPassageiros().contains(c);
-    }
+//    public boolean renderBtnAdd(Colaborador c) {
+//        return viagem.getPassageiros().contains(c);
+//    }
 
     public Viagem getViagem() {
         return viagem;

@@ -44,10 +44,6 @@ public class HospedagemMB extends BeanGenerico implements Serializable {
     @Inject
     private MunicipioController municipioController;
     private List<Municipio> listaDeMunicpios;
-    @Inject
-    private UnidadeFederativaController unidadeFederativaController;
-    private UnidadeFederativa unidadeFederativa;
-    private List<UnidadeFederativa> listaDeUnidadeFederativas;
 
     private Date data;
     private Date dataFinal;
@@ -58,25 +54,14 @@ public class HospedagemMB extends BeanGenerico implements Serializable {
         try {
             criarListaDeCamposDaConsulta();
             hospedagem = (Hospedagem) lerRegistroDaSessao("hospedagem");
-            if (hospedagem == null) {
-                hospedagem = new Hospedagem();
-                data = new Date();
-                dataFinal = new Date();
-                unidadeFederativa = new UnidadeFederativa();
-                hospedagem.setCidade(new Endereco());
-            } else {
-                unidadeFederativa = hospedagem.getCidade().getUnidadeFederativa();
-                consultarMuncipioPorUf();
-            }
+            hospedagem = new Hospedagem();
+            data = new Date();
+            dataFinal = new Date();
+            hospedagem.setViagem(new Viagem());
             listaHospedagem = new ArrayList<>();
-            listaDeUnidadeFederativas = unidadeFederativaController.consultarTodosOrdenadorPor("sigla");
         } catch (Exception ex) {
             Logger.getLogger(HospedagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void consultarMuncipioPorUf() {
-        listaDeMunicpios = municipioController.consultarMunicipioPor(unidadeFederativa);
     }
 
     public void salvar() {
@@ -104,21 +89,17 @@ public class HospedagemMB extends BeanGenerico implements Serializable {
         map.put("Data", "dataEntrada");
         return map;
     }
-    
+
+    public void setarViagem(Viagem v) {
+        hospedagem.setViagem(v);
+    }
+
     public Hospedagem getHospedagem() {
         return hospedagem;
     }
 
     public void setHospedagem(Hospedagem hospedagem) {
         this.hospedagem = hospedagem;
-    }
-
-    public UnidadeFederativa getUnidadeFederativa() {
-        return unidadeFederativa;
-    }
-
-    public void setUnidadeFederativa(UnidadeFederativa unidadeFederativa) {
-        this.unidadeFederativa = unidadeFederativa;
     }
 
     public Date getData() {
@@ -143,10 +124,6 @@ public class HospedagemMB extends BeanGenerico implements Serializable {
 
     public List<Municipio> getListaDeMunicpios() {
         return listaDeMunicpios;
-    }
-
-    public List<UnidadeFederativa> getListaDeUnidadeFederativas() {
-        return listaDeUnidadeFederativas;
     }
 
 }

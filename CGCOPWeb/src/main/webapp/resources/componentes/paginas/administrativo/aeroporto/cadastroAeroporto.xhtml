@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:h="http://java.sun.com/jsf/html"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:composite="http://java.sun.com/jsf/composite"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:panels="http://xmlns.jcp.org/jsf/composite/componentes/panels"
+                xmlns:inputs="http://xmlns.jcp.org/jsf/composite/componentes/inputs"
+                xmlns:btn="http://xmlns.jcp.org/jsf/composite/componentes/botoes"
+                xmlns:componentes="http://xmlns.jcp.org/jsf/composite/componentes">
+
+    <composite:interface id="interCon">
+
+    </composite:interface>
+    <composite:implementation  >
+        <panels:panel titulo="#{label.cadastro} #{label.de}#{label.aeroporto}" id="pnlDadPes" class="fieldDad">
+            <h:panelGroup layout="block"  class="Container100 Responsive" >
+                <inputs:input_label inp_valor="#{aeroportoMB.aeroporto.iata}" lab_valor="#{label.sigla}" inp_require="true" inp_class_tamanho="30" />
+                <inputs:input_label inp_valor="#{aeroportoMB.aeroporto.aeroporto}" lab_valor="#{label.aeroporto}" inp_require="true" inp_class_tamanho="50" />
+                <inputs:input_label inp_valor="#{aeroportoMB.aeroporto.cidade}" lab_valor="#{label.cidade}" inp_require="true" inp_class_tamanho="50" />
+                <inputs:input_label inp_valor="#{aeroportoMB.aeroporto.uf}" lab_valor="#{label.unidade_federativa}" inp_require="true" inp_class_tamanho="30" />
+            </h:panelGroup>
+        </panels:panel>
+    </composite:implementation>
+</ui:composition>
+
+
+
+
