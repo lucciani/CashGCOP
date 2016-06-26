@@ -5,6 +5,7 @@
  */
 package br.com.cgcop.solicitacao.modelo;
 
+import br.com.cgcop.administrativo.modelo.Aeroporto;
 import br.com.cgcop.administrativo.modelo.Endereco;
 import java.io.Serializable;
 import java.util.Date;
@@ -37,17 +38,19 @@ public class Passagem implements Serializable{
     @Column(name = "psg_id", nullable = false)
     private Long id;
     @ManyToOne
-    @JoinColumn(name = "psg_origem_end_id", referencedColumnName = "end_id")
-    private Endereco origem;
+    @JoinColumn(name = "psg_origem_aer_id", referencedColumnName = "aer_id")
+    private Aeroporto origem;
     @ManyToOne
-    @JoinColumn(name = "psg_destino_end_id", referencedColumnName = "end_id")
-    private Endereco destino;
+    @JoinColumn(name = "psg_destino_aer_id", referencedColumnName = "aer_id")
+    private Aeroporto destino;
     @Temporal(TemporalType.DATE)
-    @Column(name = "via_data_partida")
+    @Column(name = "psg_data_partida")
     private Date dataPartida;
-    @Temporal(TemporalType.DATE)
-    @Column(name = "via_data_retorno")
-    private Date dataRetorno;
+    
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "psg_via_id", referencedColumnName = "via_id", nullable = false)
+    private Viagem viagem;
 
     public Long getId() {
         return id;
@@ -57,19 +60,19 @@ public class Passagem implements Serializable{
         this.id = id;
     }
 
-    public Endereco getOrigem() {
+    public Aeroporto getOrigem() {
         return origem;
     }
 
-    public void setOrigem(Endereco origem) {
+    public void setOrigem(Aeroporto origem) {
         this.origem = origem;
     }
 
-    public Endereco getDestino() {
+    public Aeroporto getDestino() {
         return destino;
     }
 
-    public void setDestino(Endereco destino) {
+    public void setDestino(Aeroporto destino) {
         this.destino = destino;
     }
 
@@ -81,14 +84,14 @@ public class Passagem implements Serializable{
         this.dataPartida = dataPartida;
     }
 
-    public Date getDataRetorno() {
-        return dataRetorno;
+    public Viagem getViagem() {
+        return viagem;
     }
 
-    public void setDataRetorno(Date dataRetorno) {
-        this.dataRetorno = dataRetorno;
+    public void setViagem(Viagem viagem) {
+        this.viagem = viagem;
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;

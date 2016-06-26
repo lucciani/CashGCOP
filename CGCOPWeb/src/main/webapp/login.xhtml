@@ -19,58 +19,59 @@
 
     <h:body class="fontRegular back-login"  onload="setarFocu('login')">
 
-       
-        <div  id="divLog"      >
-            <p:panel  class="lg Container100 MaxWid500 Fnone  MarAuto MarTopPerc5 TexAlCenter ">
+
+        <div  id="divLog"     class="MarTopPerc5 "  >
+            <div class="Container100 MaxWid500 Fnone MarAuto TexAlCenter  ">
+
+<!--                <div class="Responsive Container100"  >
+                    <p:graphicImage class="Responsive" width="65%" library="images" name="oiti.png"/>
+
+                </div>-->
+            </div>
+            <p:panel  class="lg Container20  MaxWid500  Fnone  MarAuto  TexAlCenter Responsive">
+
+
+
+                 <div class="EmptyBox20"/>
+
                 <div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter  ">
 
-                    <div class="Responsive Container100 "  >
-                        <p:graphicImage   height="33" library="sentinel-layout" name="images/LOGO.svg"/>
-                        <i class="softblue Fnone Fs40">#{label.sigla_sistema} </i>
-                        
-                    </div>
+                    <p class="Fs20 fontItalic  Animated05" style="color: #6bba70" >#{configuracaoSistemaMB.paraCarregarNoLogin}</p>
                 </div>
-
-
-                <div class="softgray  FontTitilliumSemiBoldItalic Fs25"  >#{label.titulo_sistema}</div>
-                <hr/>
-                <div class="EmptyBox20"/>
-
                 <div   class=" Fnone MarAuto circulo    TexAlCenter    "/>
-                <div class="Container80 MaxWid500 Fnone MarAuto TexAlCenter  ">
-
-                    <p class="Fs25 FontLight  white" >#{configuracaoSistemaMB.paraCarregarNoLogin}</p>
-                </div>
                 <!-- LOGIN BOX COVER START -->
                 <form action="j_spring_security_check" method="post"   >
-                    
-                    <h:panelGroup layout="block" rendered="#{param.erro}">
-                        <div  class="TexAlCenter softBrownBack Animated05 BoxSizeBorder BordRad5 TabBtnActiveLeft Container100 Fnone MarAuto FontLight  red">
-                            <i class="icon-attention"></i>#{msg.usuario_senha_invalido}
-                        </div>
+
+                    <h:panelGroup rendered="#{param.erro}">
                         <div class="EmptyBox10"></div>
+                        <div  class="TexAlCenter  Animated05 Fs17 BordRad5  Container100 Fnone MarAuto FontLight red ">
+                            <i class="icon-attention Fs15"></i>#{msg.usuario_senha_invalido}
+                        </div>
                     </h:panelGroup>
-                    <div class="Container100  Fleft Fnone   transparencia   TexAlCenter " id="TAB1">
+                    <div class="Container100  Fleft Fnone   transparencia   TexAlCenter MarTopPerc5"  id="TAB1">
                         <div>
 
-                            <i class=" icon-user  Fnone Fs23  icones-login  "></i>
-                            <p:inputText  placeholder="Login" widgetVar="login" id="j_username"
-                                          styleClass=" Fleft Container60 Fnone  Fs16"/>
+                            <!--<i class=" icon-user  Fnone Fs23  icones-login  "></i>-->
+                            <p:inputText  placeholder="#{label.usuario}" widgetVar="login" id="j_username"
+                                          styleClass=" Fleft Container50 Fnone  Fs16"/>
 
                         </div>
                         <div class="EmptyBox5"></div>
 
                         <div>
-                            <i class="icon-key-1 Fs23 Fnone icones-login   " ></i>
-                            <p:password  placeholder="Password"  styleClass="Container60 Fnone  Fs16" 
+                            <!--<i class="icon-key-1 Fs23 Fnone icones-login   " ></i>-->
+                            <p:password  placeholder="#{label.senha}"  styleClass="Container50 Fnone  Fs16" 
                                          id="j_password" feedback="false"/>
 
                         </div>
                         <div class="EmptyBox5"></div>
                     </div>
-                    <div class="EmptyBox20"></div>
-                    <h:commandButton id="btnLogin"   styleClass=" Fs23 btnLogin FontTitilliumSemiBoldItalic"   value="Entrar"  />
-                    <div class="EmptyBox30"></div>
+                    <div class="MarTopPerc5">
+                        <h:commandButton id="btnLogin"    styleClass=" Fs19 btnLogin FontLight"   value="Entrar"  />
+
+                    </div>
+                    <div class="EmptyBox10"></div>
+
                 </form>
             </p:panel>
         </div>

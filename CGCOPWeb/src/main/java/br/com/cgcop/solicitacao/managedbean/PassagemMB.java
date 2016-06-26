@@ -5,8 +5,10 @@
  */
 package br.com.cgcop.solicitacao.managedbean;
 
+import br.com.cgcop.administrativo.controller.AeroportoController;
 import br.com.cgcop.administrativo.controller.MunicipioController;
 import br.com.cgcop.administrativo.controller.UnidadeFederativaController;
+import br.com.cgcop.administrativo.modelo.Aeroporto;
 import br.com.cgcop.administrativo.modelo.Endereco;
 import br.com.cgcop.administrativo.modelo.Municipio;
 import br.com.cgcop.administrativo.modelo.UnidadeFederativa;
@@ -16,6 +18,8 @@ import br.com.cgcop.solicitacao.modelo.Passagem;
 import br.com.cgcop.solicitacao.modelo.Viagem;
 import br.com.cgcop.utilitario.BeanGenerico;
 import br.com.cgcop.utilitario.mensagens.MensagensUtil;
+import br.com.cgcop.utilitarios.ManipuladorDeArquivo;
+import static java.io.File.separator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -28,6 +32,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -42,15 +48,16 @@ public class PassagemMB extends BeanGenerico implements Serializable {
     private Passagem passagem;
     private List<Passagem> listaPassagem;
     @Inject
-    private MunicipioController municipioController;
-    private List<Municipio> listaDeMunicpios;
-    @Inject
-    private UnidadeFederativaController unidadeFederativaController;
-    private UnidadeFederativa unidadeFederativa;
-    private List<UnidadeFederativa> listaDeUnidadeFederativas;
+    private AeroportoController aeroportoController;
+    private Aeroporto aeroporto;
+    private List<Aeroporto> aeroportos;
 
     private Date data;
     private Date dataFinal;
+
+    private UploadedFile arquivoUpload;
+    private byte documento[];
+    private String nomeDocumendo;
 
     @PostConstruct
     @Override
@@ -60,31 +67,25 @@ public class PassagemMB extends BeanGenerico implements Serializable {
             passagem = (Passagem) lerRegistroDaSessao("passagem");
             if (passagem == null) {
                 passagem = new Passagem();
-                unidadeFederativa = new UnidadeFederativa();
-                passagem.setOrigem(new Endereco());
-                passagem.setDestino(new Endereco());
+                passagem.setOrigem(new Aeroporto());
+                passagem.setDestino(new Aeroporto());
                 passagem.setDataPartida(new Date());
-                passagem.setDataRetorno(new Date());
+                passagem.setViagem(new Viagem());
             } else {
-                unidadeFederativa = passagem.getDestino().getUnidadeFederativa();
-                unidadeFederativa = passagem.getOrigem().getUnidadeFederativa();
-                consultarMuncipioPorUf();
+                documento = ManipuladorDeArquivo.lerArquivoEmByte(getDiretorioReal("resources" + separator + "images"+separator+passagem.getId().toString()+".pdf"));
             }
             listaPassagem = new ArrayList<>();
-            listaDeUnidadeFederativas = unidadeFederativaController.consultarTodosOrdenadorPor("sigla");
+            aeroportos = aeroportoController.consultarTodosOrdenadorPor("cidade");
         } catch (Exception ex) {
             Logger.getLogger(PassagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }
 
-    public void consultarMuncipioPorUf() {
-        listaDeMunicpios = municipioController.consultarMunicipioPor(unidadeFederativa);
-    }
-
     public void salvar() {
         try {
             passagemController.salvar(passagem);
+            passagemController.addDoc(passagem.getId().toString(), documento, getDiretorioReal("resources" + separator + "images"));
             MensagensUtil.enviarMessageParamentroInfo(MensagensUtil.REGISTRO_SUCESSO, passagem.getClass());
             init();
         } catch (Exception ex) {
@@ -92,7 +93,6 @@ public class PassagemMB extends BeanGenerico implements Serializable {
             Logger.getLogger(PassagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
 
     public void consultarPassagem() {
         try {
@@ -107,6 +107,18 @@ public class PassagemMB extends BeanGenerico implements Serializable {
         Map<String, Object> map = new HashMap<>();
         map.put("Data", "dataPartida");
         return map;
+    }
+
+    public void fileUploud(FileUploadEvent event) {
+        try {
+            documento = event.getFile().getContents();
+        } catch (Exception ex) {
+            Logger.getLogger(PassagemMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void setarViagem(Viagem v) {
+        passagem.setViagem(v);
     }
 
     public Passagem getPassagem() {
@@ -141,24 +153,24 @@ public class PassagemMB extends BeanGenerico implements Serializable {
         this.listaPassagem = listaPassagem;
     }
 
-    public List<Municipio> getListaDeMunicpios() {
-        return listaDeMunicpios;
+    public Aeroporto getAeroporto() {
+        return aeroporto;
     }
 
-    public List<UnidadeFederativa> getListaDeUnidadeFederativas() {
-        return listaDeUnidadeFederativas;
+    public void setAeroporto(Aeroporto aeroporto) {
+        this.aeroporto = aeroporto;
     }
 
-    public void setListaDeUnidadeFederativas(List<UnidadeFederativa> listaDeUnidadeFederativas) {
-        this.listaDeUnidadeFederativas = listaDeUnidadeFederativas;
+    public List<Aeroporto> getAeroportos() {
+        return aeroportos;
     }
 
-    public UnidadeFederativa getUnidadeFederativa() {
-        return unidadeFederativa;
+    public UploadedFile getArquivoUpload() {
+        return arquivoUpload;
     }
 
-    public void setUnidadeFederativa(UnidadeFederativa unidadeFederativa) {
-        this.unidadeFederativa = unidadeFederativa;
+    public void setArquivoUpload(UploadedFile arquivoUpload) {
+        this.arquivoUpload = arquivoUpload;
     }
-    
+
 }

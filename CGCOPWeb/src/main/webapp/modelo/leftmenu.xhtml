@@ -68,6 +68,10 @@
                             <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.dados_viagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.dados_viagem_cadastro}"/>
                             <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.dados_viagem_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.dados_viagem_consulta}"/>
                         </p:submenu>
+                        <p:submenu label="#{label.dados} #{label.do} #{label.passagem}" icon="  icon-ticket-1 " 
+                                   rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_cadastro)}">
+                            <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.passagem_cadastro}"/>
+                        </p:submenu>
                         <p:submenu label="#{label.dados} #{label.do} #{label.passageiro}" icon=" icon-users-1 " 
                                    rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_cadastro)}">
                             <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.passageiro_cadastro}"/>

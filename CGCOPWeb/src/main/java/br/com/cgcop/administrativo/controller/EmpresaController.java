@@ -45,7 +45,7 @@ public class EmpresaController extends ControllerGenerico<Empresa, Long> impleme
         if (conteudo != null) {
 
             //Nome da pasta q salva as imagens no hd
-            String nomeDaPasta = ManipuladorDeArquivo.PATH_LINUX + ManipuladorDeArquivo.getDiretorioLogos();
+            String nomeDaPasta = ManipuladorDeArquivo.PATH_WINDOWS + ManipuladorDeArquivo.getDiretorioLogos();
 
             String nomeArquivoComExt = (nomeDaEmpresa + ".png").trim().toLowerCase();
 

@@ -23,8 +23,9 @@
     <class>br.com.cgcop.solicitacao.modelo.Hospedagem</class>
     <class>br.com.cgcop.solicitacao.modelo.ItemDespesas</class>
     <class>br.com.cgcop.solicitacao.modelo.Passageiro</class>
-    <class>br.com.cgcop.solicitacao.modelo.Passagem</class>
     <class>br.com.cgcop.solicitacao.modelo.Viagem</class>
+    <class>br.com.cgcop.administrativo.modelo.Aeroporto</class>
+    <class>br.com.cgcop.solicitacao.modelo.Passagem</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <!--<property name="hibernate.show_sql" value="true"/>-->
