@@ -26,12 +26,12 @@ public class PassagemDAO extends DAOGenerico<Passagem, Long> implements Serializ
         super(PassagemDAO.class);
     }
 
-    public List<Passagem> consultarPorPeriodo(Date data, Date dataFinal) {
-        TypedQuery<Passagem> tq;
-        tq = getEm().createQuery("SELECT e FROM Passagem e WHERE e.dataPartida BETWEEN :dtIni and :dtFim ORDER BY e.dataPartida", Passagem.class)
-                .setParameter("dtIni", MetodosUtilitariosData.processarDataInicial(data))
-                .setParameter("dtFim", MetodosUtilitariosData.processarDataFinal(dataFinal));
-        return tq.getResultList().isEmpty() ? new ArrayList<>() : tq.getResultList();
-    }
+//    public List<Passagem> consultarPorPeriodo(Date data, Date dataFinal) {
+//        TypedQuery<Passagem> tq;
+//        tq = getEm().createQuery("SELECT e FROM Passagem e WHERE e.dataPartida BETWEEN :dtIni and :dtFim ORDER BY e.dataPartida", Passagem.class)
+//                .setParameter("dtIni", MetodosUtilitariosData.processarDataInicial(data))
+//                .setParameter("dtFim", MetodosUtilitariosData.processarDataFinal(dataFinal));
+//        return tq.getResultList().isEmpty() ? new ArrayList<>() : tq.getResultList();
+//    }
     
 }

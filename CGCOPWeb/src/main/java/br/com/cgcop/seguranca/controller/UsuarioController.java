@@ -42,7 +42,7 @@ public class UsuarioController extends ControllerGenerico<Usuario, Long> impleme
 
     @Override
     public void salvar(Usuario u) throws Exception {
-        u.setSenha("cgcopweb");
+        u.setSenha("opovo");
         dao.atualizar(u);
     }
 

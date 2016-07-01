@@ -5,6 +5,7 @@
  */
 package br.com.cgcop.solicitacao.modelo;
 
+import br.com.cgcop.administrativo.modelo.Colaborador;
 import br.com.cgcop.administrativo.modelo.Endereco;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -38,6 +39,9 @@ public class Hospedagem implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hos_id", nullable = false)
     private Long id;
+    @ManyToOne
+    @JoinColumn(name = "hos_hospede", referencedColumnName = "col_id")
+    private Colaborador hospede;
     @Column(name = "hos_cidade_end_id", length = 1024)
     private String cidade;
     @Column(name = "hos_local_evento", length = 1024)
@@ -45,14 +49,9 @@ public class Hospedagem implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "hos_data_entrada")
     private Date dataEntrada;
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "hos_via_id", referencedColumnName = "via_id", nullable = false)
-    private Viagem viagem;
-    @NotNull
-    @Min(value = 0)
-    @Column(name = "hos_diarias", nullable = false)
-    private BigDecimal diarias;
+    @Temporal(TemporalType.DATE)
+    @Column(name = "hos_data_saida")
+    private Date dataSaida;
 
     public Long getId() {
         return id;
@@ -69,7 +68,7 @@ public class Hospedagem implements Serializable {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
-    
+
     public String getLocalDoEvento() {
         return localDoEvento;
     }
@@ -86,22 +85,22 @@ public class Hospedagem implements Serializable {
         this.dataEntrada = dataEntrada;
     }
 
-    public BigDecimal getDiarias() {
-        return diarias;
+    public Colaborador getHospede() {
+        return hospede;
     }
 
-    public void setDiarias(BigDecimal diarias) {
-        this.diarias = diarias;
+    public void setHospede(Colaborador hospede) {
+        this.hospede = hospede;
     }
 
-    public Viagem getViagem() {
-        return viagem;
+    public Date getDataSaida() {
+        return dataSaida;
     }
 
-    public void setViagem(Viagem viagem) {
-        this.viagem = viagem;
+    public void setDataSaida(Date dataSaida) {
+        this.dataSaida = dataSaida;
     }
-    
+
     @Override
     public int hashCode() {
         int hash = 3;
@@ -126,5 +125,5 @@ public class Hospedagem implements Serializable {
         }
         return true;
     }
-    
+
 }

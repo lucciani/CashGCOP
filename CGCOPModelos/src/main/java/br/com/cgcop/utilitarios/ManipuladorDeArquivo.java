@@ -29,19 +29,18 @@ public class ManipuladorDeArquivo {
     public static final String PATH_WINDOWS = "C:" + File.separator;
     public static final String PATH_LINUX = "/" + File.separator;
     public static final String PASTA_LOGOS = "logos" + File.separator;
-    public static final String PASTA_DOCUMENTOS = "documentos" + File.separator;
     public static final String PASTA_COTACAO = "cotacao" + File.separator;
     public static final String PASTA_NOTA_FISCAL = "nota" + File.separator;
+    public static final String PASTA_DOCUMENTOS = "documentos" + File.separator;
 
-    
-      public static String getDiretorioLogos(){
+    public static String getDiretorioLogos() {
         if (ehLinux()) {
-            return PATH_LINUX+PASTA_LOGOS;
-        }else{
-            return PATH_WINDOWS+PASTA_LOGOS;
+            return PATH_LINUX + PASTA_LOGOS;
+        } else {
+            return PATH_WINDOWS + PASTA_LOGOS;
         }
     }
-    
+
     public static String getDiretorioDocumentosCotacao() {
         if (ehLinux()) {
             return PATH_LINUX + PASTA_DOCUMENTOS.concat(PASTA_COTACAO);
@@ -58,7 +57,6 @@ public class ManipuladorDeArquivo {
         }
     }
 
-    
     private static boolean ehLinux() {
         String os = System.getProperties().getProperty("os.name").toLowerCase();
         if (os.contains("windows")) {
@@ -86,7 +84,7 @@ public class ManipuladorDeArquivo {
         File pastaGeral = new File(caminhoCompletoDoArquivo);
         if (!pastaGeral.exists()) {
             if (!pastaGeral.mkdirs()) {
-                throw new IOException("Erro ao cria pasta relativa 1");
+                throw new IOException("Erro ao cria pasta relativa criar diretorio");
             }
         }
 
@@ -102,7 +100,7 @@ public class ManipuladorDeArquivo {
 
         if (!pastaGeral.exists()) {
             if (!pastaGeral.mkdirs()) {
-                throw new IOException("Erro ao cria pasta relativa");
+                throw new IOException("Erro ao cria pasta relativa gravar arquivo");
             }
         }
         if (arquivo.exists()) {

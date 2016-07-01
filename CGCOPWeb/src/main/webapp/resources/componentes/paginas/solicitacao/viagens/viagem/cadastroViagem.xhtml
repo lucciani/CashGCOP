@@ -16,84 +16,65 @@
 
     </composite:interface>
     <composite:implementation  >
-        <h:panelGroup layout="block" class="Container100 Responsive">
+        <panels:panel titulo="#{label.viagem}" id="pnlDadPes" class="fieldDad">
 
-            <p:fieldset legend="#{label.selecionar} #{label.viagem}" >
-                <inputs:input_label_btn_click id="inputVia" inp_valor="#{viagemMB.viagem.id}" lab_valor="#{label.viagem}" 
-                                              btn_onclick="PF('dialogViagem').show()" btn_immediate="true" btn_update=":frm_cad:pnlPadrao:compCadastro:tabV" inp_require="true"  
-                                              btn_titulo="#{label.viagem}" inp_readonly="true" inp_class_tamanho="80"/>
-            </p:fieldset>
-            <p:tabView class="Container100 Responsive" id="tabV">
-                <p:tab title="#{label.passageiro}" ariaLabel="#{label.passageiro}" id="tabPas">
-                    <p:dataTable value="#{viagemMB.passageiros}"  id="tabelaPas" paginatorAlwaysVisible="false"  paginator="true" var="c" rows="10"
-                                 rowStyleClass="#{(empty rowIx or rowIx mod 2 ne 0 ? 'even-row' : 'odd-row')  }"
-                                 rowIndexVar="rowIx" emptyMessage="#{mensagens['consulta.vazia']}"
-                                 paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                 rowsPerPageTemplate="5,10,15"  reflow="true">
+            <h:panelGroup layout="block" class="Container100 Responsive">
 
-                        <p:column headerText="#{label.nome}">
-                            <componentes:outputText value="#{c.nome}"/>
-                        </p:column>
-                        <p:column headerText="#{label.acao}" width="10%" class="TexAlCenter">
-                            <p:commandButton icon="fa fa-plus-circle" class="btnSalvar" title="#{label.adicionar} #{label.colaborador}" actionListener="#{viagemMB.addPassageiro(c)}" update="tabelaPas" rendered="#{not viagemMB.renderBtnAdd(c)}"/>
-                            <p:commandButton icon="fa fa-minus-circle" class="btnExcluir" title="#{label.remover} #{label.colaborador}" actionListener="#{viagemMB.delPassageiro(c)}" update="tabelaPas" rendered="#{viagemMB.renderBtnAdd(c)}"/>
-                        </p:column>
-                    </p:dataTable>
-                </p:tab>
-                <!--Fim Tab passageiros-->
-                <p:tab title="#{label.passagem}" ariaLabel="#{label.passagem}" id="tabPass">
-                    <panels:panel  titulo="#{label.dados} #{label.da} #{label.passagem}" id="pnlPass">
-                        <h:panelGroup layout="block" class="Container100 Responsive">
-                            <inputs:input_label_data id="input_dto"  inp_class_tamanho="20" inp_valor="#{viagemMB.passagem.dataPartida}" lab_valor="#{label.data} #{label.da} #{label.passagem}"/>
-                        </h:panelGroup>
-                        <p:fieldset legend="#{label.origem}" >
-                            <inputs:selectOneLabel  inp_valor="#{viagemMB.passagem.origem.unidadeFederativa}" id="sel_ufo" lab_valor="#{label.estado}"  ajax_render="true" 
-                                                    sel_converter="indexConverter" inp_class_tamanho="20" sel_update=":frm_cad:pnlPadrao:compCadastro:tabV:pnlPass:sel_muno:input" 
-                                                    ajax_listener="#{viagemMB.consultarMuncipioPorUf()}" >
-                                <f:selectItem value="#{null}" itemLabel="-----Selecione-----" itemValue="#{null}" noSelectionOption="true"/>
-                                <f:selectItems value="#{viagemMB.listaDeUnidadeFederativas}" var="ufo" itemLabel="#{ufo.sigla.toUpperCase()}" itemValue="#{ufo}"/>
-                            </inputs:selectOneLabel>
-                            <inputs:selectOneLabel  inp_valor="#{viagemMB.passagem.origem.municipio}" id="sel_muno" lab_valor="#{label.municipio}" 
-                                                    sel_converter="indexConverter" inp_class_tamanho="20"  >
-                                <f:selectItems value="#{viagemMB.listaDeMunicpios}" var="muo" itemLabel="#{muo.nome}" itemValue="#{muo}"/>
-                            </inputs:selectOneLabel>
-                        </p:fieldset>
-                        <p:fieldset legend="#{label.destino}" >
-                            <inputs:selectOneLabel  inp_valor="#{viagemMB.passagem.destino.unidadeFederativa}" id="sel_ufd" lab_valor="#{label.estado}"  ajax_render="true" 
-                                                    sel_converter="indexConverter" inp_class_tamanho="20" sel_update=":frm_cad:pnlPadrao:compCadastro:tabV:pnlPass:sel_mund:input" 
-                                                    ajax_listener="#{viagemMB.consultarMuncipioPorUf()}" >
-                                <f:selectItem value="#{null}" itemLabel="-----Selecione-----" itemValue="#{null}" noSelectionOption="true"/>
-                                <f:selectItems value="#{viagemMB.listaDeUnidadeFederativas}" var="ufd" itemLabel="#{ufd.sigla.toUpperCase()}" itemValue="#{ufd}"/>
-                            </inputs:selectOneLabel>
-                            <inputs:selectOneLabel  inp_valor="#{viagemMB.passagem.destino.municipio}" id="sel_mund" lab_valor="#{label.municipio}" 
-                                                    sel_converter="indexConverter" inp_class_tamanho="20"  >
-                                <f:selectItems value="#{viagemMB.listaDeMunicpios}" var="mud" itemLabel="#{mud.nome}" itemValue="#{mud}"/>
-                            </inputs:selectOneLabel>
-                        </p:fieldset>
-                    </panels:panel>
-                </p:tab>
-                <p:tab title="#{label.hospedagem}" ariaLabel="#{label.hospedagem}" id="tabHosp">
-                    <panels:panel  titulo="#{label.dados} #{label.da} #{label.hospedagem}" id="pnlHosp">
-                        <h:panelGroup layout="block" class="Container100 Responsive">
-                            <inputs:input_label_data id="input_dte"  inp_class_tamanho="20" inp_valor="#{viagemMB.hospedagem.dataEntrada}" lab_valor="#{label.data_entrada}"/>
-                            <inputs:input_label_data id="input_dts"  inp_class_tamanho="20" inp_valor="#{viagemMB.hospedagem.dataSaida}" lab_valor="#{label.data_saida}"/>
-                            <inputs:input_label inp_valor="#{viagemMB.hospedagem.localDoEvento}" lab_valor="#{label.localidade_evento}" inp_require="true" inp_class_tamanho="50" />
-                            <inputs:selectOneLabel  inp_valor="#{viagemMB.hospedagem.cidade.unidadeFederativa}" id="sel_ufh" lab_valor="#{label.estado}"  ajax_render="true" 
-                                                    sel_converter="indexConverter" inp_class_tamanho="20" sel_update=":frm_cad:pnlPadrao:compCadastro:tabV:pnlHosp:sel_munh:input" 
-                                                    ajax_listener="#{viagemMB.consultarMuncipioPorUf()}" >
-                                <f:selectItem value="#{null}" itemLabel="-----Selecione-----" itemValue="#{null}" noSelectionOption="true"/>
-                                <f:selectItems value="#{viagemMB.listaDeUnidadeFederativas}" var="ufh" itemLabel="#{ufh.sigla.toUpperCase()}" itemValue="#{ufh}"/>
-                            </inputs:selectOneLabel>
-                            <inputs:selectOneLabel  inp_valor="#{viagemMB.hospedagem.cidade.municipio}" id="sel_munh" lab_valor="#{label.municipio}" 
-                                                    sel_converter="indexConverter" inp_class_tamanho="20"  >
-                                <f:selectItems value="#{viagemMB.listaDeMunicpios}" var="muh" itemLabel="#{muh.nome}" itemValue="#{muh}"/>
-                            </inputs:selectOneLabel>
-                        </h:panelGroup>
-                    </panels:panel>
-                </p:tab>
-            </p:tabView>
-        </h:panelGroup>
+                <p:fieldset legend="#{label.dados} #{label.corporativos}" >
+                    <inputs:input_label_data id="input_dtl" inp_disable="true" inp_class_tamanho="20" inp_valor="#{viagemMB.viagem.dataDaSolicitacao}" lab_valor="#{label.data} #{label.da} #{label.solicitacao}"/>
 
+                    <inputs:selectOneLabel  inp_valor="#{viagemMB.viagem.empresa}" id="sel_em" lab_valor="#{label.empresa}"  ajax_render="true"
+                                            sel_converter="indexConverter" inp_class_tamanho="30">
+                        <f:selectItem noSelectionOption="true" itemLabel="-----Selecione-----" value="#{null}" itemValue="#{null}" />
+                        <f:selectItems value="#{viagemMB.listaEmpresa}" var="em" itemLabel="#{em.nome}" itemValue="#{em}"/>
+                    </inputs:selectOneLabel>
+
+                    <inputs:input_label_btn_click inp_valor="#{viagemMB.viagem.centroDeCusto.id}" id="inp_custo" lab_valor="#{label.centro_custo}" inp_readonly="true" inp_require="true" 
+                                                  btn_immediate="true" btn_onclick="PF('dialogCosCtc').show()" btn_process="@this" inp_class_tamanho="30" />
+                </p:fieldset>
+                <p:tabView class="Container100 Responsive" id="tabV">
+                    <!--Fim Tab passageiros-->
+                    <p:tab title="#{label.passagem}" ariaLabel="#{label.passagem}" id="tabPass">
+                        <panels:panel  titulo="#{label.dados} #{label.da} #{label.passagem}" id="pnlPass">
+                            <inputs:input_label_data id="input_dtl"  inp_class_tamanho="20" inp_valor="#{passagemMB.passagem.dataPartida}" lab_valor="#{label.data} #{label.da} #{label.passagem}"/>
+
+                            <inputs:input_label_btn_click inp_valor="#{passagemMB.passagem.passageiro.nome}" id="inp_colaborador" lab_valor="#{label.passageiro}" inp_readonly="true" inp_require="true" 
+                                                          btn_immediate="true" btn_onclick="PF('dialogCosCol').show()" btn_process="@this" inp_class_tamanho="30" />
+
+                            <inputs:selectOneLabel  inp_valor="#{passagemMB.passagem.origem}" id="sel_origem" lab_valor="#{label.origem}"  ajax_render="true"
+                                                    sel_converter="indexConverter" inp_class_tamanho="50">
+                                <f:selectItem noSelectionOption="true" itemLabel="-----Selecione-----" value="#{null}" itemValue="#{null}" />
+                                <f:selectItems value="#{passagemMB.aeroportos}" var="aer_ori" itemLabel="#{aer_ori.aeroporto}" itemValue="#{aer_ori}"/>
+                            </inputs:selectOneLabel>
+                            <inputs:selectOneLabel  inp_valor="#{passagemMB.passagem.destino}" id="sel_destino" lab_valor="#{label.destino}"  ajax_render="true"
+                                                    sel_converter="indexConverter" inp_class_tamanho="50">
+                                <f:selectItem noSelectionOption="true" itemLabel="-----Selecione-----" value="#{null}" itemValue="#{null}" />
+                                <f:selectItems value="#{passagemMB.aeroportos}" var="aer_des" itemLabel="#{aer_des.aeroporto}" itemValue="#{aer_des}"/>
+                            </inputs:selectOneLabel>
+
+                            <div class="Container20">
+                                <div class="EmptyBox20"/>
+                                <div class="EmptyBox5"/>
+                                <p:commandButton icon="fa fa-upload  "   value="#{label.incluir} #{label.documento}" onclick="PF('dialogoAssinat').show()" immediate="true"/>
+                            </div>
+                            <div class="Container20">
+                                <div class="EmptyBox20"/>
+                                <div class="EmptyBox5"/>
+                                <p:commandButton value="#{label.adicionar} #{label.passagem}" action="#{passagemMB.salvar()}" />
+                            </div>
+                        </panels:panel>
+                    </p:tab>
+                    <p:tab title="#{label.hospedagem}" ariaLabel="#{label.hospedagem}" id="tabHosp">
+                        <panels:panel  titulo="#{label.dados} #{label.da} #{label.hospedagem}" id="pnlHosp">
+                            <h:panelGroup layout="block" class="Container100 Responsive">
+                                <inputs:input_label_data id="input_dte"  inp_class_tamanho="20" inp_valor="#{viagemMB.hospedagem.dataEntrada}" lab_valor="#{label.data_entrada}"/>
+                                <inputs:input_label inp_valor="#{viagemMB.hospedagem.localDoEvento}" lab_valor="#{label.localidade_evento}" inp_require="true" inp_class_tamanho="50" />
+                            </h:panelGroup>
+                        </panels:panel>
+                    </p:tab>
+                </p:tabView>
+            </h:panelGroup>
+        </panels:panel>
     </composite:implementation>
 </ui:composition>
 

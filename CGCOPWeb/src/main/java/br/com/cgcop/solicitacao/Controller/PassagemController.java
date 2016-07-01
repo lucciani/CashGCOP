@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -37,24 +39,17 @@ public class PassagemController extends ControllerGenerico<Passagem, Long> imple
 
     public void addDoc(String nomeDoArquivo, byte[] conteudo, String diretorioRealDoc) throws IOException {
         if (conteudo != null) {
-
-            //Nome da pasta q salva os documentos de cotação de passagens no hd
-            String nomeDaPasta = ManipuladorDeArquivo.PATH_WINDOWS + ManipuladorDeArquivo.getDiretorioDocumentosCotacao();
-
+            //Nome da pasta q salva as imagens no hd
+            String nomeDaPasta = ManipuladorDeArquivo.getDiretorioDocumentosCotacao();
             String nomeArquivoComExt = (nomeDoArquivo + ".pdf").trim().toLowerCase();
-
-            //Remove do locals
+            //Remove do local
             ManipuladorDeArquivo.checarSeExisteExcluir(nomeDaPasta + File.separator + nomeArquivoComExt);
-
             //Remove do resource
             ManipuladorDeArquivo.checarSeExisteExcluir(diretorioRealDoc + File.separator + nomeArquivoComExt);
-
             //Grava no local
             ManipuladorDeArquivo.gravarArquivoLocalmente(nomeDaPasta, nomeArquivoComExt, conteudo);
-
             //GRava no resource
             ManipuladorDeArquivo.gravarArquivoLocalmente(diretorioRealDoc, nomeArquivoComExt, conteudo);
-
         }
 //        //Joga o arquivo para dentro da pasta da aplicação 
 //        String arq = diretorioRealLogo+separator+nomeArquivoComExt.trim().toLowerCase();
@@ -63,8 +58,15 @@ public class PassagemController extends ControllerGenerico<Passagem, Long> imple
 //        img.flush();
     }
 
-    public List<Passagem> consultarPorPeriodo(Date data, Date dataFinal) {
-        return dao.consultarPorPeriodo(data, dataFinal);
-    }
+    public void salvarPassagem(Passagem p) {
+        try {
+            dao.atualizar(p);
+        } catch (Exception ex) {
+            Logger.getLogger(PassagemController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
+    }
+//    public List<Passagem> consultarPorPeriodo(Date data, Date dataFinal) {
+//        return dao.consultarPorPeriodo(data, dataFinal);
+//    }
 }

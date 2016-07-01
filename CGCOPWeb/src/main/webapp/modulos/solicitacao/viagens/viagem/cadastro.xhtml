@@ -23,12 +23,34 @@
         </h:form>
     </ui:define>
     <ui:define name="dialog">
-        <p:dialog showEffect="fade" position="center center"   header="#{label.viagem} " id="dialogoViag" modal="true" hideEffect="fade" widgetVar="dialogViagem">
-            <h:form id="frm_via" >
-                <viagem:consultaDadosViagem id="compVia"  componente_to_update="@form" render_edit="false" >
-                    <p:commandButton actionListener="#{viagemMB.setarViagem(v)}" icon="fa fa-check-square-o" update="@(form)" onclick="PF('dialogViagem').hide()" />
-                </viagem:consultaDadosViagem>
 
+        <p:dialog showEffect="fade" closable="true" header="#{label.colaborador}" id="dialogPasCol" modal="true"  widgetVar="dialogCosCol">
+            <h:form id="frmDialogCosCol">
+                <col:consultaColaborador  render_ativ="false" render_edit="false" id="compViagemCol" componente_to_update="@form">
+                    <p:commandButton actionListener="#{passagemMB.setarColaborador(c)}" onclick="PF('dialogCosCol').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:pnlDadPes:tabV:pnlPass:inp_colaborador:input"  icon="fa fa-check-square"/>
+                </col:consultaColaborador> 
+            </h:form>
+        </p:dialog>
+
+        <p:dialog showEffect="fade" position="center center"   header="#{label.documento}" id="dialogoAssinat" modal="true" hideEffect="fade" widgetVar="dialogoAssinat">
+            <h:form enctype="multipart/form-data">
+                <h:panelGrid width="100%">
+                    <p:fileUpload id="carArq" style="margin: 10px" mode="advanced" fileLimit="1" fileUploadListener="#{viagemMB.fileUploud}" 
+                                  value="#{viagemMB.arquivoUpload}" sizeLimit="10485760" invalidSizeMessage="#{msg.limite_excediro}"
+                                  cancelLabel="#{label.cancelar}" label="#{label.carregar_arquivo}" uploadLabel="#{label.enviar_arquivo}" 
+                                  allowTypes="/(\.|\/)(pdf)$/"  skinSimple="true"  previewWidth="100"  />
+
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
+        
+        <p:dialog showEffect="fade" closable="true" header="#{label.centro_custo}" id="dialogCosCtc" modal="true"  widgetVar="dialogCosCtc">
+            <h:form id="frmDialogCosCtc">
+                <custo:consultaCentroCusto  render_ativ="false" render_edit="false" id="compConsCusto" componente_to_update="@form">
+                    <p:commandButton actionListener="#{viagemMB.setarCentroDeCusto(c)}" onclick="PF('dialogCosCtc').hide()" 
+                                     update=":frm_cad:pnlPadrao:compCadastro:pnlDadPes:inp_custo:input"  icon="fa fa-check-square"/>
+                </custo:consultaCentroCusto> 
             </h:form>
         </p:dialog>
     </ui:define>

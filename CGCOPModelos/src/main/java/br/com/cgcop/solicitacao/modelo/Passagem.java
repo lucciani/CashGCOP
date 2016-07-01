@@ -6,6 +6,7 @@
 package br.com.cgcop.solicitacao.modelo;
 
 import br.com.cgcop.administrativo.modelo.Aeroporto;
+import br.com.cgcop.administrativo.modelo.Colaborador;
 import br.com.cgcop.administrativo.modelo.Endereco;
 import java.io.Serializable;
 import java.util.Date;
@@ -38,6 +39,9 @@ public class Passagem implements Serializable{
     @Column(name = "psg_id", nullable = false)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "psg_colaborador", referencedColumnName = "col_id")
+    private Colaborador passageiro;
+    @ManyToOne
     @JoinColumn(name = "psg_origem_aer_id", referencedColumnName = "aer_id")
     private Aeroporto origem;
     @ManyToOne
@@ -46,11 +50,6 @@ public class Passagem implements Serializable{
     @Temporal(TemporalType.DATE)
     @Column(name = "psg_data_partida")
     private Date dataPartida;
-    
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "psg_via_id", referencedColumnName = "via_id", nullable = false)
-    private Viagem viagem;
 
     public Long getId() {
         return id;
@@ -84,12 +83,12 @@ public class Passagem implements Serializable{
         this.dataPartida = dataPartida;
     }
 
-    public Viagem getViagem() {
-        return viagem;
+    public Colaborador getPassageiro() {
+        return passageiro;
     }
 
-    public void setViagem(Viagem viagem) {
-        this.viagem = viagem;
+    public void setPassageiro(Colaborador passageiro) {
+        this.passageiro = passageiro;
     }
     
     @Override

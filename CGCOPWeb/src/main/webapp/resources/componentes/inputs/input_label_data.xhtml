@@ -15,6 +15,7 @@
         <composite:attribute id="inp_class" name="inp_class_tamanho" shortDescription="Tamanho do input pela classe Container" default="100"/>
         <composite:attribute id="inp_require" name="inp_require" default="false" />
         <composite:attribute id="inp_readonly" name="inp_readonly" default="false" />
+        <composite:attribute id="inp_disable" name="inp_disable" default="false" />
         <composite:attribute id="inp_calendar_pattern" name="inp_calendar_pattern" default="dd/MM/yyyy" />
 
     </composite:interface>
@@ -23,7 +24,7 @@
             <div class="ContainerIndent">
                 <p:outputLabel value="#{cc.attrs.lab_valor}" for="input" />
                 <div>
-                    <p:calendar widgetVar="data"  styleClass="Wid90" required="#{cc.attrs.inp_require}" readonlyInput="true" timeControlType="select"  value="#{cc.attrs.inp_valor}" id="input" readonly="#{cc.attrs.inp_readonly}"
+                    <p:calendar widgetVar="data"  styleClass="Wid90" disabled="#{cc.attrs.inp_disable}" required="#{cc.attrs.inp_require}" readonlyInput="true" timeControlType="select"  value="#{cc.attrs.inp_valor}" id="input" readonly="#{cc.attrs.inp_readonly}"
                                 effect="fade"  showButtonPanel="true" navigator="true" yearRange="c-80:c+10" pattern="#{cc.attrs.inp_calendar_pattern}"/>
                 </div>
             </div>

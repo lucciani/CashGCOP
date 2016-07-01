@@ -6,14 +6,9 @@
 package br.com.cgcop.solicitacao.managedbean;
 
 import br.com.cgcop.administrativo.controller.AeroportoController;
-import br.com.cgcop.administrativo.controller.MunicipioController;
-import br.com.cgcop.administrativo.controller.UnidadeFederativaController;
 import br.com.cgcop.administrativo.modelo.Aeroporto;
-import br.com.cgcop.administrativo.modelo.Endereco;
-import br.com.cgcop.administrativo.modelo.Municipio;
-import br.com.cgcop.administrativo.modelo.UnidadeFederativa;
+import br.com.cgcop.administrativo.modelo.Colaborador;
 import br.com.cgcop.solicitacao.Controller.PassagemController;
-import br.com.cgcop.solicitacao.Controller.ViagemController;
 import br.com.cgcop.solicitacao.modelo.Passagem;
 import br.com.cgcop.solicitacao.modelo.Viagem;
 import br.com.cgcop.utilitario.BeanGenerico;
@@ -67,12 +62,14 @@ public class PassagemMB extends BeanGenerico implements Serializable {
             passagem = (Passagem) lerRegistroDaSessao("passagem");
             if (passagem == null) {
                 passagem = new Passagem();
+                data = new Date();
+                dataFinal = new Date();
+                passagem.setPassageiro(new Colaborador());
                 passagem.setOrigem(new Aeroporto());
                 passagem.setDestino(new Aeroporto());
                 passagem.setDataPartida(new Date());
-                passagem.setViagem(new Viagem());
             } else {
-                documento = ManipuladorDeArquivo.lerArquivoEmByte(getDiretorioReal("resources" + separator + "images"+separator+passagem.getId().toString()+".pdf"));
+                documento = ManipuladorDeArquivo.lerArquivoEmByte(getDiretorioReal("resources" + separator + "documentos" + separator + "CODIGO_PASSAGEM-" + passagem.getId().toString() + ".pdf"));
             }
             listaPassagem = new ArrayList<>();
             aeroportos = aeroportoController.consultarTodosOrdenadorPor("cidade");
@@ -85,7 +82,8 @@ public class PassagemMB extends BeanGenerico implements Serializable {
     public void salvar() {
         try {
             passagemController.salvar(passagem);
-            passagemController.addDoc(passagem.getId().toString(), documento, getDiretorioReal("resources" + separator + "images"));
+            passagemController.addDoc(passagem.getId().toString(), documento, getDiretorioReal("resources" + separator + "documentos"));
+            passagem = new Passagem();
             MensagensUtil.enviarMessageParamentroInfo(MensagensUtil.REGISTRO_SUCESSO, passagem.getClass());
             init();
         } catch (Exception ex) {
@@ -94,19 +92,23 @@ public class PassagemMB extends BeanGenerico implements Serializable {
         }
     }
 
-    public void consultarPassagem() {
-        try {
-            listaPassagem = passagemController.consultarPorPeriodo(data, dataFinal);
-        } catch (Exception ex) {
-            Logger.getLogger(PassagemMB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    public void consultarPassagem() {
+//        try {
+//            listaPassagem = passagemController.consultarPorPeriodo(data, dataFinal);
+//        } catch (Exception ex) {
+//            Logger.getLogger(PassagemMB.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
 
     @Override
     protected Map<String, Object> getCampo() {
         Map<String, Object> map = new HashMap<>();
         map.put("Data", "dataPartida");
         return map;
+    }
+    
+    public void setarColaborador(Colaborador c) {
+        passagem.setPassageiro(c);
     }
 
     public void fileUploud(FileUploadEvent event) {
@@ -115,10 +117,6 @@ public class PassagemMB extends BeanGenerico implements Serializable {
         } catch (Exception ex) {
             Logger.getLogger(PassagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    public void setarViagem(Viagem v) {
-        passagem.setViagem(v);
     }
 
     public Passagem getPassagem() {
@@ -171,6 +169,22 @@ public class PassagemMB extends BeanGenerico implements Serializable {
 
     public void setArquivoUpload(UploadedFile arquivoUpload) {
         this.arquivoUpload = arquivoUpload;
+    }
+
+    public byte[] getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(byte[] documento) {
+        this.documento = documento;
+    }
+
+    public String getNomeDocumendo() {
+        return nomeDocumendo;
+    }
+
+    public void setNomeDocumendo(String nomeDocumendo) {
+        this.nomeDocumendo = nomeDocumendo;
     }
 
 }

@@ -61,25 +61,11 @@
                         <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.outras_cadastro}"/>
                         <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.outras_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.outras_consulta}"/>
                     </p:submenu>
-                    <p:submenu label="#{label.viagem}" rendered="#{utilitarioNavegacaoMB.existePermissaoModuloSolicitacao()}" icon="icon-plane-outline " >
-                        <p:submenu label="#{label.dados} #{label.corporativos}" icon=" icon-check " 
-                                   rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.dados_viagem_cadastro) 
-                                               or utilitarioNavegacaoMB.permissaoExiste(solicitacao.dados_viagem_consulta) }" >
-                            <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.dados_viagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.dados_viagem_cadastro}"/>
-                            <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.dados_viagem_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.dados_viagem_consulta}"/>
-                        </p:submenu>
-                        <p:submenu label="#{label.dados} #{label.do} #{label.passagem}" icon="  icon-ticket-1 " 
-                                   rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_cadastro)}">
-                            <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.passagem_cadastro}"/>
-                        </p:submenu>
-                        <p:submenu label="#{label.dados} #{label.do} #{label.passageiro}" icon=" icon-users-1 " 
-                                   rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_cadastro)}">
-                            <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.passageiro_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.passageiro_cadastro}"/>
-                        </p:submenu>
-                        <p:submenu label="#{label.dados} #{label.de} #{label.hospedagem}" icon=" icon-building-filled " 
-                                   rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.hospedagem_cadastro)}">
-                            <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.hospedagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.hospedagem_cadastro}"/>
-                        </p:submenu>
+                    <p:submenu label="#{label.viagem}" icon=" icon-plane-outline " 
+                               rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.viagem_cadastro) 
+                                           or utilitarioNavegacaoMB.permissaoExiste(solicitacao.viagem_consulta) }" >
+                        <p:menuitem value="#{label.cadastro}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.viagem_cadastro)}" icon=" icon-doc-text-1 " outcome="#{solicitacao.viagem_cadastro}"/>
+                        <p:menuitem value="#{label.consulta}" rendered="#{utilitarioNavegacaoMB.permissaoExiste(solicitacao.viagem_consulta)}" icon=" icon-th-list-outline " outcome="#{solicitacao.viagem_consulta}"/>
                     </p:submenu>
                 </p:submenu>
 

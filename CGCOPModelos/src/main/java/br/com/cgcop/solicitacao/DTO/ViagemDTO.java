@@ -9,7 +9,6 @@ import br.com.cgcop.administrativo.modelo.CentroDeCusto;
 import br.com.cgcop.administrativo.modelo.Empresa;
 import br.com.cgcop.solicitacao.modelo.Hospedagem;
 import br.com.cgcop.solicitacao.modelo.ItemDespesas;
-import br.com.cgcop.solicitacao.modelo.Passageiro;
 import br.com.cgcop.solicitacao.modelo.Passagem;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -25,13 +24,11 @@ public class ViagemDTO implements Serializable {
 
     private CentroDeCusto centroDeCusto;
     private Empresa empresa;
-    private List<Passageiro> passageiros;
     private List<Passagem> passagens;
     private List<Hospedagem> hospedagens;
     private List<ItemDespesas> itensDespesas;
 
     public ViagemDTO() {
-        passageiros = new ArrayList<>();
         passagens = new ArrayList<>();
         hospedagens = new ArrayList<>();
         itensDespesas = new ArrayList<>();
@@ -53,13 +50,6 @@ public class ViagemDTO implements Serializable {
         this.empresa = empresa;
     }
 
-    public List<Passageiro> getPassageiros() {
-        return passageiros;
-    }
-
-    public void setPassageiros(List<Passageiro> passageiros) {
-        this.passageiros = passageiros;
-    }
 
     public List<Passagem> getPassagens() {
         return passagens;

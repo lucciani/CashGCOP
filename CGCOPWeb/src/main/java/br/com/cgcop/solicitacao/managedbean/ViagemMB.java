@@ -5,11 +5,10 @@
  */
 package br.com.cgcop.solicitacao.managedbean;
 
-import br.com.cgcop.administrativo.controller.CentroDeCustoController;
+import br.com.cgcop.administrativo.controller.AeroportoController;
 import br.com.cgcop.administrativo.controller.ColaboradorController;
 import br.com.cgcop.administrativo.controller.EmpresaController;
-import br.com.cgcop.administrativo.controller.MunicipioController;
-import br.com.cgcop.administrativo.controller.UnidadeFederativaController;
+import br.com.cgcop.administrativo.modelo.Aeroporto;
 import br.com.cgcop.administrativo.modelo.CentroDeCusto;
 import br.com.cgcop.administrativo.modelo.Colaborador;
 import br.com.cgcop.administrativo.modelo.Empresa;
@@ -19,14 +18,15 @@ import br.com.cgcop.solicitacao.Controller.HospedagemController;
 import br.com.cgcop.solicitacao.Controller.PassagemController;
 import br.com.cgcop.solicitacao.Controller.ViagemController;
 import br.com.cgcop.solicitacao.modelo.Hospedagem;
-import br.com.cgcop.solicitacao.modelo.Passageiro;
 import br.com.cgcop.solicitacao.modelo.Passagem;
 import br.com.cgcop.solicitacao.modelo.Viagem;
 import br.com.cgcop.utilitario.BeanGenerico;
 import br.com.cgcop.utilitario.mensagens.MensagensUtil;
 import br.com.cgcop.utilitario.relatorio.RelatorioSession;
+import br.com.cgcop.utilitarios.ManipuladorDeArquivo;
 import br.com.cgcop.utilitarios.relatorios.AssistentedeRelatorio;
 import br.com.cgcop.utilitarios.relatorios.PastasRelatorio;
+import static java.io.File.separator;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -39,6 +39,8 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
 /**
  *
@@ -69,15 +71,14 @@ public class ViagemMB extends BeanGenerico implements Serializable {
     private Hospedagem hospedagem;
     private List<Hospedagem> listaDeHospedagens;
     @Inject
-    private UnidadeFederativaController unidadeFederativaController;
-    private UnidadeFederativa unidadeFederativa;
-    private List<UnidadeFederativa> listaDeUnidadeFederativas;
-    @Inject
-    private MunicipioController municipioController;
-    private List<Municipio> listaDeMunicpios;
+    private AeroportoController aeroportoController;
+    private Aeroporto aeroporto;
+    private List<Aeroporto> aeroportos;
 
     private List<CentroDeCusto> listaCentroDeCusto;
 
+    private UploadedFile arquivoUpload;
+    private byte documento[];
     private Date dataDaSolicitacao;
     private Date dataFinal;
 
@@ -89,16 +90,30 @@ public class ViagemMB extends BeanGenerico implements Serializable {
             viagem = (Viagem) lerRegistroDaSessao("viagem");
             if (viagem == null) {
                 viagem = new Viagem();
-                dataDaSolicitacao = new Date();
+                viagem.setDataDaSolicitacao(new Date());
                 dataFinal = new Date();
-                unidadeFederativa = new UnidadeFederativa();
                 viagem.setEmpresa(new Empresa());
                 viagem.setCentroDeCusto(new CentroDeCusto());
-//                viagem.setPassageiros(new ArrayList<>());
-//                viagem.setPassagens(new ArrayList<>());
+                viagem.setPassagens(new ArrayList<>());
+
+                passagem = new Passagem();
+                passagem.setPassageiro(new Colaborador());
+                passagem.setOrigem(new Aeroporto());
+                passagem.setDestino(new Aeroporto());
+                passagem.setDataPartida(new Date());
+
+                hospedagem = new Hospedagem();
+                hospedagem.setHospede(new Colaborador());
+                hospedagem.setCidade(new String());
+                hospedagem.setDataEntrada(new Date());
+                hospedagem.setDataSaida(new Date());
+                hospedagem.setLocalDoEvento(new String());
+            } else {
+                documento = ManipuladorDeArquivo.lerArquivoEmByte(getDiretorioReal("resources" + separator + "documentos" + separator + "CODIGO_VIAGEM-" + viagem.getId().toString() + ".pdf"));
             }
             listaViagem = new ArrayList<>();
             listaEmpresa = empresaController.consultarTodosOrdenadorPor("nome");
+            aeroportos = aeroportoController.consultarTodosOrdenadorPor("cidade");
         } catch (Exception ex) {
             Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -106,7 +121,31 @@ public class ViagemMB extends BeanGenerico implements Serializable {
 
     public void salvar() {
         try {
-            viagemController.salvar(viagem);
+            viagem = viagemController.salvarViagem(viagem);
+            viagemController.addDoc(viagem.getId().toString(), documento, getDiretorioReal("resources" + separator + "documentos"));
+            MensagensUtil.enviarMessageParamentroInfo(MensagensUtil.REGISTRO_SUCESSO, viagem.getId());
+            init();
+        } catch (Exception ex) {
+            MensagensUtil.enviarMessageErro(MensagensUtil.REGISTRO_FALHA);
+            Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void salvarPassagem() {
+        try {
+            viagem.addPassagem(passagem);
+            passagemController.salvarPassagem(passagem);
+            MensagensUtil.enviarMessageParamentroInfo(MensagensUtil.REGISTRO_SUCESSO, viagem.getId());
+            init();
+        } catch (Exception ex) {
+            MensagensUtil.enviarMessageErro(MensagensUtil.REGISTRO_FALHA);
+            Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void salvarHospedagem() {
+        try {
+            hospedagemController.salvarHospedagem(hospedagem);
             MensagensUtil.enviarMessageParamentroInfo(MensagensUtil.REGISTRO_SUCESSO, viagem.getId());
             init();
         } catch (Exception ex) {
@@ -123,18 +162,6 @@ public class ViagemMB extends BeanGenerico implements Serializable {
         }
     }
 
-    public void consultarPassageiro() {
-        try {
-            passageiros = colaboradorController.consultarAtivo(getCampoConsuta(), getValorCampoConsuta(), "col_ativo=true");
-        } catch (Exception ex) {
-            Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-    public void consultarMuncipioPorUf() {
-        listaDeMunicpios = municipioController.consultarMunicipioPor(unidadeFederativa);
-    }
-
     @Override
     protected Map<String, Object> getCampo() {
         Map<String, Object> map = new HashMap<>();
@@ -142,23 +169,25 @@ public class ViagemMB extends BeanGenerico implements Serializable {
         return map;
     }
 
-    public void setarViagem(Viagem v) {
+    public void fileUploud(FileUploadEvent event) {
         try {
-            viagem = v;
-            passageiros = colaboradorController.consultarTodosOrdenadorPor("nome");
+            documento = event.getFile().getContents();
         } catch (Exception ex) {
-            Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PassagemMB.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
 
+    public void setarColaborador(Colaborador c) {
+        passagem.setPassageiro(c);
     }
 
     public void setarCentroDeCusto(CentroDeCusto c) {
         viagem.setCentroDeCusto(c);
     }
 
-    public void addPassageiro(Colaborador c) {
+    public void addPassagem(Passagem p) {
         try {
-//            viagem.addPassageiros(c);
+            viagem.addPassagem(p);
             viagemController.atualizar(viagem);
             MensagensUtil.enviarMessageInfo(MensagensUtil.REGISTRO_SUCESSO);
         } catch (Exception ex) {
@@ -167,9 +196,31 @@ public class ViagemMB extends BeanGenerico implements Serializable {
         }
     }
 
-    public void delPassageiro(Colaborador c) {
+    public void delPassagem(Passagem p) {
         try {
-//            viagem.removerPassageiro(c);
+            viagem.removerPassagem(p);
+            viagemController.atualizar(viagem);
+            MensagensUtil.enviarMessageInfo(MensagensUtil.REGISTRO_SUCESSO);
+        } catch (Exception ex) {
+            MensagensUtil.enviarMessageErro(MensagensUtil.REGISTRO_FALHA);
+            Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void addHospedagem(Hospedagem h) {
+        try {
+            viagem.addHospedagem(h);
+            viagemController.atualizar(viagem);
+            MensagensUtil.enviarMessageInfo(MensagensUtil.REGISTRO_SUCESSO);
+        } catch (Exception ex) {
+            MensagensUtil.enviarMessageErro(MensagensUtil.REGISTRO_FALHA);
+            Logger.getLogger(ViagemMB.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void delHospedagem(Hospedagem h) {
+        try {
+            viagem.removerHospedagem(h);
             viagemController.atualizar(viagem);
             MensagensUtil.enviarMessageInfo(MensagensUtil.REGISTRO_SUCESSO);
         } catch (Exception ex) {
@@ -179,7 +230,7 @@ public class ViagemMB extends BeanGenerico implements Serializable {
     }
 
 //    public boolean renderBtnAdd(Colaborador c) {
-//        return viagem.getPassageiros().contains(c);
+//        return viagem.getPassagens().contains(c);
 //    }
 
     public Viagem getViagem() {
@@ -250,14 +301,6 @@ public class ViagemMB extends BeanGenerico implements Serializable {
         return listaDePassagens;
     }
 
-    public List<UnidadeFederativa> getListaDeUnidadeFederativas() {
-        return listaDeUnidadeFederativas;
-    }
-
-    public List<Municipio> getListaDeMunicpios() {
-        return listaDeMunicpios;
-    }
-
     public Hospedagem getHospedagem() {
         return hospedagem;
     }
@@ -268,6 +311,26 @@ public class ViagemMB extends BeanGenerico implements Serializable {
 
     public List<Hospedagem> getListaDeHospedagens() {
         return listaDeHospedagens;
+    }
+
+    public List<Aeroporto> getAeroportos() {
+        return aeroportos;
+    }
+
+    public UploadedFile getArquivoUpload() {
+        return arquivoUpload;
+    }
+
+    public void setArquivoUpload(UploadedFile arquivoUpload) {
+        this.arquivoUpload = arquivoUpload;
+    }
+
+    public byte[] getDocumento() {
+        return documento;
+    }
+
+    public void setDocumento(byte[] documento) {
+        this.documento = documento;
     }
 
 }

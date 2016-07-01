@@ -59,21 +59,21 @@ public class Viagem implements Serializable {
     @Temporal(TemporalType.DATE)
     @Column(name = "via_data_solicitacao")
     private Date dataDaSolicitacao;
-
+    
 //    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    @Fetch(FetchMode.SELECT)
 //    private List<Colaborador> passageiros;
 //
-//    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @Fetch(FetchMode.SELECT)
-//    private List<Passagem> passagens;
-//
-//    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
-//    @ManyToMany(fetch = FetchType.EAGER)
-//    @Fetch(FetchMode.SELECT)
-//    private List<Hospedagem> hospedagens;
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    private List<Passagem> passagens;
+
+    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @Fetch(FetchMode.SELECT)
+    private List<Hospedagem> hospedagens;
 //
 //    @Cache(usage = CacheConcurrencyStrategy.NONSTRICT_READ_WRITE)
 //    @ManyToMany(fetch = FetchType.EAGER)
@@ -120,21 +120,21 @@ public class Viagem implements Serializable {
         this.dataDaSolicitacao = dataDaSolicitacao;
     }
 
-//    public List<Passagem> getPassagens() {
-//        return Collections.unmodifiableList(passagens);
-//    }
-//
-//    public void setPassagens(List<Passagem> passagens) {
-//        this.passagens = passagens;
-//    }
-//
-//    public List<Hospedagem> getHospedagens() {
-//        return Collections.unmodifiableList(hospedagens);
-//    }
-//
-//    public void setHospedagens(List<Hospedagem> hospedagens) {
-//        this.hospedagens = hospedagens;
-//    }
+    public List<Passagem> getPassagens() {
+        return Collections.unmodifiableList(passagens);
+    }
+
+    public void setPassagens(List<Passagem> passagens) {
+        this.passagens = passagens;
+    }
+
+    public List<Hospedagem> getHospedagens() {
+        return Collections.unmodifiableList(hospedagens);
+    }
+
+    public void setHospedagens(List<Hospedagem> hospedagens) {
+        this.hospedagens = hospedagens;
+    }
 
 //    public List<ItemDespesas> getItensDespesas() {
 //        return Collections.unmodifiableList(itensDespesas);
@@ -156,29 +156,29 @@ public class Viagem implements Serializable {
 //        }
 //    }
 //
-//    public void addPassagem(Passagem psg) {
-//        if (!passagens.contains(psg)) {
-//            passagens.add(psg);
-//        }
-//    }
-//
-//    public void removerPassagem(Passagem psg) {
-//        if (passagens.contains(psg)) {
-//            passagens.remove(psg);
-//        }
-//    }
-//
-//    public void addHospedagem(Hospedagem hos) {
-//        if (!hospedagens.contains(hos)) {
-//            hospedagens.add(hos);
-//        }
-//    }
-//
-//    public void removerHospedagem(Hospedagem hos) {
-//        if (hospedagens.contains(hos)) {
-//            hospedagens.remove(hos);
-//        }
-//    }
+    public void addPassagem(Passagem psg) {
+        if (!passagens.contains(psg)) {
+            passagens.add(psg);
+        }
+    }
+
+    public void removerPassagem(Passagem psg) {
+        if (passagens.contains(psg)) {
+            passagens.remove(psg);
+        }
+    }
+
+    public void addHospedagem(Hospedagem hos) {
+        if (!hospedagens.contains(hos)) {
+            hospedagens.add(hos);
+        }
+    }
+
+    public void removerHospedagem(Hospedagem hos) {
+        if (hospedagens.contains(hos)) {
+            hospedagens.remove(hos);
+        }
+    }
 //
 //    public void addItemDespesa(ItemDespesas des) {
 //        if (!itensDespesas.contains(des)) {

@@ -7,6 +7,7 @@ package br.com.cgcop.solicitacao.managedbean;
 
 import br.com.cgcop.administrativo.controller.MunicipioController;
 import br.com.cgcop.administrativo.controller.UnidadeFederativaController;
+import br.com.cgcop.administrativo.modelo.Colaborador;
 import br.com.cgcop.administrativo.modelo.Endereco;
 import br.com.cgcop.administrativo.modelo.Municipio;
 import br.com.cgcop.administrativo.modelo.UnidadeFederativa;
@@ -57,7 +58,7 @@ public class HospedagemMB extends BeanGenerico implements Serializable {
             hospedagem = new Hospedagem();
             data = new Date();
             dataFinal = new Date();
-            hospedagem.setViagem(new Viagem());
+            hospedagem.setHospede(new Colaborador());
             listaHospedagem = new ArrayList<>();
         } catch (Exception ex) {
             Logger.getLogger(HospedagemMB.class.getName()).log(Level.SEVERE, null, ex);
@@ -89,10 +90,7 @@ public class HospedagemMB extends BeanGenerico implements Serializable {
         map.put("Data", "dataEntrada");
         return map;
     }
-
-    public void setarViagem(Viagem v) {
-        hospedagem.setViagem(v);
-    }
+    
 
     public Hospedagem getHospedagem() {
         return hospedagem;
